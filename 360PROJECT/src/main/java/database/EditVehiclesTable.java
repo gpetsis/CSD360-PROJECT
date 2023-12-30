@@ -13,11 +13,6 @@ import java.sql.Statement;
 import java.util.ArrayList;
 import mainClasses.Vehicle;
 
-/**
- *
- * @author giann
- */
-//ANW LIOSA
 public class EditVehiclesTable {
 
     public SQLException addVehicleFromJSON(String json) throws ClassNotFoundException {
@@ -110,7 +105,7 @@ public class EditVehiclesTable {
         Statement stmt = con.createStatement();
 
         String query = "CREATE TABLE vehicles "
-                + "(vId INTEGER not NULL,"
+                + "(vId INTEGER not null,"
                 + "    brand VARCHAR(15) not null,"
                 + "    model VARCHAR(15) not null,"
                 + "    color VARCHAR(10) not null,"

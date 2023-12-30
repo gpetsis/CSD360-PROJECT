@@ -18,16 +18,16 @@ public class examples {
     static String Customer5JSON = "{\"name\":\"Evelina Georgiou\",\"birthdate\":\"18-04-1992\",\"address\":\"Daidalou 98\","
             + "\"drivinglicense\":\"1273\",\"creditcard\":\"7080901020\"}";
 
-    static String bike1 = "{\"vId\"\"1\",\"brand\"\"bmx\",\"model\"\"model1\","
+    static String bike1JSON = "{\"vId\"\"1\",\"brand\"\"bmx\",\"model\"\"model1\","
             + "\"color\"\"red\",\"autonomy\"\"20\"}";
-    static String bike2 = "{\"vId\"\"2\",\"brand\"\"bmx\",\"model\"\"model2\","
+    static String bike2JSON = "{\"vId\"\"2\",\"brand\"\"bmx\",\"model\"\"model2\","
             + "\"color\"\"blue\",\"autonomy\"\"30\"}";
-    static String scooter1 = "{\"vId\"\"3\",\"brand\"\"patini\",\"model\"\"patini1\","
+    static String scooter1JSON = "{\"vId\"\"3\",\"brand\"\"patini\",\"model\"\"patini1\","
             + "\"color\"\"red\",\"autonomy\"\"20\"}";
-    static String scooter2 = "{\"vId\"\"4\",\"brand\"\"patini\",\"model\"\"patini2\","
+    static String scooter2JSON = "{\"vId\"\"4\",\"brand\"\"patini\",\"model\"\"patini2\","
             + "\"color\"\"yellow\",\"autonomy\"\"40\"}";
-    static String car1 = "{\"vId\"\"5\",\"brand\"\"lamborghini\",\"model\"\"aventador\","
+    static String car1JSON = "{\"vId\"\"5\",\"brand\"\"lamborghini\",\"model\"\"aventador\","
             + "\"color\"\"white\",\"autonomy\"\"800\"}";
-    static String car2 = "{\"vId\"\"6\",\"brand\"\"buggati\",\"model\"\"veyron\","
+    static String car2JSON = "{\"vId\"\"6\",\"brand\"\"buggati\",\"model\"\"veyron\","
             + "\"color\"\"black\",\"autonomy\"\"700\"}";
 }

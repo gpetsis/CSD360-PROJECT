@@ -25,11 +25,11 @@ public class EditCustomersTable {
         Statement stmt = con.createStatement();
 
         String query = "CREATE TABLE customers "
-                + "(name VARCHAR(20) not NULL, "
-                + "    birthdate DATE not null,"
-                + "    address VARCHAR(50) not null,"
-                + "    drivinglicense INTEGER not null,"
-                + "    creditcard BIGINT not null,"
+                + "(name VARCHAR(20) not null, "
+                + "    birthdate DATE not null, "
+                + "    address VARCHAR(50) not null, "
+                + "    drivinglicense INTEGER not null, "
+                + "    creditcard INTEGER not null, "
                 + " PRIMARY KEY (name))";
         stmt.execute(query);
         stmt.close();

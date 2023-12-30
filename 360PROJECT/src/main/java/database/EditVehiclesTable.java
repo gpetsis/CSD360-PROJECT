@@ -18,7 +18,7 @@ import mainClasses.Vehicle;
  * @author giann
  */
 //ANW LIOSA
-public class editVehiclesTable {
+public class EditVehiclesTable {
 
     public SQLException addVehicleFromJSON(String json) throws ClassNotFoundException {
         Vehicle user = jsonToVehicle(json);

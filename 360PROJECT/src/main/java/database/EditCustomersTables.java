@@ -11,6 +11,7 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import mainClasses.Customer;
 
 /**
  *
@@ -23,7 +24,7 @@ public class EditCustomersTables {
             Connection con = DB_Connection.getConnection();
             Statement stmt = con.createStatement();
             String insertQuery = "INSERT INTO "
-                    + " pets (pet_id,owner_id,name,type,breed,gender,birthyear,weight,description,photo) "
+                    + " customer (name,address,birthdate,drivinglicense,creditcard) "
                     + " VALUES ("
                     + "'" + c.getPet_id() + "',"
                     + "'" + c.getOwner_id() + "',"

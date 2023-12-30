@@ -47,7 +47,7 @@ public class Rent {
         this.vId = vId;
     }
 
-    public int setvId() {
+    public int getvId() {
         return vId;
     }
 }

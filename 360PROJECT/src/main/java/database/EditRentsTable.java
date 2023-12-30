@@ -14,49 +14,48 @@ import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import mainClasses.Customer;
 import mainClasses.Rent;
 
 /**
  *
  * @author Nikos Lasithiotakis
  */
-public class EditCustomersTable {
+public class EditRentsTable {
 
-    public SQLException addCustomerFromJSON(String json) throws ClassNotFoundException, FileNotFoundException {
-        Customer c = jsonToCustomer(json);
-        return createNewCustomer(c);
+    public SQLException addRentFromJSON(String json) throws ClassNotFoundException, FileNotFoundException {
+        Rent r = jsonToRent(json);
+        return createNewRent(r);
     }
 
-    public Customer jsonToCustomer(String json) {
+    public Rent jsonToRent(String json) {
         Gson gson = new Gson();
 
-        Customer c = gson.fromJson(json, Customer.class);
-        return c;
+        Rent r = gson.fromJson(json, Rent.class);
+        return r;
     }
 
-    public String CustomerToJSON(Rent r) {
+    public String RentToJSON(Rent r) {
         Gson gson = new Gson();
 
-        String json = gson.toJson(r, Customer.class);
+        String json = gson.toJson(r, Rent.class);
         return json;
     }
 
-    public ArrayList<Customer> getCustomers() throws SQLException, ClassNotFoundException {
+    public ArrayList<Rent> getRents() throws SQLException, ClassNotFoundException {
         Connection con = DB_Connection.getConnection();
         Statement stmt = con.createStatement();
-        ArrayList<Customer> customers = new ArrayList<Customer>();
+        ArrayList<Rent> rents = new ArrayList<Rent>();
         ResultSet rs = null;
         try {
-            rs = stmt.executeQuery("SELECT * FROM customers");
+            rs = stmt.executeQuery("SELECT * FROM rents");
 
             while (rs.next()) {
                 String json = DB_Connection.getResultsToJSON(rs);
                 Gson gson = new Gson();
-                Customer customer = gson.fromJson(json, Customer.class);
-                customers.add(customer);
+                Rent rent = gson.fromJson(json, Rent.class);
+                rents.add(rent);
             }
-            return customers;
+            return rents;
         } catch (Exception e) {
             System.err.println("Got an exception! ");
             System.err.println(e.getMessage());
@@ -64,39 +63,39 @@ public class EditCustomersTable {
         return null;
     }
 
-    public void createCustomersTable() throws SQLException, ClassNotFoundException {
+    public void createRentsTable() throws SQLException, ClassNotFoundException {
 
         Connection con = DB_Connection.getConnection();
         Statement stmt = con.createStatement();
 
         String query = "CREATE TABLE customers "
-                + "(name VARCHAR(20) not NULL, "
-                + "    birthdate DATE not null,"
-                + "    address VARCHAR(50) not null,"
-                + "    drivinglicense INTEGER not null,"
-                + "    creditcard BIGINT not null,"
-                + " PRIMARY KEY (name))";
+                + "(vId INTEGER not NULL, "
+                + "    name VARCHAR(50) not null,"
+                + "    date DATE not null,"
+                + "    duration VARCHAR(50) not null,"
+                + "    cost FLOAT(10) not null,"
+                + " PRIMARY KEY (vId))";
         stmt.execute(query);
         stmt.close();
     }
 
-    public SQLException createNewCustomer(Customer c) throws ClassNotFoundException, FileNotFoundException {
+    public SQLException createNewRent(Rent r) throws ClassNotFoundException, FileNotFoundException {
         try {
             Connection con = DB_Connection.getConnection();
             Statement stmt = con.createStatement();
             String insertQuery = "INSERT INTO "
-                    + " customers (name,address,birthdate,drivinglicense,creditcard) "
+                    + " customers (vId,name,date,duration,cost) "
                     + " VALUES ("
-                    + "'" + c.getName() + "',"
-                    + "'" + c.getAddress() + "',"
-                    + "'" + c.getBirthdate() + "',"
-                    + "'" + c.getDrivingLicense() + "',"
-                    + "'" + c.getCreditCard() + "',"
+                    + "'" + r.getvId() + "',"
+                    + "'" + r.getName() + "',"
+                    + "'" + r.getDate() + "',"
+                    + "'" + r.getDuration() + "',"
+                    + "'" + r.getCost() + "',"
                     + ")";
             //stmt.execute(table);
             System.out.println(insertQuery);
             stmt.executeUpdate(insertQuery);
-            System.out.println("# The customer was successfully added in the database.");
+            System.out.println("# The rent was successfully added in the database.");
             /* Get the member id from the database and set it to the member */
             stmt.close();
             return null;
@@ -106,4 +105,5 @@ public class EditCustomersTable {
             return ex;
         }
     }
+
 }

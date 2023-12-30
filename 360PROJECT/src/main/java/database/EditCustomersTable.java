@@ -17,25 +17,36 @@ import mainClasses.Customer;
  *
  * @author Nikos Lasithiotakis
  */
-public class EditCustomersTables {
+public class EditCustomersTable {
 
-    public SQLException createNewPet(Customer c) throws ClassNotFoundException, FileNotFoundException {
+    public void createCustomersTable() throws SQLException, ClassNotFoundException {
+
+        Connection con = DB_Connection.getConnection();
+        Statement stmt = con.createStatement();
+
+        String query = "CREATE TABLE customers "
+                + "(name VARCHAR(20) not NULL, "
+                + "    birthdate DATE not null,"
+                + "    address VARCHAR(50) not null,"
+                + "    drivinglicense INTEGER not null,"
+                + "    creditcard INTEGER not null,"
+                + " PRIMARY KEY (name))";
+        stmt.execute(query);
+        stmt.close();
+    }
+
+    public SQLException createNewCustomer(Customer c) throws ClassNotFoundException, FileNotFoundException {
         try {
             Connection con = DB_Connection.getConnection();
             Statement stmt = con.createStatement();
             String insertQuery = "INSERT INTO "
                     + " customer (name,address,birthdate,drivinglicense,creditcard) "
                     + " VALUES ("
-                    + "'" + c.getPet_id() + "',"
-                    + "'" + c.getOwner_id() + "',"
                     + "'" + c.getName() + "',"
-                    + "'" + c.getType() + "',"
-                    + "'" + c.getBreed() + "',"
-                    + "'" + c.getGender() + "',"
-                    + "'" + c.getBirthyear() + "',"
-                    + "'" + c.getWeight() + "',"
-                    + "'" + c.getDescription() + "',"
-                    + "'" + c.getPhoto() + "'"
+                    + "'" + c.getAddress() + "',"
+                    + "'" + c.getBirthdate() + "',"
+                    + "'" + c.getDrivingLicense() + "',"
+                    + "'" + c.getCreditCard() + "',"
                     + ")";
             //stmt.execute(table);
             System.out.println(insertQuery);
@@ -46,7 +57,7 @@ public class EditCustomersTables {
             return null;
 
         } catch (SQLException ex) {
-            Logger.getLogger(EditPetsTable.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(EditCustomersTable.class.getName()).log(Level.SEVERE, null, ex);
             return ex;
         }
     }

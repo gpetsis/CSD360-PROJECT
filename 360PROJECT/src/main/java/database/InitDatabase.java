@@ -14,19 +14,13 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
 
-/*
- *
- * @author micha
- */
 public class InitDatabase {
-
     public static void main(String[] args) throws SQLException, ClassNotFoundException {
         InitDatabase init = new InitDatabase();
         init.initDatabase();
         init.initTables();
         init.updateRecords();
         init.databaseToJSON();
-
         //  init.dropDatabase();
         // init.deleteRecords();
     }
@@ -48,23 +42,8 @@ public class InitDatabase {
     }
 
     public void initTables() throws SQLException, ClassNotFoundException {
-        EditPetOwnersTable eut = new EditPetOwnersTable();
-        eut.createPetOwnersTable();
-
-        EditPetKeepersTable editkeepers = new EditPetKeepersTable();
-        editkeepers.createPetKeepersTable();
-
-        EditPetsTable editpets = new EditPetsTable();
-        editpets.createPetsTable();
-
-//        EditBookingsTable editBookings = new EditBookingsTable();
-//        editBookings.createBookingTable();
-
-//        EditReviewsTable editRevs = new EditReviewsTable();
-//        editRevs.createReviewTable();
-
-//        EditMessagesTable editMsgs = new EditMessagesTable();
-//        editMsgs.createMessageTable();
+        EditCustomersTable editcustomers = new EditCustomersTable();
+        editcustomers.createCustomersTable();
     }
 
     public void databaseToJSON() throws ClassNotFoundException, SQLException {
@@ -147,14 +126,11 @@ public class InitDatabase {
     public void updateRecords() throws ClassNotFoundException, SQLException {
         EditPetOwnersTable es = new EditPetOwnersTable();
         es.updatePetOwner("mountanton", "http://users.ics.forth/mountant");
-
     }
 
     public void deleteRecords() throws ClassNotFoundException, SQLException {
-
         EditPetsTable eb = new EditPetsTable();
         String pet_id = "1";
         //   eb.deletePet(pet_id);
     }
-
 }

@@ -7,24 +7,12 @@ package database;
 
 import com.google.gson.Gson;
 import com.google.gson.JsonArray;
-import database.EditPetsTable;
 import static database.DB_Connection.getInitialConnection;
-//import database.EditBookingsTable;
-//import database.EditMessagesTable;
 
-import database.EditPetOwnersTable;
-import database.EditPetKeepersTable;
-//import database.EditReviewsTable;
 import java.sql.Connection;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
-//import mainClasses.Message;
-import mainClasses.Pet;
-import mainClasses.PetKeeper;
-import mainClasses.PetOwner;
-//import mainClasses.Review;
-
 
 /*
  *

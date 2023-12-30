@@ -13,6 +13,11 @@ import java.sql.Statement;
 import java.util.ArrayList;
 import mainClasses.Vehicle;
 
+/**
+ *
+ * @author giann
+ */
+//ANW LIOSA
 public class EditVehiclesTable {
 
     public SQLException addVehicleFromJSON(String json) throws ClassNotFoundException {

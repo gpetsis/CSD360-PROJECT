@@ -14,5 +14,23 @@ public class Customer {
     String name, birthdate, address;
     int drivinglicense, creditcard;
 
-    String
+    public String getName() {
+        return name;
+    }
+
+    public String getBirthdate() {
+        return birthdate;
+    }
+
+    public String getAddress() {
+        return address;
+    }
+
+    public int getDrivingLicense() {
+        return drivinglicense;
+    }
+
+    public int getCreditCard() {
+        return creditcard;
+    }
 }

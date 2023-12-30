@@ -14,6 +14,10 @@ public class Customer {
     String name, birthdate, address;
     int drivinglicense, creditcard;
 
+    public void setName(String name) {
+        this.name = name;
+    }
+
     public String getName() {
         return name;
     }

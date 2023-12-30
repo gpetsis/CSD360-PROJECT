@@ -17,9 +17,9 @@ import mainClasses.Customer;
  *
  * @author Nikos Lasithiotakis
  */
-public class EditCustomersTables {
+public class EditCustomersTable {
 
-    public void createCustomerTable() throws SQLException, ClassNotFoundException {
+    public void createCustomersTable() throws SQLException, ClassNotFoundException {
 
         Connection con = DB_Connection.getConnection();
         Statement stmt = con.createStatement();
@@ -57,7 +57,7 @@ public class EditCustomersTables {
             return null;
 
         } catch (SQLException ex) {
-            Logger.getLogger(EditCustomersTables.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(EditCustomersTable.class.getName()).log(Level.SEVERE, null, ex);
             return ex;
         }
     }

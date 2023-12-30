@@ -11,8 +11,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
-import java.util.logging.Level;
-import java.util.logging.Logger;
+import mainClasses.Vehicle;
 
 /**
  *
@@ -21,46 +20,46 @@ import java.util.logging.Logger;
 public class editVehiclesTable {
 
     public SQLException addVehicleFromJSON(String json) throws ClassNotFoundException {
-        PetOwner user = jsonToPetOwner(json);
+        Vehicle user = jsonToVehicle(json);
         return addNewPetOwner(user);
     }
 
-    public PetOwner jsonToPetOwner(String json) {
+    public Vehicle jsonToVehicle(String json) {
         Gson gson = new Gson();
 
-        PetOwner user = gson.fromJson(json, PetOwner.class);
-        return user;
+        Vehicle vehicle = gson.fromJson(json, Vehicle.class);
+        return vehicle;
     }
 
-    public String petOwnerToJSON(PetOwner user) {
+    public String VehicleToJSON(Vehicle user) {
         Gson gson = new Gson();
 
-        String json = gson.toJson(user, PetOwner.class);
+        String json = gson.toJson(user, Vehicle.class);
         return json;
     }
 
-    public void updatePetOwner(String username, String personalpage) throws SQLException, ClassNotFoundException {
+    public void updateVehicle(String username, String personalpage) throws SQLException, ClassNotFoundException {
         Connection con = DB_Connection.getConnection();
         Statement stmt = con.createStatement();
         String update = "UPDATE petowners SET personalpage='" + personalpage + "' WHERE username = '" + username + "'";
         stmt.executeUpdate(update);
     }
 
-    public ArrayList<PetOwner> getOwners() throws SQLException, ClassNotFoundException {
+    public ArrayList<Vehicle> getVehicles() throws SQLException, ClassNotFoundException {
         Connection con = DB_Connection.getConnection();
         Statement stmt = con.createStatement();
-        ArrayList<PetOwner> owners = new ArrayList<PetOwner>();
+        ArrayList<Vehicle> vehicles = new ArrayList<Vehicle>();
         ResultSet rs = null;
         try {
-            rs = stmt.executeQuery("SELECT * FROM petowners");
+            rs = stmt.executeQuery("SELECT * FROM vehicles");
 
             while (rs.next()) {
                 String json = DB_Connection.getResultsToJSON(rs);
                 Gson gson = new Gson();
-                PetOwner owner = gson.fromJson(json, PetOwner.class);
-                owners.add(owner);
+                Vehicle vehicle = gson.fromJson(json, Vehicle.class);
+                vehicles.add(vehicle);
             }
-            return owners;
+            return vehicles;
         } catch (Exception e) {
             System.err.println("Got an exception! ");
             System.err.println(e.getMessage());
@@ -112,7 +111,7 @@ public class editVehiclesTable {
         String query = "CREATE TABLE vehicles "
                 + "(vId INTEGER not NULL,"
                 + "    brand VARCHAR(15) not null,"
-                + "    model VARCHAR(15) not null,	"
+                + "    model VARCHAR(15) not null,"
                 + "    color VARCHAR(10) not null,"
                 + "    autonomy INTEGER not null,"
                 + " PRIMARY KEY (vId))";
@@ -125,43 +124,30 @@ public class editVehiclesTable {
      *
      * @throws ClassNotFoundException
      */
-    public SQLException addNewPetOwner(PetOwner user) throws ClassNotFoundException {
+    public SQLException addNewVehicle(Vehicle vehicle) throws ClassNotFoundException {
         try {
             Connection con = DB_Connection.getConnection();
 
             Statement stmt = con.createStatement();
 
             String insertQuery = "INSERT INTO "
-                    + " petowners (username,email,password,firstname,lastname,birthdate,gender,country,city,address,personalpage,"
-                    + "job,telephone,lat,lon)"
+                    + " vehicles (vId, brand, model, color, autonomy)"
                     + " VALUES ("
-                    + "'" + user.getUsername() + "',"
-                    + "'" + user.getEmail() + "',"
-                    + "'" + user.getPassword() + "',"
-                    + "'" + user.getFirstname() + "',"
-                    + "'" + user.getLastname() + "',"
-                    + "'" + user.getBirthdate() + "',"
-                    + "'" + user.getGender() + "',"
-                    + "'" + user.getCountry() + "',"
-                    + "'" + user.getCity() + "',"
-                    + "'" + user.getAddress() + "',"
-                    + "'" + user.getPersonalpage() + "',"
-                    + "'" + user.getJob() + "',"
-                    + "'" + user.getTelephone() + "',"
-                    + "'" + user.getLat() + "',"
-                    + "'" + user.getLon() + "'"
+                    + "'" + vehicle.getVehicleId() + "',"
+                    + "'" + vehicle.getBrand() + "',"
+                    + "'" + vehicle.getModel() + "',"
+                    + "'" + vehicle.getColor() + "',"
+                    + "'" + vehicle.getAutonomy() + "'"
                     + ")";
-            //stmt.execute(table);
+
             System.out.println(insertQuery);
             stmt.executeUpdate(insertQuery);
-            System.out.println("# The pet owner was successfully added in the database.");
+            System.out.println("# The vehicle was successfully added in the database.");
 
-            /* Get the member id from the database and set it to the member */
             stmt.close();
             return null;
         } catch (SQLException ex) {
             System.out.println("Error: " + ex);
-            Logger.getLogger(EditPetOwnersTable.class.getName()).log(Level.SEVERE, null, ex);
             return ex;
         }
     }

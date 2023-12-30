@@ -22,16 +22,32 @@ public class Customer {
         return name;
     }
 
+    public void setBirthdate(String birthdate) {
+        this.birthdate = birthdate;
+    }
+
     public String getBirthdate() {
         return birthdate;
+    }
+
+    public void setAddress(String address) {
+        this.address = address;
     }
 
     public String getAddress() {
         return address;
     }
 
+    public void setDrivingLicense(int drivinglicense) {
+        this.drivinglicense = drivinglicense;
+    }
+
     public int getDrivingLicense() {
         return drivinglicense;
+    }
+
+    public void setCreditCard(int creditcard) {
+        this.creditcard = creditcard;
     }
 
     public int getCreditCard() {

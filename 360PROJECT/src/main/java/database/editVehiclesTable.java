@@ -24,6 +24,7 @@ public class EditVehiclesTable {
         return addNewVehicle(user);
     }
 
+    // Poutanes apo patra, 8a gamh8eite
     public Vehicle jsonToVehicle(String json) {
         Gson gson = new Gson();
 

@@ -8,6 +8,7 @@ package database;
 import com.google.gson.Gson;
 import com.google.gson.JsonArray;
 import static database.DB_Connection.getInitialConnection;
+
 import java.sql.Connection;
 import java.sql.SQLException;
 import java.sql.Statement;

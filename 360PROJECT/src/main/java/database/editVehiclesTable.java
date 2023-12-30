@@ -21,7 +21,7 @@ public class editVehiclesTable {
 
     public SQLException addVehicleFromJSON(String json) throws ClassNotFoundException {
         Vehicle user = jsonToVehicle(json);
-        return addNewPetOwner(user);
+        return addNewVehicle(user);
     }
 
     public Vehicle jsonToVehicle(String json) {

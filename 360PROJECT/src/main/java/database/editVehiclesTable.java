@@ -13,10 +13,6 @@ import java.sql.Statement;
 import java.util.ArrayList;
 import mainClasses.Vehicle;
 
-/**
- *
- * @author giann
- */
 public class EditVehiclesTable {
 
     public SQLException addVehicleFromJSON(String json) throws ClassNotFoundException {
@@ -24,7 +20,6 @@ public class EditVehiclesTable {
         return addNewVehicle(user);
     }
 
-    // Poutanes apo patra, 8a gamh8eite
     public Vehicle jsonToVehicle(String json) {
         Gson gson = new Gson();
 

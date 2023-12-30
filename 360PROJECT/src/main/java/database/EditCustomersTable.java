@@ -29,7 +29,7 @@ public class EditCustomersTable {
                 + "    birthdate DATE not null,"
                 + "    address VARCHAR(50) not null,"
                 + "    drivinglicense INTEGER not null,"
-                + "    creditcard INTEGER not null,"
+                + "    creditcard BIGINT not null,"
                 + " PRIMARY KEY (name))";
         stmt.execute(query);
         stmt.close();
@@ -40,7 +40,7 @@ public class EditCustomersTable {
             Connection con = DB_Connection.getConnection();
             Statement stmt = con.createStatement();
             String insertQuery = "INSERT INTO "
-                    + " customer (name,address,birthdate,drivinglicense,creditcard) "
+                    + " customers (name,address,birthdate,drivinglicense,creditcard) "
                     + " VALUES ("
                     + "'" + c.getName() + "',"
                     + "'" + c.getAddress() + "',"

@@ -1,0 +1,100 @@
+{"name":"Evelina Georgiou","birthdate":"18-04-1992","address":"Daidalou 98","drivinglicense":"1273","creditcard":"7080901020"}
+Correct JSON
+INSERT INTO  customers (name,birthdate,address,drivinglicense,creditcard)  VALUES ('Evelina Georgiou','18-04-1992','Daidalou 98','1273','7080901020')
+Error: com.mysql.jdbc.MysqlDataTruncation: Data truncation: Incorrect date value: '18-04-1992' for column `project360`.`customers`.`birthdate` at row 1
+INSERT INTO  vehicles (vId, brand, model, color, autonomy) VALUES ('1','bmx','model1','red','20')
+# The vehicle was successfully added in the database.
+INSERT INTO  vehicles (vId, brand, model, color, autonomy) VALUES ('2','bmx','model2','blue','30')
+# The vehicle was successfully added in the database.
+INSERT INTO  vehicles (vId, brand, model, color, autonomy) VALUES ('3','patini','patini1','red','20')
+# The vehicle was successfully added in the database.
+INSERT INTO  vehicles (vId, brand, model, color, autonomy) VALUES ('4','patini2','patini2','green','30')
+# The vehicle was successfully added in the database.
+INSERT INTO  vehicles (vId, brand, model, color, autonomy) VALUES ('5','lamborghini','aventador','white','800')
+# The vehicle was successfully added in the database.
+INSERT INTO  vehicles (vId, brand, model, color, autonomy) VALUES ('6','buggati','veyron','black','700')
+# The vehicle was successfully added in the database.
+{"name":"Giannis Petsis","birthdate":"2003-09-10","address":"Kountouriotou 2","drivinglicense":"4512","creditcard":"1111222233334444"}
+Correct JSON
+INSERT INTO  customers (name,birthdate,address,drivinglicense,creditcard)  VALUES ('Giannis Petsis','2003-09-10','Kountouriotou 2','4512','1111222233334444')
+# The customer was successfully added in the database.
+{"name":"Nikos Lasithiotakis","birthdate":"20-07-2003","address":"Stavrou Mpalali 3","drivinglicense":"9831","creditcard":"5555666677778888"}
+Correct JSON
+INSERT INTO  customers (name,birthdate,address,drivinglicense,creditcard)  VALUES ('Nikos Lasithiotakis','20-07-2003','Stavrou Mpalali 3','9831','5555666677778888')
+Error: com.mysql.jdbc.MysqlDataTruncation: Data truncation: Incorrect date value: '20-07-2003' for column `project360`.`customers`.`birthdate` at row 1
+{"name":"Kostas Papadopoulou","birthdate":"12-12-2001","address":"Idomeneous 32","drivinglicense":"4512","creditcard":"123456789012"}
+Correct JSON
+INSERT INTO  customers (name,birthdate,address,drivinglicense,creditcard)  VALUES ('Kostas Papadopoulou','12-12-2001','Idomeneous 32','4512','123456789012')
+Error: com.mysql.jdbc.MysqlDataTruncation: Data truncation: Incorrect date value: '12-12-2001' for column `project360`.`customers`.`birthdate` at row 1
+{"name":"Xara kwstantinidi","birthdate":"01-2-1999","address":"Knossou 227","drivinglicense":"5218","creditcard":"102030405060"}
+Correct JSON
+INSERT INTO  customers (name,birthdate,address,drivinglicense,creditcard)  VALUES ('Xara kwstantinidi','01-2-1999','Knossou 227','5218','102030405060')
+Error: com.mysql.jdbc.MysqlDataTruncation: Data truncation: Incorrect date value: '01-2-1999' for column `project360`.`customers`.`birthdate` at row 1
+{"name":"Evelina Georgiou","birthdate":"18-04-1992","address":"Daidalou 98","drivinglicense":"1273","creditcard":"7080901020"}
+Correct JSON
+INSERT INTO  customers (name,birthdate,address,drivinglicense,creditcard)  VALUES ('Evelina Georgiou','18-04-1992','Daidalou 98','1273','7080901020')
+Error: com.mysql.jdbc.MysqlDataTruncation: Data truncation: Incorrect date value: '18-04-1992' for column `project360`.`customers`.`birthdate` at row 1
+INSERT INTO  vehicles (vId, brand, model, color, autonomy) VALUES ('1','bmx','model1','red','20')
+# The vehicle was successfully added in the database.
+INSERT INTO  vehicles (vId, brand, model, color, autonomy) VALUES ('2','bmx','model2','blue','30')
+# The vehicle was successfully added in the database.
+INSERT INTO  vehicles (vId, brand, model, color, autonomy) VALUES ('3','patini','patini1','red','20')
+# The vehicle was successfully added in the database.
+INSERT INTO  vehicles (vId, brand, model, color, autonomy) VALUES ('4','patini2','patini2','green','30')
+# The vehicle was successfully added in the database.
+INSERT INTO  vehicles (vId, brand, model, color, autonomy) VALUES ('5','lamborghini','aventador','white','800')
+# The vehicle was successfully added in the database.
+INSERT INTO  vehicles (vId, brand, model, color, autonomy) VALUES ('6','buggati','veyron','black','700')
+# The vehicle was successfully added in the database.
+{"name":"Giannis Petsis","birthdate":"2003-10-09","address":"Kountouriotou 2","drivinglicense":"4512","creditcard":"1111222233334444"}
+Correct JSON
+INSERT INTO  customers (name,birthdate,address,drivinglicense,creditcard)  VALUES ('Giannis Petsis','2003-10-09','Kountouriotou 2','4512','1111222233334444')
+# The customer was successfully added in the database.
+{"name":"Nikos Lasithiotakis","birthdate":"2003-07-20","address":"Stavrou Mpalali 3","drivinglicense":"9831","creditcard":"5555666677778888"}
+Correct JSON
+INSERT INTO  customers (name,birthdate,address,drivinglicense,creditcard)  VALUES ('Nikos Lasithiotakis','2003-07-20','Stavrou Mpalali 3','9831','5555666677778888')
+# The customer was successfully added in the database.
+{"name":"Kostas Papadopoulou","birthdate":"2001-12-12","address":"Idomeneous 32","drivinglicense":"4512","creditcard":"123456789012"}
+Correct JSON
+INSERT INTO  customers (name,birthdate,address,drivinglicense,creditcard)  VALUES ('Kostas Papadopoulou','2001-12-12','Idomeneous 32','4512','123456789012')
+# The customer was successfully added in the database.
+{"name":"Xara kwstantinidi","birthdate":"1999-02-01","address":"Knossou 227","drivinglicense":"5218","creditcard":"102030405060"}
+Correct JSON
+INSERT INTO  customers (name,birthdate,address,drivinglicense,creditcard)  VALUES ('Xara kwstantinidi','1999-02-01','Knossou 227','5218','102030405060')
+# The customer was successfully added in the database.
+{"name":"Evelina Georgiou","birthdate":"1992-04-18","address":"Daidalou 98","drivinglicense":"1273","creditcard":"7080901020"}
+Correct JSON
+INSERT INTO  customers (name,birthdate,address,drivinglicense,creditcard)  VALUES ('Evelina Georgiou','1992-04-18','Daidalou 98','1273','7080901020')
+# The customer was successfully added in the database.
+INSERT INTO  vehicles (vId, brand, model, color, autonomy) VALUES ('1','bmx','model1','red','20')
+# The vehicle was successfully added in the database.
+INSERT INTO  vehicles (vId, brand, model, color, autonomy) VALUES ('2','bmx','model2','blue','30')
+# The vehicle was successfully added in the database.
+INSERT INTO  vehicles (vId, brand, model, color, autonomy) VALUES ('3','patini','patini1','red','20')
+# The vehicle was successfully added in the database.
+INSERT INTO  vehicles (vId, brand, model, color, autonomy) VALUES ('4','patini2','patini2','green','30')
+# The vehicle was successfully added in the database.
+INSERT INTO  vehicles (vId, brand, model, color, autonomy) VALUES ('5','lamborghini','aventador','white','800')
+# The vehicle was successfully added in the database.
+INSERT INTO  vehicles (vId, brand, model, color, autonomy) VALUES ('6','buggati','veyron','black','700')
+# The vehicle was successfully added in the database.
+{"name":"Giannis Petsis","birthdate":"2003-10-09","address":"Kountouriotou 2","drivinglicense":"4512","creditcard":"1111222233334444"}
+Correct JSON
+INSERT INTO  customers (name,birthdate,address,drivinglicense,creditcard)  VALUES ('Giannis Petsis','2003-10-09','Kountouriotou 2','4512','1111222233334444')
+# The customer was successfully added in the database.
+{"name":"Nikos Lasithiotakis","birthdate":"2003-07-20","address":"Stavrou Mpalali 3","drivinglicense":"9831","creditcard":"5555666677778888"}
+Correct JSON
+INSERT INTO  customers (name,birthdate,address,drivinglicense,creditcard)  VALUES ('Nikos Lasithiotakis','2003-07-20','Stavrou Mpalali 3','9831','5555666677778888')
+# The customer was successfully added in the database.
+{"name":"Kostas Papadopoulou","birthdate":"2001-12-12","address":"Idomeneous 32","drivinglicense":"4512","creditcard":"1234567890121111"}
+Correct JSON
+INSERT INTO  customers (name,birthdate,address,drivinglicense,creditcard)  VALUES ('Kostas Papadopoulou','2001-12-12','Idomeneous 32','4512','1234567890121111')
+# The customer was successfully added in the database.
+{"name":"Xara kwstantinidi","birthdate":"1999-02-01","address":"Knossou 227","drivinglicense":"5218","creditcard":"1020304050606247"}
+Correct JSON
+INSERT INTO  customers (name,birthdate,address,drivinglicense,creditcard)  VALUES ('Xara kwstantinidi','1999-02-01','Knossou 227','5218','1020304050606247')
+# The customer was successfully added in the database.
+{"name":"Evelina Georgiou","birthdate":"1992-04-18","address":"Daidalou 98","drivinglicense":"1273","creditcard":"7080901020122334"}
+Correct JSON
+INSERT INTO  customers (name,birthdate,address,drivinglicense,creditcard)  VALUES ('Evelina Georgiou','1992-04-18','Daidalou 98','1273','7080901020122334')
+# The customer was successfully added in the database.

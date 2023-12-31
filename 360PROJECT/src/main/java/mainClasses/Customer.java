@@ -12,7 +12,8 @@ package mainClasses;
 public class Customer {
 
     String name, birthdate, address;
-    int drivinglicense, creditcard;
+    int drivinglicense;
+    long creditcard;
 
     public void setName(String name) {
         this.name = name;
@@ -46,11 +47,11 @@ public class Customer {
         return drivinglicense;
     }
 
-    public void setCreditCard(int creditcard) {
+    public void setCreditCard(long creditcard) {
         this.creditcard = creditcard;
     }
 
-    public int getCreditCard() {
+    public long getCreditCard() {
         return creditcard;
     }
 }

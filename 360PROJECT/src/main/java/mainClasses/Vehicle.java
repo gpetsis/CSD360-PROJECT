@@ -29,4 +29,24 @@ public class Vehicle {
     public int getVehicleId() {
         return vId;
     }
+
+    public void setBrand(String newBrand) {
+        this.brand = newBrand;
+    }
+
+    public void setModel(String newModel) {
+        this.model = newModel;
+    }
+
+    public void setColor(String newColor) {
+        this.color = newColor;
+    }
+
+    public void setAutonomy(int newAutonomy) {
+        this.autonomy = newAutonomy;
+    }
+
+    public void setVehicleId(int newvId) {
+        this.vId = newvId;
+    }
 }

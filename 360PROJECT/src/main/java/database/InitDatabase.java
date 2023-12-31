@@ -48,12 +48,12 @@ public class InitDatabase {
     public void addToDatabaseExamples() throws ClassNotFoundException, SQLException, FileNotFoundException, IOException {
 
         EditVehiclesTable vehiclesTable = new EditVehiclesTable();
-        vehiclesTable.addVehicleFromJSON(examples.bike1JSON);
-        vehiclesTable.addVehicleFromJSON(examples.bike2JSON);
-        vehiclesTable.addVehicleFromJSON(examples.scooter1JSON);
-        vehiclesTable.addVehicleFromJSON(examples.scooter2JSON);
-        vehiclesTable.addVehicleFromJSON(examples.car1JSON);
-        vehiclesTable.addVehicleFromJSON(examples.car2JSON);
+        vehiclesTable.addBicycleFromJSON(examples.bike1JSON);
+        vehiclesTable.addBicycleFromJSON(examples.bike2JSON);
+        vehiclesTable.addScooterFromJSON(examples.scooter1JSON);
+        vehiclesTable.addScooterFromJSON(examples.scooter2JSON);
+        vehiclesTable.addCarFromJSON(examples.car1JSON);
+        vehiclesTable.addCarFromJSON(examples.car2JSON);
 
         EditCustomersTable customersTable = new EditCustomersTable();
         customersTable.addCustomerFromJSON(examples.Customer1JSON);

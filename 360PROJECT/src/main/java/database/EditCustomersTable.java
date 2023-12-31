@@ -6,7 +6,10 @@
 package database;
 
 import com.google.gson.Gson;
+import java.io.BufferedWriter;
 import java.io.FileNotFoundException;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -23,8 +26,11 @@ import mainClasses.Rent;
  */
 public class EditCustomersTable {
 
-    public SQLException addCustomerFromJSON(String json) throws ClassNotFoundException, FileNotFoundException {
+    public SQLException addCustomerFromJSON(String json) throws ClassNotFoundException, FileNotFoundException, IOException {
+
+        System.out.println(json);
         Customer c = jsonToCustomer(json);
+        System.out.println("Correct JSON");
         return createNewCustomer(c);
     }
 
@@ -74,24 +80,24 @@ public class EditCustomersTable {
                 + "    birthdate DATE not null, "
                 + "    address VARCHAR(50) not null, "
                 + "    drivinglicense INTEGER not null, "
-                + "    creditcard INTEGER not null, "
+                + "    creditcard BIGINT not null, "
                 + " PRIMARY KEY (name))";
         stmt.execute(query);
         stmt.close();
     }
 
-    public SQLException createNewCustomer(Customer c) throws ClassNotFoundException, FileNotFoundException {
+    public SQLException createNewCustomer(Customer c) throws ClassNotFoundException, FileNotFoundException, IOException {
         try {
             Connection con = DB_Connection.getConnection();
             Statement stmt = con.createStatement();
             String insertQuery = "INSERT INTO "
-                    + " customers (name,address,birthdate,drivinglicense,creditcard) "
+                    + " customers (name,birthdate,address,drivinglicense,creditcard) "
                     + " VALUES ("
                     + "'" + c.getName() + "',"
-                    + "'" + c.getAddress() + "',"
                     + "'" + c.getBirthdate() + "',"
+                    + "'" + c.getAddress() + "',"
                     + "'" + c.getDrivingLicense() + "',"
-                    + "'" + c.getCreditCard() + "',"
+                    + "'" + c.getCreditCard() + "'"
                     + ")";
             //stmt.execute(table);
             System.out.println(insertQuery);
@@ -102,8 +108,31 @@ public class EditCustomersTable {
             return null;
 
         } catch (SQLException ex) {
+            appendToFile("Error: " + ex);
+            System.out.println("Error: " + ex);
             Logger.getLogger(EditCustomersTable.class.getName()).log(Level.SEVERE, null, ex);
             return ex;
+        }
+    }
+
+    public static void appendToFile(String str) {
+        // Try block to check for exceptions
+        try {
+            String fileName = "C:\\CSD\\PENDING\\HY-360\\CSD360-PROJECT\\360PROJECT\\src\\main\\webapp\\js\\logfile.txt";
+            // Open given file in append mode by creating an
+            // object of BufferedWriter class
+            BufferedWriter out = new BufferedWriter(
+                    new FileWriter(fileName, true));
+
+            // Writing on output stream
+            out.write(str);
+            // Closing the connection
+            out.close();
+        } // Catch block to handle the exceptions
+        catch (IOException e) {
+
+            // Display message when exception occurs
+            System.out.println("exception occurred" + e);
         }
     }
 }

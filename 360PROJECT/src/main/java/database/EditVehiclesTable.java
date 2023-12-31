@@ -6,6 +6,7 @@
 package database;
 
 import com.google.gson.Gson;
+import java.io.FileNotFoundException;
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -15,9 +16,12 @@ import mainClasses.Vehicle;
 
 public class EditVehiclesTable {
 
-    public SQLException addVehicleFromJSON(String json) throws ClassNotFoundException {
-        Vehicle user = jsonToVehicle(json);
-        return addNewVehicle(user);
+    public SQLException addVehicleFromJSON(String json) throws ClassNotFoundException, FileNotFoundException {
+//        PrintStream fileOut = new PrintStream(new File("C:\\CSD\\PENDING\\HY-360\\CSD360-PROJECT\\360PROJECT\\src\\main\\webapp\\js\\logfile.txt"));
+//        System.setOut(fileOut);
+//        System.out.println(json);
+        Vehicle vehicle = jsonToVehicle(json);
+        return addNewVehicle(vehicle);
     }
 
     public Vehicle jsonToVehicle(String json) {
@@ -120,7 +124,7 @@ public class EditVehiclesTable {
      *
      * @throws ClassNotFoundException
      */
-    public SQLException addNewVehicle(Vehicle vehicle) throws ClassNotFoundException {
+    public SQLException addNewVehicle(Vehicle vehicle) throws ClassNotFoundException, FileNotFoundException {
         try {
             Connection con = DB_Connection.getConnection();
 
@@ -143,7 +147,9 @@ public class EditVehiclesTable {
             stmt.close();
             return null;
         } catch (SQLException ex) {
-            System.out.println("Error: " + ex);
+//            PrintStream fileOut = new PrintStream(new File("C:\\CSD\\PENDING\\HY-360\\CSD360-PROJECT\\360PROJECT\\src\\main\\webapp\\js\\logfile.txt"));
+//            System.setOut(fileOut);
+//            System.out.println("Error: " + ex);
             return ex;
         }
     }

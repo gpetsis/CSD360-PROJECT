@@ -9,5 +9,40 @@
     <body>
         <h1>Hello World!</h1>
         <input type="button" onclick="initDatabase()" value="Initialize Database">
+        <form id="vehicles" onsubmit="return addNewVehicle()">
+            <h1>Add New Vehicle</h1>
+            
+            <div>
+                <label><b>Type</b></label>
+                <br>
+                <input type="radio" id="car" name="type" value="car">
+                <label>Car</label><br>
+                <input type="radio" id="bike" name="type" value="bicycle">
+                <label>Bicycle</label><br>
+                <input type="radio" id="scooter" name="type" value="scooter">
+                <label>Scooter</label><br>
+            </div>
+            
+            <div>
+                <label><b>Brand</b></label>
+                <input type="text" id="brand" name="brand">
+            </div>
+            
+            <div>
+                <label><b>Model</b></label>
+                <input type="text" id="model" name="model">
+            </div>
+            
+            <div>
+                <label><b>Color</b></label>
+                <input type="text" id="color" name="color">
+            </div>
+            
+            <div> 
+                <label><b>Autonomy</b></label>
+                <input type="text" id="autonomy" name="autonomy" pattern="[1-9]\d*">
+            </div>
+            
+        </form>
     </body>
 </html>

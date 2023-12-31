@@ -8,4 +8,12 @@
         <servlet-name>Init</servlet-name>
         <url-pattern>/Init</url-pattern>
     </servlet-mapping>
+    <servlet>
+        <servlet-name>Customer</servlet-name>
+        <servlet-class>servlets.CustomerServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>Customer</servlet-name>
+        <url-pattern>/Customer</url-pattern>
+    </servlet-mapping>
 </web-app>

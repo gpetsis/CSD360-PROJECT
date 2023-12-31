@@ -7,8 +7,11 @@ package servlets;
 
 import database.EditCustomersTable;
 import java.io.BufferedReader;
+import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -36,7 +39,7 @@ public class CustomerServlet extends HttpServlet {
      * @throws IOException if an I/O error occurs
      */
     @Override
-    protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+    protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException, FileNotFoundException {
         String requestString = "";
 
         BufferedReader in = new BufferedReader(new InputStreamReader(request.getInputStream()));
@@ -47,7 +50,11 @@ public class CustomerServlet extends HttpServlet {
         }
 
         EditCustomersTable customersTable = new EditCustomersTable();
-        customersTable.addCustomerFromJSON(requestString);
+        try {
+            customersTable.addCustomerFromJSON(requestString);
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(CustomerServlet.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 
     /**

@@ -9,17 +9,34 @@
     <body>
         <h1>Hello World!</h1>
         <input type="button" onclick="initDatabase()" value="Initialize Database">
-        <form id="vehicles" onsubmit="return addNewVehicle()">
+        <form id="addNewCustomerForm">
+            <label for="name">Name:</label>
+            <input type="text" id="addNewCustomerName" name="name">
+            
+            <label for="birthdate">Birth date:</label>
+            <input type="date" id="addNewCustomerBirthdate" name="birthdate">
+            
+            <label for="address">Address:</label>
+            <input type="text" id="addNewCustomerAddress" name="address">
+            
+            <label for="drivinglicense">Driving License:</label>
+            <input type="text" id="addNewCustomerDrivinglicense" name="drivinglicense">
+            
+            <label for="creditcard">Credit Card:</label>
+            <input type="text" id="addNewCustomerCreditcard" name="creditcard">
+        </form>
+  
+        <form id="addNewVehicleForm" onsubmit="return addNewVehicle()">
             <h1>Add New Vehicle</h1>
             
             <div>
                 <label><b>Type</b></label>
                 <br>
-                <input type="radio" id="car" name="type" value="car">
+                <input type="radio" id="addNewVehicleCar" name="type" value="car">
                 <label>Car</label><br>
-                <input type="radio" id="bike" name="type" value="bicycle">
+                <input type="radio" id="addNewVehicleBike" name="type" value="bicycle">
                 <label>Bicycle</label><br>
-                <input type="radio" id="scooter" name="type" value="scooter">
+                <input type="radio" id="addNewVehicleScooter" name="type" value="scooter">
                 <label>Scooter</label><br>
             </div>
             
@@ -42,7 +59,6 @@
                 <label><b>Autonomy</b></label>
                 <input type="text" id="autonomy" name="autonomy" pattern="[1-9]\d*">
             </div>
-            
         </form>
     </body>
 </html>

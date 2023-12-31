@@ -26,8 +26,8 @@ public class examples {
             + "\"color\":\"red\",\"autonomy\":\"20\"}";
     static String scooter2JSON = "{\"vId\":\"4\",\"brand\":\"patini2\",\"model\":\"patini2\","
             + "\"color\":\"green\",\"autonomy\":\"30\"}";
-    static String car1JSON = "{\"vId\":\"5\",\"brand\":\"lamborghini\",\"model\":\"aventador\","
-            + "\"color\":\"white\",\"autonomy\":\"800\"}";
-    static String car2JSON = "{\"vId\":\"6\",\"brand\":\"buggati\",\"model\":\"veyron\","
-            + "\"color\":\"black\",\"autonomy\":\"700\"}";
+    static String car1JSON = "{\"licensenumber\":\"5\",\"brand\":\"lamborghini\",\"model\":\"aventador\","
+            + "\"color\":\"white\",\"autonomy\":\"800\",\"type\":\"SUV\"}";
+    static String car2JSON = "{\"licensenumber\":\"6\",\"brand\":\"buggati\",\"model\":\"veyron\","
+            + "\"color\":\"black\",\"autonomy\":\"700\",\"type\":\"hatchback\"}";
 }

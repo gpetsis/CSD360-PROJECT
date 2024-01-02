@@ -99,5 +99,50 @@
             
             <br>
         </form>
+        
+        <h1>Search Vehicles</h1>
+        <select name="search" id="search">
+            <option value="vehicle">Vehicle</option>
+            <option value="car">Car</option>
+            <option value="scooter">Scooter</option>
+            <option value="bicycle">Bicycle</option>
+        </select>
+        <br><br>
+        <input type="button" id="searchButton" onclick="searchVehicles()" value="Search">
+        <br><br>
+        
+        <form id="rentVehicle">
+            <h1>Rent a Vehicle</h1>
+            <div>
+                <label><b>Name</b></label>
+                <input type="text" id="rentVehicleName" name="name">
+            </div>
+            
+            <div>
+                <label><b>Date</b></label>
+                <input type="date" id="rentVehicleDate" name="date">
+            </div>
+            
+            <div>
+                <label><b>Duration</b></label>
+                <input type="text" id="rentVehicleDuration" name="duration">
+            </div>
+            
+            <div>
+                <label><b>Cost</b></label>
+                <input type="text" id="rentVehicleCost" name="cost">
+            </div>
+            
+            <div>
+                <label><b>vId</b></label>
+                <input type="text" id="rentVehiclevId" name="vId">
+            </div>
+            
+            <div>
+                <br>
+                <input type="button" id="rentVehicleButton" onclick="rentVehicle()" value="Rent">
+            </div>
+        </form>
+
     </body>
 </html>

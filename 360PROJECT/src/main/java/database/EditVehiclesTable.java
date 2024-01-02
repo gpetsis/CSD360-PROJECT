@@ -88,19 +88,77 @@ public class EditVehiclesTable {
 //        stmt.executeUpdate(update);
 //    }
 
-    public ArrayList<Vehicle> getVehicles() throws SQLException, ClassNotFoundException {
+    public ArrayList<String> getVehicles() throws SQLException, ClassNotFoundException {
         Connection con = DB_Connection.getConnection();
         Statement stmt = con.createStatement();
-        ArrayList<Vehicle> vehicles = new ArrayList<Vehicle>();
+        ArrayList<String> vehicles = new ArrayList<String>();
         ResultSet rs = null;
         try {
             rs = stmt.executeQuery("SELECT * FROM vehicles");
 
             while (rs.next()) {
                 String json = DB_Connection.getResultsToJSON(rs);
-                Gson gson = new Gson();
-                Vehicle vehicle = gson.fromJson(json, Vehicle.class);
-                vehicles.add(vehicle);
+                vehicles.add(json);
+            }
+            return vehicles;
+        } catch (Exception e) {
+            System.err.println("Got an exception! ");
+            System.err.println(e.getMessage());
+        }
+        return null;
+    }
+
+    public ArrayList<String> getCars() throws SQLException, ClassNotFoundException {
+        Connection con = DB_Connection.getConnection();
+        Statement stmt = con.createStatement();
+        ArrayList<String> cars = new ArrayList<String>();
+        ResultSet rs = null;
+        try {
+            rs = stmt.executeQuery("SELECT * FROM cars");
+
+            while (rs.next()) {
+                String json = DB_Connection.getResultsToJSON(rs);
+                cars.add(json);
+            }
+            return cars;
+        } catch (Exception e) {
+            System.err.println("Got an exception! ");
+            System.err.println(e.getMessage());
+        }
+        return null;
+    }
+
+    public ArrayList<String> getScooters() throws SQLException, ClassNotFoundException {
+        Connection con = DB_Connection.getConnection();
+        Statement stmt = con.createStatement();
+        ArrayList<String> scooters = new ArrayList<String>();
+        ResultSet rs = null;
+        try {
+            rs = stmt.executeQuery("SELECT * FROM scooters");
+
+            while (rs.next()) {
+                String json = DB_Connection.getResultsToJSON(rs);
+                scooters.add(json);
+            }
+            return scooters;
+        } catch (Exception e) {
+            System.err.println("Got an exception! ");
+            System.err.println(e.getMessage());
+        }
+        return null;
+    }
+
+    public ArrayList<String> getBicycles() throws SQLException, ClassNotFoundException {
+        Connection con = DB_Connection.getConnection();
+        Statement stmt = con.createStatement();
+        ArrayList<String> vehicles = new ArrayList<String>();
+        ResultSet rs = null;
+        try {
+            rs = stmt.executeQuery("SELECT * FROM bicycles");
+
+            while (rs.next()) {
+                String json = DB_Connection.getResultsToJSON(rs);
+                vehicles.add(json);
             }
             return vehicles;
         } catch (Exception e) {
@@ -171,7 +229,7 @@ public class EditVehiclesTable {
         stmt.execute(query);
 
         query = "CREATE TABLE scooters "
-                + "(vId INTEGER not null references vehicles(vId) unique,"
+                + "(vId INTEGER not null references vehicles(vId),"
                 + "    brand VARCHAR(15) not null,"
                 + "    model VARCHAR(15) not null,"
                 + "    color VARCHAR(10) not null,"
@@ -180,7 +238,7 @@ public class EditVehiclesTable {
         stmt.execute(query);
 
         query = "CREATE TABLE bicycles "
-                + "(vId INTEGER not null references vehicles(vId) unique,"
+                + "(vId INTEGER not null references vehicles(vId),"
                 + "    brand VARCHAR(15) not null,"
                 + "    model VARCHAR(15) not null,"
                 + "    color VARCHAR(10) not null,"
@@ -200,6 +258,21 @@ public class EditVehiclesTable {
             Connection con = DB_Connection.getConnection();
             String insertQuery;
             Statement stmt = con.createStatement();
+
+            insertQuery = "INSERT INTO "
+                    + " vehicles (vId, brand, model, color, autonomy)"
+                    + " VALUES ("
+                    + "'" + vehicle.getVehicleId() + "',"
+                    + "'" + vehicle.getBrand() + "',"
+                    + "'" + vehicle.getModel() + "',"
+                    + "'" + vehicle.getColor() + "',"
+                    + "'" + vehicle.getAutonomy() + "'"
+                    + ")";
+
+            System.out.println(insertQuery);
+            stmt.executeUpdate(insertQuery);
+            System.out.println("# The vehicle was successfully added to vehicles.");
+
             if (type.equals("cars")) {
                 Car car = (Car) vehicle;
                 insertQuery = "INSERT INTO "
@@ -227,19 +300,6 @@ public class EditVehiclesTable {
             stmt.executeUpdate(insertQuery);
             System.out.println("# The vehicle was successfully added to " + type + ".");
 
-            insertQuery = "INSERT INTO "
-                    + " vehicles (vId, brand, model, color, autonomy)"
-                    + " VALUES ("
-                    + "'" + vehicle.getVehicleId() + "',"
-                    + "'" + vehicle.getBrand() + "',"
-                    + "'" + vehicle.getModel() + "',"
-                    + "'" + vehicle.getColor() + "',"
-                    + "'" + vehicle.getAutonomy() + "'"
-                    + ")";
-
-            System.out.println(insertQuery);
-            stmt.executeUpdate(insertQuery);
-            System.out.println("# The vehicle was successfully added to vehicles.");
 
             stmt.close();
             return null;

@@ -68,13 +68,12 @@ public class EditRentsTable {
         Connection con = DB_Connection.getConnection();
         Statement stmt = con.createStatement();
 
-        String query = "CREATE TABLE customers "
-                + "(vId INTEGER not NULL, "
-                + "    name VARCHAR(50) not null,"
+        String query = "CREATE TABLE rents "
+                + "(FOREIGN KEY (vId) REFERENCES vehicles(vId), "
+                + "    FOREIGN KEY (name) REFERENCES customers(name),"
                 + "    date DATE not null,"
                 + "    duration VARCHAR(50) not null,"
-                + "    cost FLOAT(10) not null,"
-                + " PRIMARY KEY (vId))";
+                + "    cost FLOAT(10) not null)";
         stmt.execute(query);
         stmt.close();
     }
@@ -84,13 +83,13 @@ public class EditRentsTable {
             Connection con = DB_Connection.getConnection();
             Statement stmt = con.createStatement();
             String insertQuery = "INSERT INTO "
-                    + " customers (vId,name,date,duration,cost) "
+                    + " rents (vId,name,date,duration,cost) "
                     + " VALUES ("
                     + "'" + r.getvId() + "',"
                     + "'" + r.getName() + "',"
                     + "'" + r.getDate() + "',"
                     + "'" + r.getDuration() + "',"
-                    + "'" + r.getCost() + "',"
+                    + "'" + r.getCost() + "'"
                     + ")";
             //stmt.execute(table);
             System.out.println(insertQuery);

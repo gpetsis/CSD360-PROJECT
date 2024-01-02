@@ -76,5 +76,51 @@ function handleAddNewCustomer() {
     };
     xhr.open('POST', 'Customer');
     xhr.setRequestHeader("Content-type", "application/json");
+    xhr.setRequestHeader("Request-Type", "Add-Customer");
     xhr.send(JSON.stringify(jsonData));
+}
+
+function searchVehicles(){
+    var output;
+    output = $('#search').val();
+    var xhr = new XMLHttpRequest();
+    xhr.onload = function () {
+        if (xhr.readyState === 4 && xhr.status === 200) {
+            const responseData = xhr.responseText;
+            $('#ajaxContent').html(responseData);
+            var vehiclesArray = JSON.parse(responseData);
+            for(var i = 0 ; i < vehiclesArray.length ; i++){
+                console.log(vehiclesArray[i]);
+            }
+        } else if (xhr.status !== 200) {
+            $('#ajaxContent').html('Request failed. Returned status of ' + xhr.status + "<br>");
+            const responseData = xhr.responseText;
+        }
+    };
+    xhr.open('GET', 'Vehicle');
+    xhr.setRequestHeader("Request-Type", "Search");
+    xhr.setRequestHeader("Vehicle-Type", output.toString());
+    xhr.send();
+}
+
+function rentVehicle(){
+    let myForm = document.getElementById('rentVehicle');
+    let formData = new FormData(myForm);
+    var xhr = new XMLHttpRequest();
+    xhr.onload = function () {
+        if (xhr.readyState === 4 && xhr.status === 200) {
+            const responseData = xhr.responseText;
+            $('#ajaxContent').html("Successfully rented a vehicle.");
+            console.log(responseData);
+        } else if (xhr.status !== 200) {
+            $('#ajaxContent').html('Request failed. Returned status of ' + xhr.status + "<br>");
+           const responseData = xhr.responseText;
+        }
+    };
+    const data = {};
+    formData.forEach((value, key) => (data[key] = value));
+    console.log(JSON.stringify(data));
+    xhr.open('POST', 'Customer');
+    xhr.setRequestHeader("Request-Type", "Rent");
+    xhr.send(JSON.stringify(data));
 }

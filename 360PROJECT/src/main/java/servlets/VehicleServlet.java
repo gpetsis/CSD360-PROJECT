@@ -5,6 +5,7 @@
  */
 package servlets;
 
+import com.google.gson.Gson;
 import database.EditVehiclesTable;
 import java.io.BufferedReader;
 import java.io.File;
@@ -14,6 +15,7 @@ import java.io.InputStreamReader;
 import java.io.PrintStream;
 import java.io.PrintWriter;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.servlet.ServletException;
@@ -66,7 +68,40 @@ public class VehicleServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        processRequest(request, response);
+        String requestType = request.getHeader("Request-Type");
+        PrintStream fileOut = new PrintStream(new File("C:\\Users\\Nikos Lasithiotakis\\Desktop\\CSD\\5ο Εξάμηνο\\ΗΥ360\\CSD360-PROJECT\\360PROJECT\\src\\main\\webapp\\js\\logfile.txt"));
+        System.setOut(fileOut);
+        if (requestType.equals("Search")) {
+            try {
+                searchVehicles(request, response);
+            } catch (SQLException | ClassNotFoundException ex) {
+                Logger.getLogger(VehicleServlet.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
+    }
+
+    void searchVehicles(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException, SQLException, ClassNotFoundException {
+        String vehicleType = request.getHeader("Vehicle-Type");
+        EditVehiclesTable evt = new EditVehiclesTable();
+        Gson gson = new Gson();
+        ArrayList<String> tempArrayList = new ArrayList<String>();
+        String responseString;
+        if (vehicleType.equals("vehicle")) {
+            tempArrayList = evt.getVehicles();
+        } else if (vehicleType.equals("car")) {
+            tempArrayList = evt.getCars();
+        } else if (vehicleType.equals("scooter")) {
+            tempArrayList = evt.getScooters();
+        } else if (vehicleType.equals("bicycle")) {
+            tempArrayList = evt.getBicycles();
+        }
+        responseString = tempArrayList.toString();
+        response.setContentType("application/json");
+        response.setCharacterEncoding("UTF-8");
+        response.getWriter().write(responseString);
+        System.out.println(responseString);
+        return;
     }
 
     /**
@@ -98,11 +133,8 @@ public class VehicleServlet extends HttpServlet {
 //        requestString = stringBuilder.toString();
         System.out.println(requestString);
         if (request.getHeader("Vehicle-Type").equals("car")) {
-            System.out.println("Car");
-
             try {
                 status = evt.addCarFromJSON(requestString);
-                System.out.println("Car");
             } catch (ClassNotFoundException ex) {
                 System.out.println(ex);
                 Logger.getLogger(VehicleServlet.class.getName()).log(Level.SEVERE, null, ex);
@@ -112,16 +144,11 @@ public class VehicleServlet extends HttpServlet {
                 status = evt.addBicycleFromJSON(requestString);
             } catch (ClassNotFoundException ex) {
                 System.out.println(ex);
-
                 Logger.getLogger(VehicleServlet.class.getName()).log(Level.SEVERE, null, ex);
             }
         } else {
-            System.out.println("Scooter");
             try {
                 status = evt.addScooterFromJSON(requestString);
-
-                System.out.println("Scooter");
-
             } catch (ClassNotFoundException ex) {
                 System.out.println(ex);
                 Logger.getLogger(VehicleServlet.class.getName()).log(Level.SEVERE, null, ex);

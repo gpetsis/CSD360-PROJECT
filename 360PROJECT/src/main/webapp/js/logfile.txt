@@ -1,5 +1,3 @@
-null
-{"brand":"","model":"","color":"","autonomy":"","vId":""}
-Scooter
-{"brand":"","model":"","color":"","autonomy":"","vId":""}
-Geia
+{"name":"Evelina Georgiou","date":"2024-01-25","duration":"asd","cost":"32","vId":"1"}
+INSERT INTO  rents (vId,name,date,duration,cost)  VALUES ('1','Evelina Georgiou','2024-01-25','asd','32.0')
+# The rent was successfully added in the database.

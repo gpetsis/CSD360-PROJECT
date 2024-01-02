@@ -5,13 +5,17 @@
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <script src="js/handleDatabase.js" type="text/javascript"></script>
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
-        
+
     </head>
     <body>
+        <h1>Initialize Database</h1>
         <input type="button" onclick="initDatabase()" value="Initialize Database">
         
-        <br>
-        
+        <br><br>
+        <div id="ajaxContent"></div>
+
+        <h1>Add New Customer</h1>
+
         <form id="addNewCustomerForm">
             <div>
                 <label for="name">Name:</label>
@@ -53,7 +57,7 @@
                 <label>Scooter</label><br>
             </div>
             
-            <div id="divLicenseNumber" style="display: none"> 
+            <div id="addDivLicenseNumber" style="display: none"> 
                 <label><b>Licence Number</b></label>
                 <input type="text" id="addNewLicenseNumber" name="licensenumber">
             </div>
@@ -75,10 +79,15 @@
             
             <div> 
                 <label><b>Autonomy</b></label>
-                <input type="text" id="addNewVehicleAutonomy" name="autonomy" pattern="[1-9]\d*">
+                <input type="text" id="addNewVehicleAutonomy" name="autonomy">
             </div>
             
-            <div id="divType" style="display: none">
+            <div id="addDivvId" style="display: none"> 
+                <label><b>vId</b></label>
+                <input type="text" id="addNewvId" name="vId"> 
+            </div>
+            
+            <div id="addDivType" style="display: none">
                 <label><b>Type</b></label>
                 <input type="text" id="addNewVehicleType" name="type">
             </div>
@@ -89,12 +98,56 @@
             </div>
             
             <br>
-            <div id="ajaxContent"></div>
         </form>
         
         <h1>Return a vehicle</h1>
         <label for="returnVehicle">Enter vehicle ID:<label>
         <input type="text" id="returnVehicle">
         <input type="button" onclick="handleReturnVehicle()" value="Return Vehicle"> 
-     </body>
+          
+        <h1>Search Vehicles</h1>
+        <select name="search" id="search">
+            <option value="vehicle">Vehicle</option>
+            <option value="car">Car</option>
+            <option value="scooter">Scooter</option>
+            <option value="bicycle">Bicycle</option>
+        </select>
+        <br><br>
+        <input type="button" id="searchButton" onclick="searchVehicles()" value="Search">
+        <br><br>
+        
+        <form id="rentVehicle">
+            <h1>Rent a Vehicle</h1>
+            <div>
+                <label><b>Name</b></label>
+                <input type="text" id="rentVehicleName" name="name">
+            </div>
+            
+            <div>
+                <label><b>Date</b></label>
+                <input type="date" id="rentVehicleDate" name="date">
+            </div>
+            
+            <div>
+                <label><b>Duration</b></label>
+                <input type="text" id="rentVehicleDuration" name="duration">
+            </div>
+            
+            <div>
+                <label><b>Cost</b></label>
+                <input type="text" id="rentVehicleCost" name="cost">
+            </div>
+            
+            <div>
+                <label><b>vId</b></label>
+                <input type="text" id="rentVehiclevId" name="vId">
+            </div>
+            
+            <div>
+                <br>
+                <input type="button" id="rentVehicleButton" onclick="rentVehicle()" value="Rent">
+            </div>
+        </form>
+
+    </body>
 </html>

@@ -6,10 +6,14 @@
 package servlets;
 
 import database.EditCustomersTable;
+import database.EditRentsTable;
 import java.io.BufferedReader;
+import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.io.PrintStream;
+import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.servlet.ServletException;
@@ -36,6 +40,40 @@ public class CustomerServlet extends HttpServlet {
      */
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException, FileNotFoundException {
+        String requestType = request.getHeader("Request-Type");
+        PrintStream fileOut = new PrintStream(new File("C:\\Users\\Nikos Lasithiotakis\\Desktop\\CSD\\5ο Εξάμηνο\\ΗΥ360\\CSD360-PROJECT\\360PROJECT\\src\\main\\webapp\\js\\logfile.txt"));
+        System.setOut(fileOut);
+        if (requestType.equals("Add-Customer")) {
+            addCustomer(request, response);
+        } else if (requestType.equals("Rent")) {
+            try {
+                rent(request, response);
+            } catch (ClassNotFoundException ex) {
+                Logger.getLogger(CustomerServlet.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
+    }
+
+    void rent(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException, FileNotFoundException, ClassNotFoundException {
+        String requestString = "";
+        BufferedReader in = new BufferedReader(new InputStreamReader(request.getInputStream()));
+        String line = in.readLine();
+        SQLException status;
+        EditRentsTable ert = new EditRentsTable();
+        while (line != null) {
+            requestString += line;
+            line = in.readLine();
+        }
+        System.out.println(requestString);
+        status = ert.addRentFromJSON(requestString);
+        if (status == null) {
+            response.setStatus(200);
+        } else {
+            response.setStatus(500);
+        }
+    }
+
+    void addCustomer(HttpServletRequest request, HttpServletResponse response) throws IOException, FileNotFoundException {
         String requestString = "";
 
         BufferedReader in = new BufferedReader(new InputStreamReader(request.getInputStream()));
@@ -44,13 +82,14 @@ public class CustomerServlet extends HttpServlet {
             requestString += line;
             line = in.readLine();
         }
-
         EditCustomersTable customersTable = new EditCustomersTable();
         try {
             customersTable.addCustomerFromJSON(requestString);
-        } catch (ClassNotFoundException ex) {
+        } catch (IOException | ClassNotFoundException | SQLException ex) {
+            response.setStatus(409);
             Logger.getLogger(CustomerServlet.class.getName()).log(Level.SEVERE, null, ex);
         }
+        response.setStatus(200);
     }
 
     /**

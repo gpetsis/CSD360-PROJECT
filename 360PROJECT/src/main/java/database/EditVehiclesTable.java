@@ -6,8 +6,11 @@
 package database;
 
 import com.google.gson.Gson;
+import java.io.File;
 import java.io.FileNotFoundException;
+import java.io.PrintStream;
 import java.sql.Connection;
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
@@ -81,6 +84,39 @@ public class EditVehiclesTable {
         return json;
     }
 
+    public void returnVehicle(String vId) throws SQLException, FileNotFoundException, ClassNotFoundException {
+        PrintStream fileOut = new PrintStream(new File("C:\\CSD\\PENDING\\HY-360\\CSD360-PROJECT\\360PROJECT\\src\\main\\webapp\\js\\logfile.txt"));
+        System.setOut(fileOut);
+        Connection con = DB_Connection.getConnection();
+        Vehicle vehicle;
+        ResultSet rs = null;
+        boolean vehicleExists;
+
+//        try {
+        String query = "SELECT COUNT(*) AS count FROM rents WHERE vId=" + vId;
+        PreparedStatement preparedStatement = con.prepareStatement(query);
+
+        rs = preparedStatement.executeQuery();
+        if (rs.next()) {
+            int count = rs.getInt("count");
+            if (count == 0) {
+                vehicleExists = false;
+            } else {
+                vehicleExists = true;
+            }
+
+            System.out.println("Count: " + count);
+            if (!vehicleExists) {
+                throw new SQLException("Vehicle does not exist!");
+            }
+
+        }
+//        } catch (Exception e) {
+//            System.out.println("Got an exception! ");
+//            System.out.println(e.getMessage());
+//        }
+    }
+
 //    public void updateVehicle(String username, String personalpage) throws SQLException, ClassNotFoundException {
 //        Connection con = DB_Connection.getConnection();
 //        Statement stmt = con.createStatement();
@@ -94,7 +130,7 @@ public class EditVehiclesTable {
         ArrayList<String> vehicles = new ArrayList<String>();
         ResultSet rs = null;
         try {
-            rs = stmt.executeQuery("SELECT * FROM vehicles");
+//            rs = stmt.executeQuery("SELECT * FROM rents WHERE vId=");
 
             while (rs.next()) {
                 String json = DB_Connection.getResultsToJSON(rs);

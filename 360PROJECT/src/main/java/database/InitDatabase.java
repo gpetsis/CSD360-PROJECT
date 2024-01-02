@@ -45,8 +45,6 @@ public class InitDatabase {
         editcustomers.createCustomersTable();
         editvehicles.createVehiclesTable();
         editrents.createRentsTable();
-
-        // init rents
     }
 
     public void addToDatabaseExamples() throws ClassNotFoundException, SQLException, FileNotFoundException, IOException {

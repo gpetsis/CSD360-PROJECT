@@ -5,6 +5,7 @@
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <script src="js/handleDatabase.js" type="text/javascript"></script>
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+
     </head>
     <body>
         <h1>Initialize Database</h1>
@@ -45,7 +46,6 @@
   
         <form id="addNewVehicleForm">
             <h1>Add New Vehicle</h1>
-            <!-- ADD VID -->
             <div>
                 <label><b>Vehicle Type</b></label>
                 <br>
@@ -100,6 +100,11 @@
             <br>
         </form>
         
+        <h1>Return a vehicle</h1>
+        <label for="returnVehicle">Enter vehicle ID:<label>
+        <input type="text" id="returnVehicle">
+        <input type="button" onclick="handleReturnVehicle()" value="Return Vehicle"> 
+          
         <h1>Search Vehicles</h1>
         <select name="search" id="search">
             <option value="vehicle">Vehicle</option>

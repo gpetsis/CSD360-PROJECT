@@ -5,10 +5,6 @@
  */
 package mainClasses;
 
-/**
- *
- * @author Nikos Lasithiotakis
- */
 public class Customer {
 
     String name, birthdate, address;

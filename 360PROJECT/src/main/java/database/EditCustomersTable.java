@@ -20,10 +20,6 @@ import java.util.logging.Logger;
 import mainClasses.Customer;
 import mainClasses.Rent;
 
-/**
- *
- * @author Nikos Lasithiotakis
- */
 public class EditCustomersTable {
 
     public SQLException addCustomerFromJSON(String json) throws ClassNotFoundException, FileNotFoundException, IOException {

@@ -137,12 +137,9 @@ function rentVehicle(){
     };
     const data = {};
     formData.forEach((value, key) => (data[key] = value));
-<<<<<<< HEAD
-    if(data['insurance']) { data['insurance'] = "1"; }
+    if(data['insurance'] == true) { data['insurance'] = "1"; }
     else { data['insurance'] = "0"; }
 
-=======
->>>>>>> 0f91d68d6fadf64a87f0fb67478abbf1ac14c148
     console.log(JSON.stringify(data));
     xhr.open('POST', 'Customer');
     xhr.setRequestHeader("Request-Type", "Rent");

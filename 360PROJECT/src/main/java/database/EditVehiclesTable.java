@@ -137,11 +137,7 @@ public class EditVehiclesTable {
                 vehicles.add(json);
             }
             return vehicles;
-<<<<<<< HEAD
         } catch (SQLException e) {
-=======
-        } catch (Exception e) {
->>>>>>> 0f91d68d6fadf64a87f0fb67478abbf1ac14c148
             System.err.println("Got an exception! ");
             System.err.println(e.getMessage());
         }

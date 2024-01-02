@@ -68,7 +68,6 @@ public class EditRentsTable {
         Connection con = DB_Connection.getConnection();
         Statement stmt = con.createStatement();
 
-<<<<<<< HEAD
         String query = "CREATE TABLE rents ("
                 + "    rent_id INTEGER NOT NULL AUTO_INCREMENT, "
                 + "    vId INT, "
@@ -81,14 +80,6 @@ public class EditRentsTable {
                 + "    FOREIGN KEY (vId) REFERENCES vehicles(vId), "
                 + "    FOREIGN KEY (name) REFERENCES customers(name)"
                 + ")";
-=======
-        String query = "CREATE TABLE rents "
-                + "(FOREIGN KEY (vId) REFERENCES vehicles(vId), "
-                + "    FOREIGN KEY (name) REFERENCES customers(name),"
-                + "    date DATE not null,"
-                + "    duration VARCHAR(50) not null,"
-                + "    cost FLOAT(10) not null)";
->>>>>>> 0f91d68d6fadf64a87f0fb67478abbf1ac14c148
         stmt.execute(query);
         stmt.close();
     }
@@ -104,12 +95,8 @@ public class EditRentsTable {
                     + "'" + r.getName() + "',"
                     + "'" + r.getDate() + "',"
                     + "'" + r.getDuration() + "',"
-<<<<<<< HEAD
                     + "'" + r.getCost() + "',"
                     + "'" + r.getInsurance() + "'"
-=======
-                    + "'" + r.getCost() + "'"
->>>>>>> 0f91d68d6fadf64a87f0fb67478abbf1ac14c148
                     + ")";
             System.out.println(insertQuery);
             stmt.executeUpdate(insertQuery);

@@ -130,14 +130,14 @@ public class EditVehiclesTable {
         ArrayList<String> vehicles = new ArrayList<String>();
         ResultSet rs = null;
         try {
-//            rs = stmt.executeQuery("SELECT * FROM rents WHERE vId=");
+            rs = stmt.executeQuery("SELECT * FROM vehicles");
 
             while (rs.next()) {
                 String json = DB_Connection.getResultsToJSON(rs);
                 vehicles.add(json);
             }
             return vehicles;
-        } catch (Exception e) {
+        } catch (SQLException e) {
             System.err.println("Got an exception! ");
             System.err.println(e.getMessage());
         }

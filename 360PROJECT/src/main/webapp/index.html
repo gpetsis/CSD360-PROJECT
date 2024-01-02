@@ -101,7 +101,7 @@
         </form>
         
         <h1>Return a vehicle</h1>
-        <label for="returnVehicle">Enter vehicle ID:<label>
+        <label for="returnVehicle">Enter vehicle ID:</label>
         <input type="text" id="returnVehicle">
         <input type="button" onclick="handleReturnVehicle()" value="Return Vehicle"> 
           
@@ -118,6 +118,7 @@
         
         <form id="rentVehicle">
             <h1>Rent a Vehicle</h1>
+            <h3>Calculate the total cost by multiplying the days of rent with the daily rent cost of the car. If paying for insurance, calculate that cost as well.</h3>
             <div>
                 <label><b>Name</b></label>
                 <input type="text" id="rentVehicleName" name="name">
@@ -136,6 +137,11 @@
             <div>
                 <label><b>Cost</b></label>
                 <input type="text" id="rentVehicleCost" name="cost">
+            </div>
+            
+            <div>
+                <label><b>Insurance</b></label>
+                <input type="checkbox" id="rentVehicleInsurance" name="insurance">
             </div>
             
             <div>

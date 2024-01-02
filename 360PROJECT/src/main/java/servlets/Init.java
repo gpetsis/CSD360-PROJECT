@@ -67,6 +67,7 @@ public class Init extends HttpServlet {
             init.initTables();
             init.addToDatabaseExamples();
         } catch (Exception ex) {
+            System.out.println(ex);
             Logger.getLogger(Init.class.getName()).log(Level.SEVERE, null, ex);
         }
     }

@@ -15,14 +15,12 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import mainClasses.Customer;
 import mainClasses.Rent;
 
 public class EditCustomersTable {
 
-    public SQLException addCustomerFromJSON(String json) throws ClassNotFoundException, FileNotFoundException, IOException {
+    public SQLException addCustomerFromJSON(String json) throws ClassNotFoundException, FileNotFoundException, IOException, SQLException {
 
         System.out.println(json);
         Customer c = jsonToCustomer(json);
@@ -82,8 +80,8 @@ public class EditCustomersTable {
         stmt.close();
     }
 
-    public SQLException createNewCustomer(Customer c) throws ClassNotFoundException, FileNotFoundException, IOException {
-        try {
+    public SQLException createNewCustomer(Customer c) throws ClassNotFoundException, FileNotFoundException, IOException, SQLException {
+//        try {
             Connection con = DB_Connection.getConnection();
             Statement stmt = con.createStatement();
             String insertQuery = "INSERT INTO "
@@ -103,12 +101,12 @@ public class EditCustomersTable {
             stmt.close();
             return null;
 
-        } catch (SQLException ex) {
-            appendToFile("Error: " + ex);
-            System.out.println("Error: " + ex);
-            Logger.getLogger(EditCustomersTable.class.getName()).log(Level.SEVERE, null, ex);
-            return ex;
-        }
+//        } catch (SQLException ex) {
+//            appendToFile("Error: " + ex);
+//            System.out.println("Error: " + ex);
+//            Logger.getLogger(EditCustomersTable.class.getName()).log(Level.SEVERE, null, ex);
+//            throw new SQLException();
+//        }
     }
 
     public static void appendToFile(String str) {

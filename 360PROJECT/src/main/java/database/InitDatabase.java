@@ -6,8 +6,10 @@
 package database;
 
 import static database.DB_Connection.getInitialConnection;
+import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.io.PrintStream;
 
 import java.sql.Connection;
 import java.sql.SQLException;
@@ -33,7 +35,9 @@ public class InitDatabase {
         conn.close();
     }
 
-    public void initTables() throws SQLException, ClassNotFoundException {
+    public void initTables() throws SQLException, ClassNotFoundException, FileNotFoundException {
+        PrintStream fileOut = new PrintStream(new File("C:\\Users\\Nikos Lasithiotakis\\Desktop\\CSD\\5ο Εξάμηνο\\ΗΥ360\\CSD360-PROJECT\\360PROJECT\\src\\main\\webapp\\js\\logfile.txt"));
+        System.setOut(fileOut);
         EditCustomersTable editcustomers = new EditCustomersTable();
         EditVehiclesTable editvehicles = new EditVehiclesTable();
         EditRentsTable editrents = new EditRentsTable();

@@ -69,12 +69,11 @@ public class EditRentsTable {
         Statement stmt = con.createStatement();
 
         String query = "CREATE TABLE rents "
-                + "(vId INTEGER not NULL , "
-                + "    name VARCHAR(50) not null,"
+                + "(FOREIGN KEY (vId) REFERENCES vehicles(vId), "
+                + "    FOREIGN KEY (name) REFERENCES customers(name),"
                 + "    date DATE not null,"
-                + "    duration INTEGER not null,"
-                + "    cost FLOAT(10) not null,"
-                + " PRIMARY KEY (vId))";
+                + "    duration VARCHAR(50) not null,"
+                + "    cost FLOAT(10) not null)";
         stmt.execute(query);
         stmt.close();
     }
@@ -90,7 +89,7 @@ public class EditRentsTable {
                     + "'" + r.getName() + "',"
                     + "'" + r.getDate() + "',"
                     + "'" + r.getDuration() + "',"
-                    + "'" + r.getCost() + "',"
+                    + "'" + r.getCost() + "'"
                     + ")";
             //stmt.execute(table);
             System.out.println(insertQuery);

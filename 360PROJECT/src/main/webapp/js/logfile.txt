@@ -1,2 +1,0 @@
-Count: 0
-Error: java.sql.SQLException: Vehicle does not exist!

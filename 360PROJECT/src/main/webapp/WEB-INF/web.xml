@@ -19,7 +19,7 @@
         <servlet-name>Customer</servlet-name>
         <url-pattern>/Customer</url-pattern>
     </servlet-mapping>
-    
+  
     <servlet>
         <servlet-name>Vehicle</servlet-name>
         <servlet-class>servlets.VehicleServlet</servlet-class>

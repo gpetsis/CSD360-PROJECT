@@ -1,3 +1,2 @@
-{"name":"Giannis Petsis","date":"2024-01-24","duration":"321","cost":"32","vId":"1"}
-INSERT INTO  rents (vId,name,date,duration,cost)  VALUES ('1','Giannis Petsis','2024-01-24','321','32.0')
-# The rent was successfully added in the database.
+{"name":"Giannis Petsis","date":"2024-01-24","duration":"asd","cost":"2","vId":"1","insurance":"0"}
+Count: 1

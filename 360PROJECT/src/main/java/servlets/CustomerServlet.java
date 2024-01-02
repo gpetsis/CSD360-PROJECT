@@ -5,6 +5,7 @@
  */
 package servlets;
 
+import database.DB_Connection;
 import database.EditCustomersTable;
 import database.EditRentsTable;
 import java.io.BufferedReader;
@@ -13,7 +14,10 @@ import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.PrintStream;
+import java.sql.Connection;
+import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Statement;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.servlet.ServletException;
@@ -41,36 +45,57 @@ public class CustomerServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException, FileNotFoundException {
         String requestType = request.getHeader("Request-Type");
-        PrintStream fileOut = new PrintStream(new File("C:\\Users\\Nikos Lasithiotakis\\Desktop\\CSD\\5ο Εξάμηνο\\ΗΥ360\\CSD360-PROJECT\\360PROJECT\\src\\main\\webapp\\js\\logfile.txt"));
-        System.setOut(fileOut);
+//        PrintStream fileOut = new PrintStream(new File("C:\\Users\\Nikos Lasithiotakis\\Desktop\\CSD\\5ο Εξάμηνο\\ΗΥ360\\CSD360-PROJECT\\360PROJECT\\src\\main\\webapp\\js\\logfile.txt"));
+//        System.setOut(fileOut);
         if (requestType.equals("Add-Customer")) {
             addCustomer(request, response);
         } else if (requestType.equals("Rent")) {
             try {
                 rent(request, response);
-            } catch (ClassNotFoundException ex) {
+            } catch (ClassNotFoundException | SQLException ex) {
                 Logger.getLogger(CustomerServlet.class.getName()).log(Level.SEVERE, null, ex);
             }
         }
     }
 
-    void rent(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException, FileNotFoundException, ClassNotFoundException {
+    void rent(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException, FileNotFoundException, ClassNotFoundException, SQLException {
+        Connection con = DB_Connection.getConnection();
+        Statement stmt = con.createStatement();
+        ResultSet rs = null;
+        int count = 0;
+        boolean temp = false;
+        PrintStream fileOut = new PrintStream(new File("C:\\Users\\Nikos Lasithiotakis\\Desktop\\CSD\\5ο Εξάμηνο\\ΗΥ360\\CSD360-PROJECT\\360PROJECT\\src\\main\\webapp\\js\\logfile.txt"));
+        System.setOut(fileOut);
         String requestString = "";
         BufferedReader in = new BufferedReader(new InputStreamReader(request.getInputStream()));
         String line = in.readLine();
-        SQLException status;
+        SQLException status = null;
         EditRentsTable ert = new EditRentsTable();
         while (line != null) {
             requestString += line;
             line = in.readLine();
         }
         System.out.println(requestString);
-        String query = "SELECT COUNT(*) AS count FROM rents WHERE vId=";
-        status = ert.addRentFromJSON(requestString);
-        if (status == null) {
+        String query = "SELECT COUNT(*) AS count FROM rents WHERE vId=" + request.getHeader("vId");
+        stmt = con.createStatement();
+
+        rs = stmt.executeQuery(query);
+        if (rs.next()) {
+            count = rs.getInt("count");
+            System.out.println("Count: " + count);
+        }
+        if (count == 0) {
+            status = ert.addRentFromJSON(requestString);
+        } else {
+            temp = true;
+        }
+        if (status == null && temp == false) {
             response.setStatus(200);
         } else {
             response.setStatus(500);
+        }
+        if (temp == true) {
+            response.setStatus(700);
         }
     }
 

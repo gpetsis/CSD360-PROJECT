@@ -9,7 +9,7 @@ public class Rent {
 
     String name, date, duration;
     double cost;
-    int vId;
+    int vId, insurance;
 
     public void setName(String name) {
         this.name = name;
@@ -49,5 +49,9 @@ public class Rent {
 
     public int getvId() {
         return vId;
+    }
+
+    public int getInsurance() {
+        return insurance;
     }
 }

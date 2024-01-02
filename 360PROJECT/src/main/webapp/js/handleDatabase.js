@@ -130,6 +130,8 @@ function rentVehicle(){
             const responseData = xhr.responseText;
             $('#ajaxContent').html("Successfully rented a vehicle.");
             console.log(responseData);
+        }else if(xhr.status == 700){
+            $('#ajaxContent').html("Vehicle is already rented.");
         } else if (xhr.status !== 200) {
             $('#ajaxContent').html('Request failed. Returned status of ' + xhr.status + "<br>");
            const responseData = xhr.responseText;
@@ -137,8 +139,12 @@ function rentVehicle(){
     };
     const data = {};
     formData.forEach((value, key) => (data[key] = value));
+    if(data['insurance'] == true) { data['insurance'] = "1"; }
+    else { data['insurance'] = "0"; }
+
     console.log(JSON.stringify(data));
     xhr.open('POST', 'Customer');
     xhr.setRequestHeader("Request-Type", "Rent");
+    xhr.setRequestHeader("vId", data['vId']);
     xhr.send(JSON.stringify(data));
 }

@@ -18,9 +18,6 @@ import mainClasses.Scooter;
 import mainClasses.Vehicle;
 
 public class EditVehiclesTable {
-
-    static int vId = 7;
-
 //    public SQLException addVehicleFromJSON(String json) throws ClassNotFoundException, FileNotFoundException {
 ////        PrintStream fileOut = new PrintStream(new File("C:\\CSD\\PENDING\\HY-360\\CSD360-PROJECT\\360PROJECT\\src\\main\\webapp\\js\\logfile.txt"));
 ////        System.setOut(fileOut);
@@ -203,11 +200,8 @@ public class EditVehiclesTable {
             Connection con = DB_Connection.getConnection();
             String insertQuery;
             Statement stmt = con.createStatement();
-            int vehicleId;
-
             if (type.equals("cars")) {
                 Car car = (Car) vehicle;
-                vehicleId = car.getVehicleId();
                 insertQuery = "INSERT INTO "
                         + " " + type + " (licensenumber, brand, model, color, autonomy, type)"
                         + " VALUES ("
@@ -219,11 +213,10 @@ public class EditVehiclesTable {
                         + "'" + car.getType() + "'"
                         + ")";
             } else {
-                vehicleId = vId;
                 insertQuery = "INSERT INTO "
                         + " " + type + " (vId, brand, model, color, autonomy)"
                         + " VALUES ("
-                        + "'" + vId++ + "',"
+                        + "'" + vehicle.getVehicleId() + "',"
                         + "'" + vehicle.getBrand() + "',"
                         + "'" + vehicle.getModel() + "',"
                         + "'" + vehicle.getColor() + "',"
@@ -237,7 +230,7 @@ public class EditVehiclesTable {
             insertQuery = "INSERT INTO "
                     + " vehicles (vId, brand, model, color, autonomy)"
                     + " VALUES ("
-                    + "'" + vehicleId + "',"
+                    + "'" + vehicle.getVehicleId() + "',"
                     + "'" + vehicle.getBrand() + "',"
                     + "'" + vehicle.getModel() + "',"
                     + "'" + vehicle.getColor() + "',"

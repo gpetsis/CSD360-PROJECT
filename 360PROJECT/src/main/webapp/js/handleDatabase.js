@@ -26,6 +26,7 @@ function addNewVehicle(){
     console.log(type);
     if(type == "car"){
         formData.delete('vehicleType');
+        formData.delete('vId');
     }
     else {
         formData.delete('type');
@@ -41,12 +42,14 @@ function addNewVehicle(){
 
 function handleExtraFields(vehicleType){
     if(vehicleType == "car"){
-        $('#divLicenseNumber').show();
-        $('#divType').show();
+        $('#addDivLicenseNumber').show();
+        $('#addDivType').show();
+        $('#addDivvId').hide();
     }
     else{
-        $('#divLicenseNumber').hide();
-        $('#divType').hide();
+        $('#addDivLicenseNumber').hide();
+        $('#addDivType').hide();
+        $('#addDivvId').show();
     }
 }
   
@@ -54,13 +57,23 @@ function handleAddNewCustomer() {
     let myForm = document.getElementById('addNewCustomerForm');
     let formData = new FormData(myForm);
     var jsonData = {};
+    
     formData.forEach(function(value, key){
         jsonData[key] = value;
         console.log(key, jsonData[key]);
     });
     
     var xhr = new XMLHttpRequest();
-    xhr.onload = function () {};
+    xhr.onload = function () {
+        if (xhr.readyState === 4 && xhr.status === 200) {
+            const responseData = xhr.responseText;
+            $('#ajaxContent').html("Successfully added new customer.");
+            console.log(responseData);
+        } else if (xhr.status !== 200) {
+            $('#ajaxContent').html('Request failed. Returned status of ' + xhr.status + "<br>");
+           const responseData = xhr.responseText;
+        }
+    };
     xhr.open('POST', 'Customer');
     xhr.setRequestHeader("Content-type", "application/json");
     xhr.send(JSON.stringify(jsonData));

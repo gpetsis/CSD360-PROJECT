@@ -49,8 +49,10 @@ public class CustomerServlet extends HttpServlet {
         try {
             customersTable.addCustomerFromJSON(requestString);
         } catch (ClassNotFoundException ex) {
+            response.setStatus(409);
             Logger.getLogger(CustomerServlet.class.getName()).log(Level.SEVERE, null, ex);
         }
+        response.setStatus(200);
     }
 
     /**

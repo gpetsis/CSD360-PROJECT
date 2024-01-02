@@ -92,10 +92,10 @@ public class VehicleServlet extends HttpServlet {
             requestString += line;
             line = in.readLine();
         }
-        StringBuilder stringBuilder = new StringBuilder(requestString);
-        stringBuilder.deleteCharAt(stringBuilder.length() - 1);
-        stringBuilder.append(",\"vId\":\"0\"}");
-        requestString = stringBuilder.toString();
+//        StringBuilder stringBuilder = new StringBuilder(requestString);
+//        stringBuilder.deleteCharAt(stringBuilder.length() - 1);
+//        stringBuilder.append(",\"vId\":\"0\"}");
+//        requestString = stringBuilder.toString();
         System.out.println(requestString);
         if (request.getHeader("Vehicle-Type").equals("car")) {
             System.out.println("Car");

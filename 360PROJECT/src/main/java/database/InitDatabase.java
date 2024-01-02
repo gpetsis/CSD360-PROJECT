@@ -36,11 +36,11 @@ public class InitDatabase {
     public void initTables() throws SQLException, ClassNotFoundException {
         EditCustomersTable editcustomers = new EditCustomersTable();
         EditVehiclesTable editvehicles = new EditVehiclesTable();
+        EditRentsTable editrents = new EditRentsTable();
 
         editcustomers.createCustomersTable();
         editvehicles.createVehiclesTable();
-
-        // init rents
+        editrents.createRentsTable();
     }
 
     public void addToDatabaseExamples() throws ClassNotFoundException, SQLException, FileNotFoundException, IOException {

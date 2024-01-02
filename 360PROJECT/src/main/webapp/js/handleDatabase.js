@@ -36,6 +36,7 @@ function addNewVehicle(){
     console.log(JSON.stringify(data));
     xhr.open('POST', 'VehicleServlet');
     xhr.setRequestHeader("Vehicle-Type", type);
+    xhr.setRequestHeader("Request-Type", "Add-Vehicle")
     xhr.send(JSON.stringify(data));
 }
 
@@ -64,4 +65,20 @@ function handleAddNewCustomer() {
     xhr.open('POST', 'Customer');
     xhr.setRequestHeader("Content-type", "application/json");
     xhr.send(JSON.stringify(jsonData));
+}
+
+function handleReturnVehicle() {
+    var vId = document.getElementById("returnVehicle").value;
+
+    var xhr = new XMLHttpRequest();
+    xhr.onload = function () {
+        if (xhr.readyState === 4 && xhr.status === 200) {
+            $('#ajaxContent').html("Succesfully returned vehicle");
+        } else if (xhr.status !== 200) {
+            $('#ajaxContent').html('Request failed. Returned status of ' + xhr.status + "<br>");
+        }
+    };
+    xhr.open('POST', 'Vehicle');
+    xhr.setRequestHeader("Request-Type", "Return-Vehicle");
+    xhr.send(vId);
 }

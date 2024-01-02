@@ -80,7 +80,46 @@ public class VehicleServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException, FileNotFoundException {
-        PrintStream fileOut = new PrintStream(new File("C:\\Users\\Nikos Lasithiotakis\\Desktop\\CSD\\5ο Εξάμηνο\\ΗΥ360\\CSD360-PROJECT\\360PROJECT\\src\\main\\webapp\\js\\logfile.txt"));
+        String requestType = request.getHeader("Request-Type");
+        if (requestType.equals("Add-Vehicle")) {
+            addNewVehicle(request, response);
+        } else if (requestType.equals("Return-Vehicle")) {
+            PrintStream fileOut = new PrintStream(new File("C:\\CSD\\PENDING\\HY-360\\CSD360-PROJECT\\360PROJECT\\src\\main\\webapp\\js\\logfile.txt"));
+            System.setOut(fileOut);
+
+            returnVehicle(request, response);
+        }
+    }
+
+    void returnVehicle(HttpServletRequest request, HttpServletResponse response) throws FileNotFoundException, IOException {
+        PrintStream fileOut = new PrintStream(new File("C:\\CSD\\PENDING\\HY-360\\CSD360-PROJECT\\360PROJECT\\src\\main\\webapp\\js\\logfile.txt"));
+        System.setOut(fileOut);
+
+        String vId = "";
+        BufferedReader in = new BufferedReader(new InputStreamReader(request.getInputStream()));
+        String line = in.readLine();
+        while (line != null) {
+            vId += line;
+            line = in.readLine();
+        }
+
+        System.out.println(vId);
+
+        try {
+            EditVehiclesTable vehiclesTable = new EditVehiclesTable();
+            vehiclesTable.returnVehicle(vId);
+            response.setStatus(200);
+        } catch (FileNotFoundException | ClassNotFoundException | SQLException ex) {
+            System.out.println("Error: " + ex);
+            response.setStatus(404);
+            Logger.getLogger(VehicleServlet.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
+    }
+
+    void addNewVehicle(HttpServletRequest request, HttpServletResponse response) throws FileNotFoundException, IOException {
+        //        PrintStream fileOut = new PrintStream(new File("C:\\Users\\Nikos Lasithiotakis\\Desktop\\CSD\\5ο Εξάμηνο\\ΗΥ360\\CSD360-PROJECT\\360PROJECT\\src\\main\\webapp\\js\\logfile.txt"));
+        PrintStream fileOut = new PrintStream(new File("C:\\CSD\\PENDING\\HY-360\\CSD360-PROJECT\\360PROJECT\\src\\main\\webapp\\js\\logfile.txt"));
         System.setOut(fileOut);
         System.out.println(request.getHeader("Vehicle-Type"));
         SQLException status = null;

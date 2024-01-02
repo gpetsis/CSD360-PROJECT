@@ -132,13 +132,12 @@ public class EditVehiclesTable {
         try {
             rs = stmt.executeQuery("SELECT * FROM vehicles");
 
-
             while (rs.next()) {
                 String json = DB_Connection.getResultsToJSON(rs);
                 vehicles.add(json);
             }
             return vehicles;
-        } catch (Exception e) {
+        } catch (SQLException e) {
             System.err.println("Got an exception! ");
             System.err.println(e.getMessage());
         }

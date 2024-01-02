@@ -75,6 +75,7 @@ public class EditRentsTable {
                 + "    date DATE NOT NULL, "
                 + "    duration VARCHAR(50) NOT NULL, "
                 + "    cost FLOAT(10) NOT NULL, "
+                + "    insurance BOOLEAN NOT NULL, "
                 + "    PRIMARY KEY (rent_id), "
                 + "    FOREIGN KEY (vId) REFERENCES vehicles(vId), "
                 + "    FOREIGN KEY (name) REFERENCES customers(name)"
@@ -88,23 +89,25 @@ public class EditRentsTable {
             Connection con = DB_Connection.getConnection();
             Statement stmt = con.createStatement();
             String insertQuery = "INSERT INTO "
-                    + " rents (vId,name,date,duration,cost) "
+                    + " rents (vId,name,date,duration,cost,insurance) "
                     + " VALUES ("
                     + "'" + r.getvId() + "',"
                     + "'" + r.getName() + "',"
                     + "'" + r.getDate() + "',"
                     + "'" + r.getDuration() + "',"
-                    + "'" + r.getCost() + "'"
+                    + "'" + r.getCost() + "',"
+                    + "'" + r.getInsurance() + "'"
                     + ")";
-            //stmt.execute(table);
             System.out.println(insertQuery);
             stmt.executeUpdate(insertQuery);
             System.out.println("# The rent was successfully added in the database.");
-            /* Get the member id from the database and set it to the member */
             stmt.close();
             return null;
 
         } catch (SQLException ex) {
+//            PrintStream fileOut = new PrintStream(new File("C:\\CSD\\PENDING\\HY-360\\CSD360-PROJECT\\360PROJECT\\src\\main\\webapp\\js\\logfile.txt"));
+//            System.setOut(fileOut);
+            System.out.println("Error: " + ex);
             Logger.getLogger(EditCustomersTable.class.getName()).log(Level.SEVERE, null, ex);
             return ex;
         }

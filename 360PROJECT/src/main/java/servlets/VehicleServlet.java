@@ -65,6 +65,7 @@ public class VehicleServlet extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         String requestType = request.getHeader("Request-Type");
+<<<<<<< HEAD
 //        PrintStream fileOut = new PrintStream(new File("C:\\Users\\Nikos Lasithiotakis\\Desktop\\CSD\\5ο Εξάμηνο\\ΗΥ360\\CSD360-PROJECT\\360PROJECT\\src\\main\\webapp\\js\\logfile.txt"));
         PrintStream fileOut = new PrintStream(new File("C:\\CSD\\PENDING\\HY-360\\CSD360-PROJECT\\360PROJECT\\src\\main\\webapp\\js\\logfile.txt"));
         System.setOut(fileOut);
@@ -74,6 +75,14 @@ public class VehicleServlet extends HttpServlet {
                 searchVehicles(request, response);
             } catch (SQLException | ClassNotFoundException | IOException ex) {
                 System.out.println("Error: " + ex);
+=======
+        PrintStream fileOut = new PrintStream(new File("C:\\Users\\Nikos Lasithiotakis\\Desktop\\CSD\\5ο Εξάμηνο\\ΗΥ360\\CSD360-PROJECT\\360PROJECT\\src\\main\\webapp\\js\\logfile.txt"));
+        System.setOut(fileOut);
+        if (requestType.equals("Search")) {
+            try {
+                searchVehicles(request, response);
+            } catch (SQLException | ClassNotFoundException ex) {
+>>>>>>> 0f91d68d6fadf64a87f0fb67478abbf1ac14c148
                 Logger.getLogger(VehicleServlet.class.getName()).log(Level.SEVERE, null, ex);
             }
         }
@@ -96,6 +105,11 @@ public class VehicleServlet extends HttpServlet {
             tempArrayList = evt.getBicycles();
         }
         responseString = tempArrayList.toString();
+<<<<<<< HEAD
+=======
+        response.setContentType("application/json");
+        response.setCharacterEncoding("UTF-8");
+>>>>>>> 0f91d68d6fadf64a87f0fb67478abbf1ac14c148
         response.getWriter().write(responseString);
         System.out.println(responseString);
         return;

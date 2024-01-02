@@ -65,6 +65,7 @@ public class CustomerServlet extends HttpServlet {
             line = in.readLine();
         }
         System.out.println(requestString);
+        String query = "SELECT COUNT(*) AS count FROM rents WHERE vId=";
         status = ert.addRentFromJSON(requestString);
         if (status == null) {
             response.setStatus(200);

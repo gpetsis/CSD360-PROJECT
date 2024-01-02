@@ -75,6 +75,7 @@ public class VehicleServlet extends HttpServlet {
             try {
                 searchVehicles(request, response);
             } catch (SQLException | ClassNotFoundException ex) {
+                System.out.println(ex);
                 Logger.getLogger(VehicleServlet.class.getName()).log(Level.SEVERE, null, ex);
             }
         }

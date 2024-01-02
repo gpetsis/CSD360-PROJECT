@@ -1,3 +1,4 @@
-{"name":"Evelina Georgiou","date":"2024-01-25","duration":"asd","cost":"32","vId":"1"}
-INSERT INTO  rents (vId,name,date,duration,cost)  VALUES ('1','Evelina Georgiou','2024-01-25','asd','32.0')
-# The rent was successfully added in the database.
+{"name":"Pipi","birthdate":"2024-01-03","address":"Tsimpoukoupoli","drivinglicense":"1234","creditcard":"789","balance":"6900"}
+Correct JSON
+INSERT INTO  customers (name,birthdate,address,drivinglicense,creditcard,balance)  VALUES ('Pipi','2024-01-03','Tsimpoukoupoli','1234','789','6900.0')
+# The customer was successfully added in the database.

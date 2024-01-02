@@ -8,15 +8,15 @@ package database;
 public class examples {
 
     static String Customer1JSON = "{\"name\":\"Giannis Petsis\",\"birthdate\":\"2003-10-09\",\"address\":\"Kountouriotou 2\","
-            + "\"drivinglicense\":\"4512\",\"creditcard\":\"1111222233334444\"}";
+            + "\"drivinglicense\":\"4512\",\"creditcard\":\"1111222233334444\",\"balance\":\"1000\"}";
     static String Customer2JSON = "{\"name\":\"Nikos Lasithiotakis\",\"birthdate\":\"2003-07-20\",\"address\":\"Stavrou Mpalali 3\","
-            + "\"drivinglicense\":\"9831\",\"creditcard\":\"5555666677778888\"}";
+            + "\"drivinglicense\":\"9831\",\"creditcard\":\"5555666677778888\",\"balance\":\"1200\"}";
     static String Customer3JSON = "{\"name\":\"Kostas Papadopoulou\",\"birthdate\":\"2001-12-12\",\"address\":\"Idomeneous 32\","
-            + "\"drivinglicense\":\"4512\",\"creditcard\":\"1234567890121111\"}";
+            + "\"drivinglicense\":\"4512\",\"creditcard\":\"1234567890121111\",\"balance\":\"1300\"}";
     static String Customer4JSON = "{\"name\":\"Xara kwstantinidi\",\"birthdate\":\"1999-02-01\",\"address\":\"Knossou 227\","
-            + "\"drivinglicense\":\"5218\",\"creditcard\":\"1020304050606247\"}";
+            + "\"drivinglicense\":\"5218\",\"creditcard\":\"1020304050606247\",\"balance\":\"1400\"}";
     static String Customer5JSON = "{\"name\":\"Evelina Georgiou\",\"birthdate\":\"1992-04-18\",\"address\":\"Daidalou 98\","
-            + "\"drivinglicense\":\"1273\",\"creditcard\":\"7080901020122334\"}";
+            + "\"drivinglicense\":\"1273\",\"creditcard\":\"7080901020122334\",\"balance\":\"1500\"}";
 
     static String bike1JSON = "{\"vId\":\"1\",\"brand\":\"bmx\",\"model\":\"model1\","
             + "\"color\":\"red\",\"autonomy\":\"20\"}";

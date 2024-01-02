@@ -1,1 +1,4 @@
+<<<<<<< HEAD
 [{"vId":"1","brand":"bmx","model":"model1","color":"red","autonomy":"20"}, {"vId":"2","brand":"bmx","model":"model2","color":"blue","autonomy":"30"}, {"vId":"3","brand":"patini","model":"patini1","color":"red","autonomy":"20"}, {"vId":"4","brand":"patini2","model":"patini2","color":"green","autonomy":"30"}, {"vId":"5","brand":"lamborghini","model":"aventador","color":"white","autonomy":"800"}, {"vId":"6","brand":"buggati","model":"veyron","color":"black","autonomy":"700"}]
+=======
+>>>>>>> d17d1899276aeea0db93b6f6aa9d323e4cd56712

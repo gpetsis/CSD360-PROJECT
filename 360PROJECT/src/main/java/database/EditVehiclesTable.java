@@ -19,6 +19,16 @@ import mainClasses.Vehicle;
 
 public class EditVehiclesTable {
 
+    static int vId = 7;
+
+//    public SQLException addVehicleFromJSON(String json) throws ClassNotFoundException, FileNotFoundException {
+////        PrintStream fileOut = new PrintStream(new File("C:\\CSD\\PENDING\\HY-360\\CSD360-PROJECT\\360PROJECT\\src\\main\\webapp\\js\\logfile.txt"));
+////        System.setOut(fileOut);
+////        System.out.println(json);
+//        Vehicle vehicle = jsonToVehicle(json);
+//        return addNewVehicle(vehicle);
+//    }
+
     public SQLException addCarFromJSON(String json) throws ClassNotFoundException, FileNotFoundException {
 
         Car vehicle = jsonToCar(json);
@@ -26,7 +36,11 @@ public class EditVehiclesTable {
     }
 
     public SQLException addScooterFromJSON(String json) throws ClassNotFoundException, FileNotFoundException {
+//        PrintStream fileOut = new PrintStream(new File("C:\\CSD\\PENDING\\HY-360\\CSD360-PROJECT\\360PROJECT\\src\\main\\webapp\\js\\logfile.txt"));
+//        System.setOut(fileOut);
+        System.out.println(json);
         Scooter vehicle = jsonToScooter(json);
+        System.out.println(vehicle.getBrand());
         return addNewVehicle(vehicle, "scooters");
     }
 
@@ -51,7 +65,7 @@ public class EditVehiclesTable {
 
     public Scooter jsonToScooter(String json) {
         Gson gson = new Gson();
-
+        System.out.println("Geia");
         Scooter vehicle = gson.fromJson(json, Scooter.class);
         return vehicle;
     }
@@ -141,7 +155,7 @@ public class EditVehiclesTable {
         Statement stmt = con.createStatement();
 
         String query = "CREATE TABLE vehicles "
-                + "(vId INTEGER not null,"
+                + "(vId INTEGER not null unique,"
                 + "    brand VARCHAR(15) not null,"
                 + "    model VARCHAR(15) not null,"
                 + "    color VARCHAR(10) not null,"
@@ -160,7 +174,7 @@ public class EditVehiclesTable {
         stmt.execute(query);
 
         query = "CREATE TABLE scooters "
-                + "(vId INTEGER not null references vehicles(vId),"
+                + "(vId INTEGER not null references vehicles(vId) unique,"
                 + "    brand VARCHAR(15) not null,"
                 + "    model VARCHAR(15) not null,"
                 + "    color VARCHAR(10) not null,"
@@ -169,7 +183,7 @@ public class EditVehiclesTable {
         stmt.execute(query);
 
         query = "CREATE TABLE bicycles "
-                + "(vId INTEGER not null references vehicles(vId),"
+                + "(vId INTEGER not null references vehicles(vId) unique,"
                 + "    brand VARCHAR(15) not null,"
                 + "    model VARCHAR(15) not null,"
                 + "    color VARCHAR(10) not null,"
@@ -189,10 +203,11 @@ public class EditVehiclesTable {
             Connection con = DB_Connection.getConnection();
             String insertQuery;
             Statement stmt = con.createStatement();
+            int vehicleId;
 
             if (type.equals("cars")) {
                 Car car = (Car) vehicle;
-
+                vehicleId = car.getVehicleId();
                 insertQuery = "INSERT INTO "
                         + " " + type + " (licensenumber, brand, model, color, autonomy, type)"
                         + " VALUES ("
@@ -204,10 +219,11 @@ public class EditVehiclesTable {
                         + "'" + car.getType() + "'"
                         + ")";
             } else {
+                vehicleId = vId;
                 insertQuery = "INSERT INTO "
                         + " " + type + " (vId, brand, model, color, autonomy)"
                         + " VALUES ("
-                        + "'" + vehicle.getVehicleId() + "',"
+                        + "'" + vId++ + "',"
                         + "'" + vehicle.getBrand() + "',"
                         + "'" + vehicle.getModel() + "',"
                         + "'" + vehicle.getColor() + "',"
@@ -221,7 +237,7 @@ public class EditVehiclesTable {
             insertQuery = "INSERT INTO "
                     + " vehicles (vId, brand, model, color, autonomy)"
                     + " VALUES ("
-                    + "'" + vehicle.getVehicleId() + "',"
+                    + "'" + vehicleId + "',"
                     + "'" + vehicle.getBrand() + "',"
                     + "'" + vehicle.getModel() + "',"
                     + "'" + vehicle.getColor() + "',"

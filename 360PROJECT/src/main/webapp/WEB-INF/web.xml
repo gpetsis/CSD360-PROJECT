@@ -16,4 +16,11 @@
         <servlet-name>Customer</servlet-name>
         <url-pattern>/Customer</url-pattern>
     </servlet-mapping>
+        <servlet-name>VehicleServlet</servlet-name>
+        <servlet-class>servlets.VehicleServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>VehicleServlet</servlet-name>
+        <url-pattern>/VehicleServlet</url-pattern>
+    </servlet-mapping>
 </web-app>

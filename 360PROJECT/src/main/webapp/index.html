@@ -42,39 +42,57 @@
             <input type="button" onclick="handleAddNewCustomer()" value="Add new customer">
         </form>
   
-        <form id="addNewVehicleForm" onsubmit="return addNewVehicle()">
+        <form id="addNewVehicleForm">
             <h1>Add New Vehicle</h1>
-            
+            <!-- ADD VID -->
             <div>
-                <label><b>Type</b></label>
+                <label><b>Vehicle Type</b></label>
                 <br>
-                <input type="radio" id="addNewVehicleCar" name="type" value="car">
+                <input type="radio" id="addNewVehicleCar" name="vehicleType" value="car" onchange="handleExtraFields('car')">
                 <label>Car</label><br>
-                <input type="radio" id="addNewVehicleBike" name="type" value="bicycle">
+                <input type="radio" id="addNewVehicleBike" name="vehicleType" value="bicycle" onchange="handleExtraFields('bicycle')">
                 <label>Bicycle</label><br>
-                <input type="radio" id="addNewVehicleScooter" name="type" value="scooter">
+                <input type="radio" id="addNewVehicleScooter" name="vehicleType" value="scooter" onchange="handleExtraFields('scooter')">
                 <label>Scooter</label><br>
+            </div>
+            
+            <div id="divLicenseNumber" style="display: none"> 
+                <label><b>Licence Number</b></label>
+                <input type="text" id="addNewLicenseNumber" name="licensenumber">
             </div>
             
             <div>
                 <label><b>Brand</b></label>
-                <input type="text" id="brand" name="brand">
+                <input type="text" id="addNewVehicleBrand" name="brand">
             </div>
             
             <div>
                 <label><b>Model</b></label>
-                <input type="text" id="model" name="model">
+                <input type="text" id="addNewVehicleModel" name="model">
             </div>
             
             <div>
                 <label><b>Color</b></label>
-                <input type="text" id="color" name="color">
+                <input type="text" id="addNewVehicleColor" name="color">
             </div>
             
             <div> 
                 <label><b>Autonomy</b></label>
-                <input type="text" id="autonomy" name="autonomy" pattern="[1-9]\d*">
+                <input type="text" id="addNewVehicleAutonomy" name="autonomy" pattern="[1-9]\d*">
             </div>
+            
+            <div id="divType" style="display: none">
+                <label><b>Type</b></label>
+                <input type="text" id="addNewVehicleType" name="type">
+            </div>
+            
+            <div>
+                <br>
+                <input type="button" id="addNewVehicleSumbit" onclick="addNewVehicle()" value="Add New Vehicle">
+            </div>
+            
+            <br>
+            <div id="ajaxContent"></div>
         </form>
     </body>
 </html>

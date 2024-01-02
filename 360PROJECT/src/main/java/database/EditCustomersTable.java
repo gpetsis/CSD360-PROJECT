@@ -75,6 +75,7 @@ public class EditCustomersTable {
                 + "    address VARCHAR(50) not null, "
                 + "    drivinglicense INTEGER not null, "
                 + "    creditcard BIGINT not null, "
+                + "    balance FLOAT not null, "
                 + " PRIMARY KEY (name))";
         stmt.execute(query);
         stmt.close();
@@ -85,13 +86,14 @@ public class EditCustomersTable {
             Connection con = DB_Connection.getConnection();
             Statement stmt = con.createStatement();
             String insertQuery = "INSERT INTO "
-                    + " customers (name,birthdate,address,drivinglicense,creditcard) "
+                    + " customers (name,birthdate,address,drivinglicense,creditcard,balance) "
                     + " VALUES ("
                     + "'" + c.getName() + "',"
                     + "'" + c.getBirthdate() + "',"
                     + "'" + c.getAddress() + "',"
                     + "'" + c.getDrivingLicense() + "',"
-                    + "'" + c.getCreditCard() + "'"
+                    + "'" + c.getCreditCard() + "',"
+                    + "'" + c.getBalance() + "'"
                     + ")";
             //stmt.execute(table);
             System.out.println(insertQuery);

@@ -10,6 +10,7 @@ public class Customer {
     String name, birthdate, address;
     int drivinglicense;
     long creditcard;
+    float balance;
 
     public void setName(String name) {
         this.name = name;
@@ -49,5 +50,13 @@ public class Customer {
 
     public long getCreditCard() {
         return creditcard;
+    }
+
+    public void setBalance(float balance) {
+        this.balance = balance;
+    }
+
+    public float getBalance() {
+        return balance;
     }
 }

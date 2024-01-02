@@ -64,8 +64,13 @@ public class VehicleServlet extends HttpServlet {
             throws ServletException, IOException {
         String requestType = request.getHeader("Request-Type");
 //        PrintStream fileOut = new PrintStream(new File("C:\\Users\\Nikos Lasithiotakis\\Desktop\\CSD\\5ο Εξάμηνο\\ΗΥ360\\CSD360-PROJECT\\360PROJECT\\src\\main\\webapp\\js\\logfile.txt"));
+<<<<<<< HEAD
 //        PrintStream fileOut = new PrintStream(new File("C:\\CSD\\PENDING\\HY-360\\CSD360-PROJECT\\360PROJECT\\src\\main\\webapp\\js\\logfile.txt"));
 //        System.setOut(fileOut);
+=======
+        PrintStream fileOut = new PrintStream(new File("C:\\CSD\\PENDING\\HY-360\\CSD360-PROJECT\\360PROJECT\\src\\main\\webapp\\js\\logfile.txt"));
+        System.setOut(fileOut);
+>>>>>>> 6a972a6cf29aa1034d4917fa29a2bc9bc21076e7
         if (requestType.equals("Search")) {
             try {
                 searchVehicles(request, response);
@@ -93,6 +98,11 @@ public class VehicleServlet extends HttpServlet {
             tempArrayList = evt.getBicycles();
         }
         responseString = tempArrayList.toString();
+<<<<<<< HEAD
+=======
+        PrintStream fileOut = new PrintStream(new File("C:\\CSD\\PENDING\\HY-360\\CSD360-PROJECT\\360PROJECT\\src\\main\\webapp\\js\\logfile.txt"));
+        System.setOut(fileOut);
+>>>>>>> 6a972a6cf29aa1034d4917fa29a2bc9bc21076e7
 
         response.getWriter().write(responseString);
         System.out.println(responseString);

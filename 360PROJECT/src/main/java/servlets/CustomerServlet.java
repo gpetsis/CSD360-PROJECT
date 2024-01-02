@@ -9,13 +9,15 @@ import database.DB_Connection;
 import database.EditCustomersTable;
 import database.EditRentsTable;
 import java.io.BufferedReader;
-import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStreamReader;
+<<<<<<< HEAD
 import java.io.PrintStream;
 import java.sql.Connection;
 import java.sql.ResultSet;
+=======
+>>>>>>> 6a972a6cf29aa1034d4917fa29a2bc9bc21076e7
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.logging.Level;

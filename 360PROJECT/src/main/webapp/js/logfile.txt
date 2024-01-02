@@ -1,2 +1,5 @@
+<<<<<<< HEAD
 {"name":"Giannis Petsis","date":"2024-01-24","duration":"asd","cost":"2","vId":"1","insurance":"0"}
 Count: 1
+=======
+>>>>>>> 6a972a6cf29aa1034d4917fa29a2bc9bc21076e7

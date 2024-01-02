@@ -6,5 +6,75 @@
     </head>
     <body>
         <h1>Hello World!</h1>
+        <script src="js/handleDatabase.js" type="text/javascript"></script>
+    </head>
+    <body>
+        <h1>Hello World!</h1>
+        <input type="button" onclick="initDatabase()" value="Initialize Database">
+        
+        <br>
+        
+        <form id="addNewCustomerForm">
+            <div>
+                <label for="name">Name:</label>
+                <input type="text" id="addNewCustomerName" name="name">
+            </div>
+
+            <div>
+                <label for="birthdate">Birth date:</label>
+                <input type="date" id="addNewCustomerBirthdate" name="birthdate">
+            </div>
+            
+            <div>
+                <label for="address">Address:</label>
+                <input type="text" id="addNewCustomerAddress" name="address">
+            </div>
+            
+            <div>
+                <label for="drivinglicense">Driving License:</label>
+                <input type="text" id="addNewCustomerDrivinglicense" name="drivinglicense">
+            </div>
+                
+            <div>
+                <label for="creditcard">Credit Card:</label>
+                <input type="text" id="addNewCustomerCreditcard" name="creditcard">
+            </div>
+            <input type="button" onclick="handleAddNewCustomer()" value="Add new customer">
+        </form>
+  
+        <form id="addNewVehicleForm" onsubmit="return addNewVehicle()">
+            <h1>Add New Vehicle</h1>
+            
+            <div>
+                <label><b>Type</b></label>
+                <br>
+                <input type="radio" id="addNewVehicleCar" name="type" value="car">
+                <label>Car</label><br>
+                <input type="radio" id="addNewVehicleBike" name="type" value="bicycle">
+                <label>Bicycle</label><br>
+                <input type="radio" id="addNewVehicleScooter" name="type" value="scooter">
+                <label>Scooter</label><br>
+            </div>
+            
+            <div>
+                <label><b>Brand</b></label>
+                <input type="text" id="brand" name="brand">
+            </div>
+            
+            <div>
+                <label><b>Model</b></label>
+                <input type="text" id="model" name="model">
+            </div>
+            
+            <div>
+                <label><b>Color</b></label>
+                <input type="text" id="color" name="color">
+            </div>
+            
+            <div> 
+                <label><b>Autonomy</b></label>
+                <input type="text" id="autonomy" name="autonomy" pattern="[1-9]\d*">
+            </div>
+        </form>
     </body>
 </html>

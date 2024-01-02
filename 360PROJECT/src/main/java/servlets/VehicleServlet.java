@@ -23,6 +23,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.ws.rs.NotFoundException;
 
 @WebServlet(name = "VehicleServlet", urlPatterns = {"/VehicleServlet"})
 public class VehicleServlet extends HttpServlet {
@@ -143,9 +144,13 @@ public class VehicleServlet extends HttpServlet {
             EditVehiclesTable vehiclesTable = new EditVehiclesTable();
             vehiclesTable.returnVehicle(vId);
             response.setStatus(200);
-        } catch (FileNotFoundException | ClassNotFoundException | SQLException ex) {
+        } catch (FileNotFoundException | ClassNotFoundException | SQLException | NotFoundException ex) {
             System.out.println("Error: " + ex);
-            response.setStatus(404);
+            if (ex instanceof NotFoundException) {
+                response.setStatus(404);
+            } else {
+                response.setStatus(409);
+            }
             Logger.getLogger(VehicleServlet.class.getName()).log(Level.SEVERE, null, ex);
         }
 

@@ -3,28 +3,43 @@
     <head>
         <title>Start Page</title>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        
-        <script src="js/initDatabase.js" type="text/javascript"></script>
-        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+    </head>
+    <body>
+        <h1>Hello World!</h1>
+        <script src="js/handleDatabase.js" type="text/javascript"></script>
     </head>
     <body>
         <h1>Hello World!</h1>
         <input type="button" onclick="initDatabase()" value="Initialize Database">
+        
+        <br>
+        
         <form id="addNewCustomerForm">
-            <label for="name">Name:</label>
-            <input type="text" id="addNewCustomerName" name="name">
+            <div>
+                <label for="name">Name:</label>
+                <input type="text" id="addNewCustomerName" name="name">
+            </div>
+
+            <div>
+                <label for="birthdate">Birth date:</label>
+                <input type="date" id="addNewCustomerBirthdate" name="birthdate">
+            </div>
             
-            <label for="birthdate">Birth date:</label>
-            <input type="date" id="addNewCustomerBirthdate" name="birthdate">
+            <div>
+                <label for="address">Address:</label>
+                <input type="text" id="addNewCustomerAddress" name="address">
+            </div>
             
-            <label for="address">Address:</label>
-            <input type="text" id="addNewCustomerAddress" name="address">
-            
-            <label for="drivinglicense">Driving License:</label>
-            <input type="text" id="addNewCustomerDrivinglicense" name="drivinglicense">
-            
-            <label for="creditcard">Credit Card:</label>
-            <input type="text" id="addNewCustomerCreditcard" name="creditcard">
+            <div>
+                <label for="drivinglicense">Driving License:</label>
+                <input type="text" id="addNewCustomerDrivinglicense" name="drivinglicense">
+            </div>
+                
+            <div>
+                <label for="creditcard">Credit Card:</label>
+                <input type="text" id="addNewCustomerCreditcard" name="creditcard">
+            </div>
+            <input type="button" onclick="handleAddNewCustomer()" value="Add new customer">
         </form>
   
         <form id="addNewVehicleForm">

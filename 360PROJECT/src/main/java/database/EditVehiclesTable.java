@@ -30,9 +30,7 @@ public class EditVehiclesTable {
 //    }
 
     public SQLException addCarFromJSON(String json) throws ClassNotFoundException, FileNotFoundException {
-//        PrintStream fileOut = new PrintStream(new File("C:\\CSD\\PENDING\\HY-360\\CSD360-PROJECT\\360PROJECT\\src\\main\\webapp\\js\\logfile.txt"));
-//        System.setOut(fileOut);
-//        System.out.println(json);
+
         Car vehicle = jsonToCar(json);
         return addNewVehicle(vehicle, "cars");
     }
@@ -47,9 +45,6 @@ public class EditVehiclesTable {
     }
 
     public SQLException addBicycleFromJSON(String json) throws ClassNotFoundException, FileNotFoundException {
-//        PrintStream fileOut = new PrintStream(new File("C:\\CSD\\PENDING\\HY-360\\CSD360-PROJECT\\360PROJECT\\src\\main\\webapp\\js\\logfile.txt"));
-//        System.setOut(fileOut);
-//        System.out.println(json);
         Bicycle vehicle = jsonToBicycle(json);
         return addNewVehicle(vehicle, "bicycles");
     }

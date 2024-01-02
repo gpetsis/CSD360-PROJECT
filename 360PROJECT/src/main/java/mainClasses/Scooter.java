@@ -5,10 +5,6 @@
  */
 package mainClasses;
 
-/**
- *
- * @author giann
- */
 public class Scooter extends Vehicle {
 
 }

@@ -161,7 +161,49 @@ function rentVehicle(){
 }
 
 function reportDamage(){
-    
+    let myForm = document.getElementById('reportDamage');
+    let formData = new FormData(myForm);
+    var xhr = new XMLHttpRequest();
+    var type;
+    var oldvId, newvId;
+    xhr.onload = function () {
+        if (xhr.readyState === 4 && xhr.status === 200) {
+            const responseData = xhr.responseText;
+            $('#ajaxContent').html("Successfully added new vehicle.");
+            replaceVehicles(oldvId, newvId);
+
+            console.log(responseData);
+        } else if (xhr.status !== 200) {
+            $('#ajaxContent').html('Request failed. Returned status of ' + xhr.status + "<br>");
+           const responseData = xhr.responseText;
+        }
+    };
+    const data = {};
+    type = formData.get('vehicleType');
+    console.log(type);
+    if(type == "car"){
+        formData.delete('vehicleType');
+        formData.delete('vId');
+    }
+    else if(type == "scooter" || type == "bicycle"){
+        formData.delete('type');
+        formData.delete('licensenumber');
+        formData.delete('vehicleType');
+    }
+    else{
+        formData.delete('vehicleType');
+        formData.delete('vId');
+        formData.delete('type');
+    }
+    oldvId = formData.get('oldvId');
+    newvId = formData.get('vId');
+    formData.delete('oldvId');
+    formData.forEach((value, key) => (data[key] = value));
+    console.log(JSON.stringify(data));
+    xhr.open('POST', 'VehicleServlet');
+    xhr.setRequestHeader("Vehicle-Type", type);
+    xhr.setRequestHeader("Request-Type", "Add-Vehicle")
+    xhr.send(JSON.stringify(data));
 }
 
 function handleRepairVehicle() {
@@ -184,5 +226,43 @@ function handleRepairVehicle() {
     
     xhr.open('POST', 'Vehicle');
     xhr.setRequestHeader("Request-Type", "Repair-Vehicle");
-    xhr.send(JSON.stringify(data));
+    xhr.send(JSON.stringify(data));   
+}
+
+function replaceVehicles(oldvId, newvId){
+    var xhr = new XMLHttpRequest();
+    xhr.onload = function () {
+        if (xhr.readyState === 4 && xhr.status === 200) {
+            const responseData = xhr.responseText;
+            $('#ajaxContent').html("Successfully replaced the damaged vehicle with a new vehicle.");
+            console.log(responseData);
+        } else if (xhr.status !== 200) {
+            $('#ajaxContent').html('Request failed. Returned status of ' + xhr.status + "<br>");
+           const responseData = xhr.responseText;
+        }
+    };
+    console.log(oldvId, newvId);
+    xhr.open('PUT', 'Customer');
+    xhr.setRequestHeader("oldvId", oldvId);
+    xhr.setRequestHeader("newvId", newvId);
+    xhr.setRequestHeader("Request-Type", "Replace-Vehicles")
+    xhr.send();
+}
+
+function handleDamageFields(vehicleType){
+    if(vehicleType == "car"){
+        $('#reportDamageDivLicenseNumber').show();
+        $('#reportDamageDivType').show();
+        $('#reportDamageDivvId').hide();
+    }
+    else if(vehicleType == "scooter" || vehicleType == "bicycle"){
+        $('#reportDamageDivLicenseNumber').hide();
+        $('#reportDamageDivType').hide();
+        $('#reportDamageDivvId').show();
+    }
+    else{
+        $('#reportDamageDivType').hide();
+        $('#reportDamageDivvId').hide();
+        $('#reportDamageDivLicenseNumber').show();
+    }
 }

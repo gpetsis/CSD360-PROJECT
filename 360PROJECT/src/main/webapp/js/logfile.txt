@@ -1,0 +1,9 @@
+bicycle
+{"brand":"asd","model":"asd","color":"asd","autonomy":"2","vId":"183","rentcost":"2","insurancecost":"1"}
+INSERT INTO  vehicles (vId, brand, model, color, autonomy, rentcost, insurancecost) VALUES ('183','asd','asd','asd','2','2.0','1.0')
+# The vehicle was successfully added to vehicles.
+INSERT INTO  bicycles (vId, brand, model, color, autonomy, rentcost, insurancecost) VALUES ('183','asd','asd','asd','2','2.0','1.0')
+# The vehicle was successfully added to bicycles.
+147 183
+INSERT INTO  unavailable (vId, returndate) VALUES (147,'null')
+com.mysql.jdbc.MysqlDataTruncation: Data truncation: Incorrect date value: 'null' for column `project360`.`unavailable`.`returndate` at row 1

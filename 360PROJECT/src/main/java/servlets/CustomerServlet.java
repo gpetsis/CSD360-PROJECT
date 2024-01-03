@@ -5,9 +5,12 @@
  */
 package servlets;
 
+import com.google.gson.JsonObject;
+import com.google.gson.JsonParser;
 import database.DB_Connection;
 import database.EditCustomersTable;
 import database.EditRentsTable;
+import database.EditVehiclesTable;
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -34,15 +37,59 @@ public class CustomerServlet extends HttpServlet {
     @Override
     protected void doPut(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         String requestType = request.getHeader("Request-Type");
-        PrintStream fileOut = new PrintStream(new File("C:\\Users\\Nikos Lasithiotakis\\Desktop\\CSD\\5ο Εξάμηνο\\ΗΥ360\\CSD360-PROJECT\\360PROJECT\\src\\main\\webapp\\js\\logfile.txt"));
-        System.setOut(fileOut);
+//        PrintStream fileOut = new PrintStream(new File("C:\\Users\\Nikos Lasithiotakis\\Desktop\\CSD\\5ο Εξάμηνο\\ΗΥ360\\CSD360-PROJECT\\360PROJECT\\src\\main\\webapp\\js\\logfile.txt"));
+//        System.setOut(fileOut);
         if (requestType.equals("Replace-Vehicles")) {
             try {
                 replaceVehicles(request, response);
             } catch (SQLException | ClassNotFoundException ex) {
+                response.setStatus(500);
+                System.out.println(ex);
+                Logger.getLogger(CustomerServlet.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        } else if (requestType.equals("Replace-Vehicles-Accident")) {
+            try {
+                replaceVehiclesAfterAccident(request, response);
+            } catch (SQLException | ClassNotFoundException ex) {
+                response.setStatus(500);
+                System.out.println(ex);
                 Logger.getLogger(CustomerServlet.class.getName()).log(Level.SEVERE, null, ex);
             }
         }
+    }
+
+    void replaceVehiclesAfterAccident(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException, SQLException, ClassNotFoundException {
+        Connection con = DB_Connection.getConnection();
+        String query = "SELECT name, insurance, cost FROM rents WHERE vId=" + Integer.valueOf(request.getHeader("oldvId"));
+        System.out.println(query);
+        Statement stmt = con.createStatement();
+        ResultSet rs = null;
+        try {
+            rs = stmt.executeQuery(query);
+            String responseQuery = "";
+            while (rs.next()) {
+                responseQuery += DB_Connection.getResultsToJSON(rs);
+            }
+            JsonParser jsonParser = new JsonParser();
+            JsonObject jsonObject = jsonParser.parse(responseQuery).getAsJsonObject();
+            String name = jsonObject.get("name").getAsString();
+            boolean insurance = jsonObject.get("insurance").getAsBoolean();
+            int cost = jsonObject.get("cost").getAsInt();
+            System.out.println("Name: " + name);
+            System.out.println("Insurance: " + insurance);
+            if (!insurance) {
+                query = "UPDATE customers SET balance=balance-" + cost * 3 + " WHERE name=" + "'" + name + "'";
+                System.out.println(query);
+                PreparedStatement preparedStatement;
+                preparedStatement = con.prepareStatement(query);
+            }
+        } catch (SQLException e) {
+            response.setStatus(500);
+            System.err.println("Got an exception! ");
+            System.err.println(e.getMessage());
+            return;
+        }
+        replaceVehicles(request, response);
     }
 
     void replaceVehicles(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException, SQLException, ClassNotFoundException {
@@ -55,6 +102,8 @@ public class CustomerServlet extends HttpServlet {
         int oldvId = Integer.valueOf(tempOldvId);
         int newvId = Integer.valueOf(tempNewvId);
         System.out.println(oldvId + " " + newvId);
+        EditVehiclesTable evt = new EditVehiclesTable();
+        evt.addToUnavailable(oldvId, null);
         String query = "UPDATE rents SET vId= " + newvId + " WHERE vId=" + oldvId;
         preparedStatement = con.prepareStatement(query);
         preparedStatement.executeUpdate();

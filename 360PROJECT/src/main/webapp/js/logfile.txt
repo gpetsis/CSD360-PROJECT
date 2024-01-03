@@ -1,1 +1,0 @@
-SELECT name, insurance FROM rents WHERE vId=1

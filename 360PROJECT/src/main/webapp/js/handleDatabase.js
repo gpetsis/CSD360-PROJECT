@@ -6,6 +6,32 @@ function initDatabase() {
     xhr.send();
 }
 
+function searchExpenses() {
+    var fromDate = document.getElementById("searchFromDateExpenses").value;
+    var toDate = document.getElementById("searchToDateExpenses").value;
+    
+    var query;
+    
+    var xhr = new XMLHttpRequest();
+    xhr.onload = function () {
+        if (xhr.readyState === 4 && xhr.status === 200) {
+            const responseData = xhr.responseText;
+            $('#ajaxContent').html(responseData);
+        } else if (xhr.status !== 200) {
+            $('#ajaxContent').html('Request failed. Returned status of ' + xhr.status + "<br>");
+            const responseData = xhr.responseText;
+        }
+    };
+    
+    query = "SELECT SUM(unavailable.repaircost) AS cost FROM unavailable WHERE unavailable.entrydate BETWEEN '" + fromDate + "' AND '" + toDate + "'";
+    console.log(query);
+    
+    xhr.open('GET', 'Init');
+    xhr.setRequestHeader("Content-type", "application/json");
+    xhr.setRequestHeader("Query", query);
+    xhr.send();
+}
+
 function askAnything() {
     var query = document.getElementById("askAnythingInput").value;
     
@@ -14,10 +40,6 @@ function askAnything() {
         if (xhr.readyState === 4 && xhr.status === 200) {
             const responseData = xhr.responseText;
             $('#ajaxContent').html(responseData);
-//            var vehiclesArray = responseData;
-//            for(var i = 0 ; i < vehiclesArray.length ; i++){
-//                console.log(vehiclesArray[i]);
-//            }
         } else if (xhr.status !== 200) {
             $('#ajaxContent').html('Request failed. Returned status of ' + xhr.status + "<br>");
             const responseData = xhr.responseText;

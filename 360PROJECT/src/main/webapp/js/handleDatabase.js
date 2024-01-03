@@ -186,7 +186,7 @@ function rentVehicle(){
     xhr.send(JSON.stringify(data));
 }
 
-//SELECT AVG(rents.duration) FROM vehicles  INNER JOIN rents ON rents.vId = vehicles.vId
+
 
 function reportDamage(){
     let myForm = document.getElementById('reportDamage');

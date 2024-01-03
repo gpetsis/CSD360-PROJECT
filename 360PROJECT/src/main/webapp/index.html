@@ -196,8 +196,6 @@
             </div>
         </form>
         
-        <form>
-          
         <form id='reportDamage'>
             <h1>Report Damage</h1>
             <div>
@@ -206,6 +204,7 @@
             </div>
             
             <h2>Replace Vehicle</h2>
+            <h3>New costs will affect the next customers</h3>
             <div>
                 <label><b>Vehicle Type</b></label>
                 <br>
@@ -266,7 +265,79 @@
             
             <div>
                 <br>
-                <input type="button" id="reportDamageButton" onclick="reportDamage()" value="Report">
+                <input type="button" id="reportDamageButton" onclick="reportDamage()" value="Report Damage">
+            </div>
+        </form>
+        
+        <form id='reportAccident'>
+            <h1>Report Accident</h1>
+            <div>
+                <label><b>Enter Vehicle's vId : </b></label>
+                <input type="text" id="reportAccidentvId" name="oldvId">
+            </div>
+           
+            <h2>Replace Vehicle</h2>
+            <div>
+                <label><b>Vehicle Type</b></label>
+                <br>
+                <input type="radio" id="reportAccidentCar" name="vehicleType" value="car" onchange="handleAccidentFields('car')">
+                <label>Car</label><br>
+                <input type="radio" id="reportAccidentBike" name="vehicleType" value="bicycle" onchange="handleAccidentFields('bicycle')">
+                <label>Bicycle</label><br>
+                <input type="radio" id="reportAccidentScooter" name="vehicleType" value="scooter" onchange="handleAccidentFields('scooter')">
+                <label>Scooter</label><br>
+                <input type="radio" id="reportAccidentMotorcycle" name="vehicleType" value="motorcycle" onchange="handleAccidentFields('motorcycle')">
+                <label>Motorcycle</label><br>
+            </div>
+            
+            <div id="reportAccidentDivLicenseNumber" style="display: none"> 
+                <label><b>Licence Number</b></label>
+                <input type="text" id="reportAccidentLicenseNumber" name="licensenumber">
+            </div>
+            
+            <div>
+                <label><b>Brand</b></label>
+                <input type="text" id="reportAccidentBrand" name="brand">
+            </div>
+            
+            <div>
+                <label><b>Model</b></label>
+                <input type="text" id="reportAccidentModel" name="model">
+            </div>
+            
+            <div>
+                <label><b>Color</b></label>
+                <input type="text" id="reportAccidentColor" name="color">
+            </div>
+            
+            <div> 
+                <label><b>Autonomy</b></label>
+                <input type="text" id="reportAccidentAutonomy" name="autonomy">
+            </div>
+            
+            <div id="reportAccidentDivvId" style="display: none"> 
+                <label><b>vId</b></label>
+                <input type="text" id="reportAccidentvId" name="vId"> 
+            </div>
+            
+            <div id="reportAccidentDivType" style="display: none">
+                <label><b>Type</b></label>
+                <input type="text" id="reportAccidentType" name="type">
+            </div>
+            
+            <div> 
+                <label><b>Rent Cost</b></label>
+                <input type="text" id="reportAccidentRentCost" name="rentcost">
+            </div>
+            
+            <div> 
+                <label><b>Insurance Cost</b></label>
+                <input type="text" id="reportAccidentInsuranceCost" name="insurancecost">
+            </div>
+            
+            <div>
+                <br>
+                <input type="button" id="reportAccidentButton" onclick="reportAccident()" value="Report Accident">
             </div>
         </form>
 

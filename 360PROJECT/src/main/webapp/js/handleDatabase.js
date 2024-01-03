@@ -1,7 +1,7 @@
 function initDatabase() {
     var xhr = new XMLHttpRequest();
     xhr.onload = function () {};
-    xhr.open('GET', 'Init');
+    xhr.open('POST', 'Init');
     xhr.setRequestHeader("Content-type", "application/json");
     xhr.send();
 }
@@ -265,4 +265,88 @@ function handleDamageFields(vehicleType){
         $('#reportDamageDivvId').hide();
         $('#reportDamageDivLicenseNumber').show();
     }
+}
+
+function reportAccident(){
+    let myForm = document.getElementById('reportAccident');
+    let formData = new FormData(myForm);
+    var xhr = new XMLHttpRequest();
+    var type;
+    var oldvId, newvId;
+    xhr.onload = function () {
+        if (xhr.readyState === 4 && xhr.status === 200) {
+            const responseData = xhr.responseText;
+            $('#ajaxContent').html("Successfully added new vehicle.");
+            replaceVehiclesAfterAccident(oldvId, newvId);
+
+            console.log(responseData);
+        } else if (xhr.status !== 200) {
+            $('#ajaxContent').html('Request failed. Returned status of ' + xhr.status + "<br>");
+           const responseData = xhr.responseText;
+        }
+    };
+    const data = {};
+    type = formData.get('vehicleType');
+    console.log(type);
+    if(type == "car"){
+        formData.delete('vehicleType');
+        formData.delete('vId');
+    }
+    else if(type == "scooter" || type == "bicycle"){
+        formData.delete('type');
+        formData.delete('licensenumber');
+        formData.delete('vehicleType');
+    }
+    else{
+        formData.delete('vehicleType');
+        formData.delete('vId');
+        formData.delete('type');
+    }
+    oldvId = formData.get('oldvId');
+    newvId = formData.get('vId');
+    formData.delete('oldvId');
+    formData.forEach((value, key) => (data[key] = value));
+    console.log(JSON.stringify(data));
+    xhr.open('POST', 'VehicleServlet');
+    xhr.setRequestHeader("Vehicle-Type", type);
+    xhr.setRequestHeader("Request-Type", "Add-Vehicle")
+    xhr.send(JSON.stringify(data));
+}
+
+function handleAccidentFields(vehicleType){
+    if(vehicleType == "car"){
+        $('#reportAccidentDivLicenseNumber').show();
+        $('#reportAccidentDivType').show();
+        $('#reportAccidentDivvId').hide();
+    }
+    else if(vehicleType == "scooter" || vehicleType == "bicycle"){
+        $('#reportAccidentDivLicenseNumber').hide();
+        $('#reportAccidentDivType').hide();
+        $('#reportAccidentDivvId').show();
+    }
+    else{
+        $('#reportAccidentDivType').hide();
+        $('#reportAccidentDivvId').hide();
+        $('#reportAccidentDivLicenseNumber').show();
+    }
+}
+
+function replaceVehiclesAfterAccident(oldvId, newvId){
+    var xhr = new XMLHttpRequest();
+    xhr.onload = function () {
+        if (xhr.readyState === 4 && xhr.status === 200) {
+            const responseData = xhr.responseText;
+            $('#ajaxContent').html("Successfully replaced the damaged vehicle with a new vehicle.(After Accident)");
+            console.log(responseData);
+        } else if (xhr.status !== 200) {
+            $('#ajaxContent').html('Request failed. Returned status of ' + xhr.status + "<br>");
+           const responseData = xhr.responseText;
+        }
+    };
+    console.log(oldvId, newvId);
+    xhr.open('PUT', 'Customer');
+    xhr.setRequestHeader("oldvId", oldvId);
+    xhr.setRequestHeader("newvId", newvId);
+    xhr.setRequestHeader("Request-Type", "Replace-Vehicles-Accident")
+    xhr.send();
 }

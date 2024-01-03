@@ -1,0 +1,8 @@
+SELECT name, insurance, cost FROM rents WHERE vId=159
+Name: Nikos Lasithiotakis
+Insurance: false
+UPDATE customers SET balance=balance-45 WHERE name='Nikos Lasithiotakis'
+ROWS AFFECTED = 1
+159 147
+INSERT INTO  unavailable (vId, returndate) VALUES (159,null)
+# The vehicle was successfully added to unavailable.

@@ -356,6 +356,7 @@ public class EditVehiclesTable {
         query = "CREATE TABLE unavailable"
                 + "(vId INTEGER not null references vehicles(vId),"
                 + "    returndate DATE,"
+                + "    FOREIGN KEY (vId) REFERENCES vehicles(vId), "
                 + " PRIMARY KEY (vId))";
         stmt.execute(query);
         stmt.close();

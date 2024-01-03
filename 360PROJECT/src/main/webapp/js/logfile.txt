@@ -54,37 +54,3 @@ INSERT INTO  customers (name,birthdate,address,drivinglicense,creditcard,balance
 Correct JSON
 INSERT INTO  customers (name,birthdate,address,drivinglicense,creditcard,balance)  VALUES ('Evelina Georgiou','1992-04-18','Daidalou 98','1273','7080901020122334','1500.0')
 # The customer was successfully added in the database.
-{"name":"Nikos","birthdate":"2024-01-02","address":"Spitimou","drivinglicense":"123","creditcard":"13","balance":"13"}
-Correct JSON
-INSERT INTO  customers (name,birthdate,address,drivinglicense,creditcard,balance)  VALUES ('Nikos','2024-01-02','Spitimou','123','13','13.0')
-# The customer was successfully added in the database.
-motorcycle
-{"brand":"KATEM","model":"asd","color":"pinkpinkpink","autonomy":"12","vId":"","rentCost":"21","insuranceCost":"1"}
-motorcycle
-{"licensenumber":"123","brand":"asd","model":"asd","color":"asd","autonomy":"3","rentCost":"45","insuranceCost":"5"}
-INSERT INTO  vehicles (vId, brand, model, color, autonomy, rentcost, insurancecost) VALUES ('123','asd','asd','asd','3','0.0','0.0')
-# The vehicle was successfully added to vehicles.
-INSERT INTO  motorcycles (licensenumber, brand, model, color, autonomy, rentcost, insurancecost) VALUES ('123','asd','asd','asd','3','0.0','0.0')
-# The vehicle was successfully added to motorcycles.
-scooter
-{"brand":"asd","model":"asd","color":"asd","autonomy":"3","vId":"12","rentCost":"45","insuranceCost":"5"}
-{"brand":"asd","model":"asd","color":"asd","autonomy":"3","vId":"12","rentCost":"45","insuranceCost":"5"}
-asd
-INSERT INTO  vehicles (vId, brand, model, color, autonomy, rentcost, insurancecost) VALUES ('12','asd','asd','asd','3','0.0','0.0')
-# The vehicle was successfully added to vehicles.
-INSERT INTO  scooters (vId, brand, model, color, autonomy, rentcost, insurancecost) VALUES ('12','asd','asd','asd','3','0.0','0.0')
-# The vehicle was successfully added to scooters.
-motorcycle
-{"licensenumber":"12","brand":"asd","model":"asd","color":"asd","autonomy":"1","rentcost":"3","insurancecost":"4"}
-INSERT INTO  vehicles (vId, brand, model, color, autonomy, rentcost, insurancecost) VALUES ('12','asd','asd','asd','1','3.0','4.0')
-Error: com.mysql.jdbc.exceptions.jdbc4.MySQLIntegrityConstraintViolationException: Duplicate entry '12' for key 'PRIMARY'
-car
-{"licensenumber":"12","brand":"asd","model":"asd","color":"asd","autonomy":"1","type":"asd","rentcost":"3","insurancecost":"4"}
-INSERT INTO  vehicles (vId, brand, model, color, autonomy, rentcost, insurancecost) VALUES ('12','asd','asd','asd','1','3.0','4.0')
-Error: com.mysql.jdbc.exceptions.jdbc4.MySQLIntegrityConstraintViolationException: Duplicate entry '12' for key 'PRIMARY'
-motorcycle
-{"licensenumber":"1234","brand":"asd","model":"asd","color":"asd","autonomy":"1","rentcost":"3","insurancecost":"4"}
-INSERT INTO  vehicles (vId, brand, model, color, autonomy, rentcost, insurancecost) VALUES ('1234','asd','asd','asd','1','3.0','4.0')
-# The vehicle was successfully added to vehicles.
-INSERT INTO  motorcycles (licensenumber, brand, model, color, autonomy, rentcost, insurancecost) VALUES ('1234','asd','asd','asd','1','3.0','4.0')
-# The vehicle was successfully added to motorcycles.

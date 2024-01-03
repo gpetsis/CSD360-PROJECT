@@ -173,12 +173,72 @@
             </div>
         </form>
         
-        <form>
+        <form id='reportDamage'>
             <h1>Report Damage</h1>
             <div>
-                <label><b>vId</b></label>
-                <input type="text" id="reportDamagevId" name="vId">
+                <label><b>Enter Damaged Vehicle's vId : </b></label>
+                <input type="text" id="reportDamageoldvId" name="oldvId">
             </div>
+            
+            <h2>Replace Vehicle</h2>
+            <div>
+                <label><b>Vehicle Type</b></label>
+                <br>
+                <input type="radio" id="reportDamageCar" name="vehicleType" value="car" onchange="handleDamageFields('car')">
+                <label>Car</label><br>
+                <input type="radio" id="reportDamageBike" name="vehicleType" value="bicycle" onchange="handleDamageFields('bicycle')">
+                <label>Bicycle</label><br>
+                <input type="radio" id="reportDamageScooter" name="vehicleType" value="scooter" onchange="handleDamageFields('scooter')">
+                <label>Scooter</label><br>
+                <input type="radio" id="reportDamageMotorcycle" name="vehicleType" value="motorcycle" onchange="handleDamageFields('motorcycle')">
+                <label>Motorcycle</label><br>
+            </div>
+            
+            <div id="reportDamageDivLicenseNumber" style="display: none"> 
+                <label><b>Licence Number</b></label>
+                <input type="text" id="reportDamageLicenseNumber" name="licensenumber">
+            </div>
+            
+            <div>
+                <label><b>Brand</b></label>
+                <input type="text" id="reportDamageBrand" name="brand">
+            </div>
+            
+            <div>
+                <label><b>Model</b></label>
+                <input type="text" id="reportDamageModel" name="model">
+            </div>
+            
+            <div>
+                <label><b>Color</b></label>
+                <input type="text" id="reportDamageColor" name="color">
+            </div>
+            
+            <div> 
+                <label><b>Autonomy</b></label>
+                <input type="text" id="reportDamageAutonomy" name="autonomy">
+            </div>
+            
+            <div id="reportDamageDivvId" style="display: none"> 
+                <label><b>vId</b></label>
+                <input type="text" id="reportDamagevId" name="vId"> 
+            </div>
+            
+            <div id="reportDamageDivType" style="display: none">
+                <label><b>Type</b></label>
+                <input type="text" id="reportDamageType" name="type">
+            </div>
+            
+            <div> 
+                <label><b>Rent Cost</b></label>
+                <input type="text" id="reportDamageRentCost" name="rentcost">
+            </div>
+            
+            <div> 
+                <label><b>Insurance Cost</b></label>
+                <input type="text" id="reportDamageInsuranceCost" name="insurancecost">
+            </div>
+            
             <div>
                 <br>
                 <input type="button" id="reportDamageButton" onclick="reportDamage()" value="Report">

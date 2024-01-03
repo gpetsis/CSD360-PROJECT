@@ -373,6 +373,13 @@ public class EditVehiclesTable {
                 + "    insurancecost FLOAT(10) not null,"
                 + " PRIMARY KEY (vId))";
         stmt.execute(query);
+
+        query = "CREATE TABLE unavailable"
+                + "(vId INTEGER not null references vehicles(vId),"
+                + "    returndate DATE,"
+                + " PRIMARY KEY (vId))";
+        stmt.execute(query);
+
         stmt.close();
     }
 

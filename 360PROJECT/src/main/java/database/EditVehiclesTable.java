@@ -12,9 +12,14 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+import java.time.temporal.ChronoUnit;
 import java.util.ArrayList;
+import java.util.NoSuchElementException;
 import mainClasses.Bicycle;
 import mainClasses.Car;
+import mainClasses.Rent;
 import mainClasses.Motorcycle;
 import mainClasses.Scooter;
 import mainClasses.Vehicle;
@@ -97,6 +102,7 @@ public class EditVehiclesTable {
 
     public void returnVehicle(String vId) throws SQLException, FileNotFoundException, ClassNotFoundException {
         Connection con = DB_Connection.getConnection();
+        Statement stmt;
         Vehicle vehicle;
         ResultSet rs = null;
         boolean vehicleExists;
@@ -116,7 +122,45 @@ public class EditVehiclesTable {
 
             System.out.println("Count: " + count);
             if (!vehicleExists) {
-                throw new SQLException("Vehicle does not exist!");
+                throw new NoSuchElementException("Vehicle does not exist!");
+            }
+
+            query = "SELECT * FROM rents WHERE vId=" + vId;
+            stmt = con.createStatement();
+
+            rs = stmt.executeQuery(query);
+
+            if (rs.next()) {
+                EditRentsTable rentsTable = new EditRentsTable();
+                String json = DB_Connection.getResultsToJSON(rs);
+                Rent rent = rentsTable.jsonToRent(json);
+                System.out.println(rent.getDate());
+
+                LocalDate current = LocalDate.now();
+                DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+
+                String formattedDate = current.format(formatter);
+
+                LocalDate rentDate = LocalDate.parse(rent.getDate(), formatter);
+                LocalDate currentDate = LocalDate.parse(formattedDate, formatter);
+
+                long daysDifference = ChronoUnit.DAYS.between(currentDate, rentDate);
+
+                if (daysDifference < 0) {
+                    int penalty = (int) (-24 * daysDifference); // daysDifference is < 0
+                    String customerName = rent.getName();
+                    query = "UPDATE customers SET balance=balance - " + penalty + " WHERE name='" + customerName + "'";
+
+                    preparedStatement = con.prepareStatement(query);
+                    preparedStatement.executeUpdate();
+
+                }
+                query = "DELETE FROM rents WHERE vId=" + vId;
+
+                preparedStatement = con.prepareStatement(query);
+                preparedStatement.executeUpdate();
+
+                System.out.println("Difference: " + daysDifference);
             }
 
         }

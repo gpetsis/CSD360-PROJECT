@@ -14,6 +14,7 @@ import java.io.InputStreamReader;
 import java.io.PrintWriter;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.NoSuchElementException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.servlet.ServletException;
@@ -107,6 +108,7 @@ public class VehicleServlet extends HttpServlet {
      * @param response servlet response
      * @throws ServletException if a servlet-specific error occurs
      * @throws IOException if an I/O error occurs
+     * @throws java.io.FileNotFoundException
      */
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
@@ -137,9 +139,13 @@ public class VehicleServlet extends HttpServlet {
             EditVehiclesTable vehiclesTable = new EditVehiclesTable();
             vehiclesTable.returnVehicle(vId);
             response.setStatus(200);
-        } catch (FileNotFoundException | ClassNotFoundException | SQLException ex) {
+        } catch (FileNotFoundException | ClassNotFoundException | SQLException | NoSuchElementException ex) {
             System.out.println("Error: " + ex);
-            response.setStatus(404);
+            if (ex instanceof NoSuchElementException) {
+                response.setStatus(404);
+            } else {
+                response.setStatus(409);
+            }
             Logger.getLogger(VehicleServlet.class.getName()).log(Level.SEVERE, null, ex);
         }
 

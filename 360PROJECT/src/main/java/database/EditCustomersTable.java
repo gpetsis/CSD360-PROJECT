@@ -6,9 +6,7 @@
 package database;
 
 import com.google.gson.Gson;
-import java.io.BufferedWriter;
 import java.io.FileNotFoundException;
-import java.io.FileWriter;
 import java.io.IOException;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -112,26 +110,5 @@ public class EditCustomersTable {
 
         preparedStatement = con.prepareStatement(query);
         preparedStatement.executeUpdate();
-    }
-
-    public static void appendToFile(String str) {
-        // Try block to check for exceptions
-        try {
-            String fileName = "C:\\CSD\\PENDING\\HY-360\\CSD360-PROJECT\\360PROJECT\\src\\main\\webapp\\js\\logfile.txt";
-            // Open given file in append mode by creating an
-            // object of BufferedWriter class
-            BufferedWriter out = new BufferedWriter(
-                    new FileWriter(fileName, true));
-
-            // Writing on output stream
-            out.write(str);
-            // Closing the connection
-            out.close();
-        } // Catch block to handle the exceptions
-        catch (IOException e) {
-
-            // Display message when exception occurs
-            System.out.println("exception occurred" + e);
-        }
     }
 }

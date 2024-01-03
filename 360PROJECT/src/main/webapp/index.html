@@ -20,6 +20,69 @@
             <input type="button" onclick="askAnything()" value="Ask">
         </div>
         
+        <div>
+            <h1>Search vehicles</h1>
+
+            <h3>From To Date: </h3>
+            <div>
+                <label><b>From</b></label>
+                <input type="date" id="searchFromDate" name="fromDate">
+            </div>
+
+            <div>
+                <label><b>To</b></label>
+                <input type="date" id="searchToDate" name="toDate">
+            </div>
+            
+            <br>
+            <input type="button" id="searchFromToDate" onclick="searchFromToVehicles()" value="Search">
+            <br><br>
+            
+            <h3>Min Max Avg: </h3>
+            <select name="search" id="searchMixMaxAvgInput">
+            <option value="vehicles">Vehicles</option>
+            <option value="cars">Cars</option>
+            <option value="scooters">Scooters</option>
+            <option value="bicycles">Bicycles</option>
+            <option value="motorcycles">Motorcycles</option>
+            </select>
+            
+            <select name="search" id="searchMixMaxAvgOption">
+            <option value="min">Min</option>
+            <option value="max">Max</option>
+            <option value="avg">Average</option>
+            </select>
+            
+            <br><br>
+            <input type="button" id="searchMinMaxAvg" onclick="searchMinMaxAvgVehicles()" value="Search">
+            <br><br>
+            
+            <h3>Total income By Date And Category</h3>
+            <div>
+                <label><b>From</b></label>
+                <input type="date" id="searchIncomeDateFrom" name="fromDate">
+            </div>
+
+            <div>
+                <label><b>To</b></label>
+                <input type="date" id="searchIncomeDateTo" name="toDate">
+            </div>
+            
+            <select name="search" id="searchIncomeInput">
+            <option value="vehicles">Vehicles</option>
+            <option value="cars">Cars</option>
+            <option value="scooters">Scooters</option>
+            <option value="bicycles">Bicycles</option>
+            <option value="motorcycles">Motorcycles</option>
+            </select>
+            
+            <br><br>
+            <input type="button" id="searchIncomeButton" onclick="searchIncome()" value="Search">
+            <br><br>
+        </div>
+        
+        
+        
         <h1>Add New Customer</h1>
 
         <form id="addNewCustomerForm">

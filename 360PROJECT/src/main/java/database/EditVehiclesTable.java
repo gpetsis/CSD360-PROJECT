@@ -15,6 +15,7 @@ import java.sql.Statement;
 import java.util.ArrayList;
 import mainClasses.Bicycle;
 import mainClasses.Car;
+import mainClasses.Motorcycle;
 import mainClasses.Scooter;
 import mainClasses.Vehicle;
 
@@ -31,6 +32,12 @@ public class EditVehiclesTable {
 
         Car vehicle = jsonToCar(json);
         return addNewVehicle(vehicle, "cars");
+    }
+
+    public SQLException addMotorcycleFromJSON(String json) throws ClassNotFoundException, FileNotFoundException {
+
+        Motorcycle vehicle = jsonToMotorcycle(json);
+        return addNewVehicle(vehicle, "motorcycles");
     }
 
     public SQLException addScooterFromJSON(String json) throws ClassNotFoundException, FileNotFoundException {
@@ -61,9 +68,15 @@ public class EditVehiclesTable {
         return vehicle;
     }
 
+    public Motorcycle jsonToMotorcycle(String json) {
+        Gson gson = new Gson();
+
+        Motorcycle vehicle = gson.fromJson(json, Motorcycle.class);
+        return vehicle;
+    }
+
     public Scooter jsonToScooter(String json) {
         Gson gson = new Gson();
-        System.out.println("Geia");
         Scooter vehicle = gson.fromJson(json, Scooter.class);
         return vehicle;
     }
@@ -153,6 +166,26 @@ public class EditVehiclesTable {
                 cars.add(json);
             }
             return cars;
+        } catch (Exception e) {
+            System.err.println("Got an exception! ");
+            System.err.println(e.getMessage());
+        }
+        return null;
+    }
+
+    public ArrayList<String> getMotorcycles() throws SQLException, ClassNotFoundException {
+        Connection con = DB_Connection.getConnection();
+        Statement stmt = con.createStatement();
+        ArrayList<String> motorcycles = new ArrayList<String>();
+        ResultSet rs = null;
+        try {
+            rs = stmt.executeQuery("SELECT * FROM motorcycles");
+
+            while (rs.next()) {
+                String json = DB_Connection.getResultsToJSON(rs);
+                motorcycles.add(json);
+            }
+            return motorcycles;
         } catch (Exception e) {
             System.err.println("Got an exception! ");
             System.err.println(e.getMessage());
@@ -264,6 +297,17 @@ public class EditVehiclesTable {
                 + " PRIMARY KEY (licensenumber))";
         stmt.execute(query);
 
+        query = "CREATE TABLE motorcycles "
+                + "(licensenumber INTEGER not null references vehicles(vId),"
+                + "    brand VARCHAR(15) not null,"
+                + "    model VARCHAR(15) not null,"
+                + "    color VARCHAR(10) not null,"
+                + "    autonomy INTEGER not null,"
+                + "    rentcost FLOAT(10) not null,"
+                + "    insurancecost FLOAT(10) not null,"
+                + " PRIMARY KEY (licensenumber))";
+        stmt.execute(query);
+
         query = "CREATE TABLE scooters "
                 + "(vId INTEGER not null references vehicles(vId),"
                 + "    brand VARCHAR(15) not null,"
@@ -329,7 +373,7 @@ public class EditVehiclesTable {
                         + "'" + vehicle.getRentCost() + "',"
                         + "'" + vehicle.getInsuranceCost() + "'"
                         + ")";
-            } else {
+            } else if (type.equals("bicycles") || type.equals("scooters")) {
                 insertQuery = "INSERT INTO "
                         + " " + type + " (vId, brand, model, color, autonomy, rentcost, insurancecost)"
                         + " VALUES ("
@@ -340,6 +384,19 @@ public class EditVehiclesTable {
                         + "'" + vehicle.getAutonomy() + "',"
                         + "'" + vehicle.getRentCost() + "',"
                         + "'" + vehicle.getInsuranceCost() + "'"
+                        + ")";
+            } else {
+                Motorcycle motorcycle = (Motorcycle) vehicle;
+                insertQuery = "INSERT INTO "
+                        + " " + type + " (licensenumber, brand, model, color, autonomy, rentcost, insurancecost)"
+                        + " VALUES ("
+                        + "'" + motorcycle.getVehicleId() + "',"
+                        + "'" + motorcycle.getBrand() + "',"
+                        + "'" + motorcycle.getModel() + "',"
+                        + "'" + motorcycle.getColor() + "',"
+                        + "'" + motorcycle.getAutonomy() + "',"
+                        + "'" + motorcycle.getRentCost() + "',"
+                        + "'" + motorcycle.getInsuranceCost() + "'"
                         + ")";
             }
             System.out.println(insertQuery);

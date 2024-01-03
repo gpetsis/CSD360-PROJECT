@@ -30,4 +30,8 @@ public class examples {
             + "\"color\":\"white\",\"autonomy\":\"800\",\"type\":\"SUV\",\"rentcost\":\"36\",\"insurancecost\":\"12\"}";
     static String car2JSON = "{\"licensenumber\":\"6\",\"brand\":\"buggati\",\"model\":\"veyron\","
             + "\"color\":\"black\",\"autonomy\":\"700\",\"type\":\"hatchback\",\"rentcost\":\"15\",\"insurancecost\":\"10\"}";
+    static String motorbike1JSON = "{\"licensenumber\":\"7\",\"brand\":\"KTM\",\"model\":\"motor1\","
+            + "\"color\":\"cyan\",\"autonomy\":\"350\",\"rentcost\":\"20\",\"insurancecost\":\"11\"}";
+    static String motorbike2JSON = "{\"licensenumber\":\"8\",\"brand\":\"Kawasaki\",\"model\":\"motor2\","
+            + "\"color\":\"yellow\",\"autonomy\":\"300\",\"rentcost\":\"25\",\"insurancecost\":\"12\"}";
 }

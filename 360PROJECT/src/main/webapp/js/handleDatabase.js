@@ -47,10 +47,15 @@ function handleExtraFields(vehicleType){
         $('#addDivType').show();
         $('#addDivvId').hide();
     }
-    else{
+    else if(vehicleType == "scooter" || vehicleType == "bicycle"){
         $('#addDivLicenseNumber').hide();
         $('#addDivType').hide();
         $('#addDivvId').show();
+    }
+    else{
+        $('#addDivType').hide();
+        $('#addDivvId').hide();
+        $('#addDivLicenseNumber').show();
     }
 }
   

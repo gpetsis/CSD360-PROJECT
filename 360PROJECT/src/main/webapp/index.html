@@ -60,6 +60,8 @@
                 <label>Bicycle</label><br>
                 <input type="radio" id="addNewVehicleScooter" name="vehicleType" value="scooter" onchange="handleExtraFields('scooter')">
                 <label>Scooter</label><br>
+                <input type="radio" id="addNewVehicleMotorcycle" name="vehicleType" value="motorcycle" onchange="handleExtraFields('motorcycle')">
+                <label>Motorcycle</label><br>
             </div>
             
             <div id="addDivLicenseNumber" style="display: none"> 
@@ -122,10 +124,12 @@
           
         <h1>Search Vehicles</h1>
         <select name="search" id="search">
-            <option value="vehicle">Vehicle</option>
+            <option value="vehicle">Vehicles</option>
             <option value="car">Car</option>
             <option value="scooter">Scooter</option>
             <option value="bicycle">Bicycle</option>
+            <option value="motorcycle">Motorcycle</option>
+
         </select>
         <br><br>
         <input type="button" id="searchButton" onclick="searchVehicles()" value="Search">

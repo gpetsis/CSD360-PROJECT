@@ -25,14 +25,6 @@ import mainClasses.Scooter;
 import mainClasses.Vehicle;
 
 public class EditVehiclesTable {
-//    public SQLException addVehicleFromJSON(String json) throws ClassNotFoundException, FileNotFoundException {
-////        PrintStream fileOut = new PrintStream(new File("C:\\CSD\\PENDING\\HY-360\\CSD360-PROJECT\\360PROJECT\\src\\main\\webapp\\js\\logfile.txt"));
-////        System.setOut(fileOut);
-////        System.out.println(json);
-//        Vehicle vehicle = jsonToVehicle(json);
-//        return addNewVehicle(vehicle);
-//    }
-
     public SQLException addCarFromJSON(String json) throws ClassNotFoundException, FileNotFoundException {
 
         Car vehicle = jsonToCar(json);

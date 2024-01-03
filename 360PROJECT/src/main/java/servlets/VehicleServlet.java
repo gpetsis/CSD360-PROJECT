@@ -205,8 +205,8 @@ public class VehicleServlet extends HttpServlet {
     }
 
     void addNewVehicle(HttpServletRequest request, HttpServletResponse response) throws FileNotFoundException, IOException {
-        PrintStream fileOut = new PrintStream(new File("C:\\Users\\Nikos Lasithiotakis\\Desktop\\CSD\\5ο Εξάμηνο\\ΗΥ360\\CSD360-PROJECT\\360PROJECT\\src\\main\\webapp\\js\\logfile.txt"));
-        System.setOut(fileOut);
+//        PrintStream fileOut = new PrintStream(new File("C:\\Users\\Nikos Lasithiotakis\\Desktop\\CSD\\5ο Εξάμηνο\\ΗΥ360\\CSD360-PROJECT\\360PROJECT\\src\\main\\webapp\\js\\logfile.txt"));
+//        System.setOut(fileOut);
         System.out.println(request.getHeader("Vehicle-Type"));
         SQLException status = null;
         EditVehiclesTable evt = new EditVehiclesTable();

@@ -186,20 +186,19 @@ function rentVehicle(){
     xhr.send(JSON.stringify(data));
 }
 
-
-
 function reportDamage(){
     let myForm = document.getElementById('reportDamage');
     let formData = new FormData(myForm);
     var xhr = new XMLHttpRequest();
     var type;
+    var entrydate = formData.get('entrydate');
+    var repaircost = formData.get('repaircost');
     var oldvId, newvId;
     xhr.onload = function () {
         if (xhr.readyState === 4 && xhr.status === 200) {
             const responseData = xhr.responseText;
             $('#ajaxContent').html("Successfully added new vehicle.");
-            replaceVehicles(oldvId, newvId);
-
+            replaceVehicles(oldvId, newvId, entrydate, repaircost);
             console.log(responseData);
         } else if (xhr.status !== 200) {
             $('#ajaxContent').html('Request failed. Returned status of ' + xhr.status + "<br>");
@@ -226,11 +225,13 @@ function reportDamage(){
     oldvId = formData.get('oldvId');
     newvId = formData.get('vId');
     formData.delete('oldvId');
+    formData.delete('repaircost');
+    formData.delete('entrydate');
     formData.forEach((value, key) => (data[key] = value));
     console.log(JSON.stringify(data));
     xhr.open('POST', 'VehicleServlet');
     xhr.setRequestHeader("Vehicle-Type", type);
-    xhr.setRequestHeader("Request-Type", "Add-Vehicle")
+    xhr.setRequestHeader("Request-Type", "Add-Vehicle");
     xhr.send(JSON.stringify(data));
 }
 
@@ -274,7 +275,7 @@ function handleRefreshUnavailable() {
     xhr.send();
 }
 
-function replaceVehicles(oldvId, newvId){
+function replaceVehicles(oldvId, newvId, entrydate, repaircost){
     var xhr = new XMLHttpRequest();
     xhr.onload = function () {
         if (xhr.readyState === 4 && xhr.status === 200) {
@@ -290,6 +291,8 @@ function replaceVehicles(oldvId, newvId){
     xhr.open('PUT', 'Customer');
     xhr.setRequestHeader("oldvId", oldvId);
     xhr.setRequestHeader("newvId", newvId);
+    xhr.setRequestHeader("entrydate", entrydate);
+    xhr.setRequestHeader("repaircost", repaircost);
     xhr.setRequestHeader("Request-Type", "Replace-Vehicles")
     xhr.send();
 }
@@ -318,12 +321,13 @@ function reportAccident(){
     var xhr = new XMLHttpRequest();
     var type;
     var oldvId, newvId;
+    var entrydate = formData.get('entrydate');
+    var repaircost = formData.get('repaircost');
     xhr.onload = function () {
         if (xhr.readyState === 4 && xhr.status === 200) {
             const responseData = xhr.responseText;
             $('#ajaxContent').html("Successfully added new vehicle.");
-            replaceVehiclesAfterAccident(oldvId, newvId);
-
+            replaceVehiclesAfterAccident(oldvId, newvId, entrydate, repaircost);
             console.log(responseData);
         } else if (xhr.status !== 200) {
             $('#ajaxContent').html('Request failed. Returned status of ' + xhr.status + "<br>");
@@ -350,6 +354,8 @@ function reportAccident(){
     oldvId = formData.get('oldvId');
     newvId = formData.get('vId');
     formData.delete('oldvId');
+    formData.delete('entrydate');
+    formData.delete('repaircost');
     formData.forEach((value, key) => (data[key] = value));
     console.log(JSON.stringify(data));
     xhr.open('POST', 'VehicleServlet');
@@ -376,7 +382,7 @@ function handleAccidentFields(vehicleType){
     }
 }
 
-function replaceVehiclesAfterAccident(oldvId, newvId){
+function replaceVehiclesAfterAccident(oldvId, newvId, entrydate, repaircost){
     var xhr = new XMLHttpRequest();
     xhr.onload = function () {
         if (xhr.readyState === 4 && xhr.status === 200) {
@@ -392,6 +398,51 @@ function replaceVehiclesAfterAccident(oldvId, newvId){
     xhr.open('PUT', 'Customer');
     xhr.setRequestHeader("oldvId", oldvId);
     xhr.setRequestHeader("newvId", newvId);
+    xhr.setRequestHeader("entrydate", entrydate);
+    xhr.setRequestHeader("repaircost", repaircost);
     xhr.setRequestHeader("Request-Type", "Replace-Vehicles-Accident")
+    xhr.send();
+}
+
+function firstQuestion(){
+    var output;
+    var query;
+    output = $('#firstQuestion').val();
+    if(output == 'availableVehicles'){
+        query = "SELECT vehicles.vId FROM vehicles LEFT OUTER JOIN rents ON vehicles.vId = rents.vId LEFT OUTER JOIN unavailable ON vehicles.vId = unavailable.vId WHERE rents.vId IS NULL AND unavailable.vId IS NULL";
+    }
+    else if(output == 'rentedVehicles'){
+        query = "SELECT vehicles.vId FROM vehicles INNER JOIN rents ON vehicles.vId = rents.vId";
+    }else if(output == 'availableCars'){
+        query = "SELECT cars.licensenumber FROM cars LEFT OUTER JOIN rents ON cars.licensenumber = rents.vId LEFT OUTER JOIN unavailable ON cars.licensenumber = unavailable.vId WHERE rents.vId IS NULL AND unavailable.vId IS NULL";
+    }else if(output == 'rentedCars'){
+        query = "SELECT cars.licensenumber FROM cars INNER JOIN rents ON cars.licensenumber = rents.vId";
+    }else if(output == 'availableScooters'){
+        query = "SELECT scooters.vId FROM scooters LEFT OUTER JOIN rents ON scooters.vId = rents.vId LEFT OUTER JOIN unavailable ON scooters.vId = unavailable.vId WHERE rents.vId IS NULL AND unavailable.vId IS NULL";
+    }else if(output == 'rentedScooters'){
+        query = "SELECT scooters.vId FROM scooters INNER JOIN rents ON scooters.vId = rents.vId";
+    }else if(output == 'availableBicycles'){
+        query = "SELECT bicycles.vId FROM bicycles LEFT OUTER JOIN rents ON bicycles.vId = rents.vId LEFT OUTER JOIN unavailable ON bicycles.vId = unavailable.vId WHERE rents.vId IS NULL AND unavailable.vId IS NULL";
+    }else if(output == 'rentedBicycles'){
+        query = "SELECT bicycles.vId FROM bicycles INNER JOIN rents ON bicycles.vId = rents.vId";
+    }else if(output == 'availableMotorcycles'){
+        query = "SELECT motorcycles.licensenumber FROM motorcycles LEFT OUTER JOIN rents ON motorcycles.licensenumber = rents.vId LEFT OUTER JOIN unavailable ON motorcycles.licensenumber = unavailable.vId WHERE rents.vId IS NULL AND unavailable.vId IS NULL";
+    }else if(output == 'rentedMotorcycles'){
+        query = "SELECT motorcycles.licensenumber FROM motorcycles INNER JOIN rents ON motorcycles.licensenumber = rents.vId";
+    }
+    var xhr = new XMLHttpRequest();
+    xhr.onload = function () {
+        if (xhr.readyState === 4 && xhr.status === 200) {
+            const responseData = xhr.responseText;
+            $('#ajaxContent').html(responseData);
+        } else if (xhr.status !== 200) {
+            $('#ajaxContent').html('Request failed. Returned status of ' + xhr.status + "<br>");
+            const responseData = xhr.responseText;
+        }
+    };
+    console.log(query);
+    xhr.open('GET', 'Init');
+    xhr.setRequestHeader("Content-type", "application/json");
+    xhr.setRequestHeader("Query", query);
     xhr.send();
 }

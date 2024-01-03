@@ -28,10 +28,16 @@ function addNewVehicle(){
         formData.delete('vehicleType');
         formData.delete('vId');
     }
-    else {
+    else if(type == "scooter" || type == "bicycle"){
         formData.delete('type');
         formData.delete('licensenumber');
         formData.delete('vehicleType');
+    }
+    else{
+        formData.delete('vehicleType');
+        formData.delete('vId');
+        formData.delete('type');
+
     }
     formData.forEach((value, key) => (data[key] = value));
     console.log(JSON.stringify(data));
@@ -152,4 +158,8 @@ function rentVehicle(){
     xhr.setRequestHeader("Request-Type", "Rent");
     xhr.setRequestHeader("vId", data['vId']);
     xhr.send(JSON.stringify(data));
+}
+
+function reportDamage(){
+    
 }

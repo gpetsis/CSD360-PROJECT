@@ -101,12 +101,12 @@
             
             <div> 
                 <label><b>Rent Cost</b></label>
-                <input type="text" id="addNewVehicleRentCost" name="rentCost">
+                <input type="text" id="addNewVehicleRentCost" name="rentcost">
             </div>
             
             <div> 
                 <label><b>Insurance Cost</b></label>
-                <input type="text" id="addNewVehicleInsuranceCost" name="insuranceCost">
+                <input type="text" id="addNewVehicleInsuranceCost" name="insurancecost">
             </div>
             
             <div>
@@ -171,6 +171,18 @@
             <div>
                 <br>
                 <input type="button" id="rentVehicleButton" onclick="rentVehicle()" value="Rent">
+            </div>
+        </form>
+        
+        <form>
+            <h1>Report Damage</h1>
+            <div>
+                <label><b>vId</b></label>
+                <input type="text" id="reportDamagevId" name="vId">
+            </div>
+            <div>
+                <br>
+                <input type="button" id="reportDamageButton" onclick="reportDamage()" value="Report">
             </div>
         </form>
 

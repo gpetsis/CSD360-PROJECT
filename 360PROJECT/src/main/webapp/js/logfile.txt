@@ -1,0 +1,5 @@
+2024-01-06
+INSERT INTO  unavailable (vId, returndate) VALUES (1,'2024-01-06')
+# The vehicle was successfully updated to unavailable.
+1repair
+{"vId":"1","repairType":"repair"}

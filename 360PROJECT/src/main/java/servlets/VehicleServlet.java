@@ -8,6 +8,7 @@ package servlets;
 import com.google.gson.Gson;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
+import com.google.gson.JsonSyntaxException;
 import database.EditVehiclesTable;
 import java.io.BufferedReader;
 import java.io.File;
@@ -154,8 +155,9 @@ public class VehicleServlet extends HttpServlet {
             }
 
             System.out.println(vId + repairType);
-        } catch (Exception e) {
-            e.printStackTrace();
+        } catch (JsonSyntaxException | ClassNotFoundException | SQLException ex) {
+            System.out.println("Error : " + ex);
+            response.setStatus(409);
         }
 
         System.out.println(requestString);

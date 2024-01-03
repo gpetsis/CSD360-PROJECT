@@ -6,9 +6,7 @@
 package servlets;
 
 import database.InitDatabase;
-import java.io.File;
 import java.io.IOException;
-import java.io.PrintStream;
 import java.io.PrintWriter;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -64,8 +62,6 @@ public class Init extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         InitDatabase init = new InitDatabase();
-        PrintStream fileOut = new PrintStream(new File("C:\\Users\\Nikos Lasithiotakis\\Desktop\\CSD\\5ο Εξάμηνο\\ΗΥ360\\CSD360-PROJECT\\360PROJECT\\src\\main\\webapp\\js\\logfile.txt"));
-        System.setOut(fileOut);
         try {
             init.initDatabase();
             init.initTables();

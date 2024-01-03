@@ -11,6 +11,7 @@ import java.io.FileNotFoundException;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.sql.Connection;
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
@@ -109,6 +110,15 @@ public class EditCustomersTable {
 //            Logger.getLogger(EditCustomersTable.class.getName()).log(Level.SEVERE, null, ex);
 //            throw new SQLException();
 //        }
+    }
+
+    public void chargeCustomer(double cost, String customerName) throws SQLException, ClassNotFoundException {
+        Connection con = DB_Connection.getConnection();
+        PreparedStatement preparedStatement;
+        String query = "UPDATE customers SET balance=balance - " + cost + " WHERE name='" + customerName + "'";
+
+        preparedStatement = con.prepareStatement(query);
+        preparedStatement.executeUpdate();
     }
 
     public static void appendToFile(String str) {

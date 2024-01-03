@@ -1,2 +1,4 @@
-Count: 0
-Error: java.util.NoSuchElementException: Vehicle does not exist!
+INSERT INTO  unavailable (vId, returndate) VALUES (1,null)
+# The vehicle was successfully added to unavailable.
+1service
+{"vId":"1","repairType":"service"}

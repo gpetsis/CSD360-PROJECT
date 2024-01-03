@@ -127,6 +127,7 @@ public class VehicleServlet extends HttpServlet {
 
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
     void repairVehicle(HttpServletRequest request, HttpServletResponse response) throws FileNotFoundException, IOException {
         PrintStream fileOut = new PrintStream(new File("C:\\CSD\\PENDING\\HY-360\\CSD360-PROJECT\\360PROJECT\\src\\main\\webapp\\js\\logfile.txt"));
         System.setOut(fileOut);
@@ -164,6 +165,8 @@ public class VehicleServlet extends HttpServlet {
 
 =======
 >>>>>>> 6881db9df95a1e100e2f21a49c8b0180885e8211
+=======
+>>>>>>> parent of 9ab0c80 ([Giannis] Update service vehicle)
 =======
 >>>>>>> parent of 9ab0c80 ([Giannis] Update service vehicle)
     void returnVehicle(HttpServletRequest request, HttpServletResponse response) throws FileNotFoundException, IOException {

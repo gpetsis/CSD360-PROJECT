@@ -323,6 +323,7 @@ public class EditVehiclesTable {
                 + "    color VARCHAR(10) not null,"
                 + "    autonomy INTEGER not null,"
 <<<<<<< HEAD
+<<<<<<< HEAD
                 + "    rentcost FLOAT(10) not null,"
                 + "    insurancecost FLOAT(10) not null,"
 <<<<<<< HEAD
@@ -334,6 +335,8 @@ public class EditVehiclesTable {
                 + "    returndate DATE,"
 =======
 >>>>>>> 6881db9df95a1e100e2f21a49c8b0180885e8211
+=======
+>>>>>>> parent of 9ab0c80 ([Giannis] Update service vehicle)
 =======
 >>>>>>> parent of 9ab0c80 ([Giannis] Update service vehicle)
                 + " PRIMARY KEY (vId))";

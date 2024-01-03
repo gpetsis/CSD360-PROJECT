@@ -14,11 +14,14 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
 import java.io.PrintStream;
 >>>>>>> 6881db9df95a1e100e2f21a49c8b0180885e8211
 import java.sql.Connection;
 import java.sql.ResultSet;
+=======
+>>>>>>> parent of 9ab0c80 ([Giannis] Update service vehicle)
 =======
 >>>>>>> parent of 9ab0c80 ([Giannis] Update service vehicle)
 import java.sql.SQLException;
@@ -64,6 +67,7 @@ public class CustomerServlet extends HttpServlet {
     }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
     void rent(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException, FileNotFoundException, ClassNotFoundException, SQLException {
         Connection con = DB_Connection.getConnection();
         Statement stmt = con.createStatement();
@@ -78,6 +82,9 @@ public class CustomerServlet extends HttpServlet {
 =======
     void rent(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException, FileNotFoundException, ClassNotFoundException {
 >>>>>>> parent of 9ab0c80 ([Giannis] Update service vehicle)
+=======
+    void rent(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException, FileNotFoundException, ClassNotFoundException {
+>>>>>>> parent of 9ab0c80 ([Giannis] Update service vehicle)
         String requestString = "";
         BufferedReader in = new BufferedReader(new InputStreamReader(request.getInputStream()));
         String line = in.readLine();
@@ -88,6 +95,7 @@ public class CustomerServlet extends HttpServlet {
             line = in.readLine();
         }
         System.out.println(requestString);
+<<<<<<< HEAD
 <<<<<<< HEAD
         String query = "SELECT COUNT(*) AS count FROM rents WHERE vId=" + request.getHeader("vId");
         stmt = con.createStatement();
@@ -110,6 +118,11 @@ public class CustomerServlet extends HttpServlet {
             temp = true;
         }
         if (status == null && temp == false) {
+=======
+        String query = "SELECT COUNT(*) AS count FROM rents WHERE vId=";
+        status = ert.addRentFromJSON(requestString);
+        if (status == null) {
+>>>>>>> parent of 9ab0c80 ([Giannis] Update service vehicle)
 =======
         String query = "SELECT COUNT(*) AS count FROM rents WHERE vId=";
         status = ert.addRentFromJSON(requestString);

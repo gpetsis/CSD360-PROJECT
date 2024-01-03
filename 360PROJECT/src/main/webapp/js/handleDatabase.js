@@ -144,6 +144,7 @@ function rentVehicle(){
     xhr.open('POST', 'Customer');
     xhr.setRequestHeader("Request-Type", "Rent");
 <<<<<<< HEAD
+<<<<<<< HEAD
     xhr.setRequestHeader("vId", data['vId']);
 <<<<<<< HEAD
     xhr.send(JSON.stringify(data));
@@ -175,6 +176,8 @@ function handleRepairVehicle() {
     xhr.setRequestHeader("Request-Type", "Repair-Vehicle");
 =======
 >>>>>>> 6881db9df95a1e100e2f21a49c8b0180885e8211
+=======
+>>>>>>> parent of 9ab0c80 ([Giannis] Update service vehicle)
 =======
 >>>>>>> parent of 9ab0c80 ([Giannis] Update service vehicle)
     xhr.send(JSON.stringify(data));

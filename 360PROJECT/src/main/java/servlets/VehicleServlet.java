@@ -125,6 +125,20 @@ public class VehicleServlet extends HttpServlet {
             returnVehicle(request, response);
         } else if (requestType.equals("Repair-Vehicle")) {
             repairVehicle(request, response);
+        } else if (requestType.equals("Refresh-Unavailable")) {
+            refreshUnavailable(request, response);
+        }
+    }
+
+    void refreshUnavailable(HttpServletRequest request, HttpServletResponse response) throws FileNotFoundException, IOException {
+        EditVehiclesTable vehiclesTable = new EditVehiclesTable();
+        try {
+            vehiclesTable.refreshUnavailable();
+            response.setStatus(200);
+        } catch (SQLException | ClassNotFoundException ex) {
+            System.out.println("Error: " + ex);
+            response.setStatus(409);
+            Logger.getLogger(VehicleServlet.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
 

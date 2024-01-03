@@ -190,21 +190,32 @@ public class EditVehiclesTable {
     public void updateUnavailable(int vId, String returnDate) throws SQLException, ClassNotFoundException {
         Connection con = DB_Connection.getConnection();
 
-        String query = "UPDATE SET FROM rents WHERE vId=" + vId;
-        query = "UPDATE unavailable SET returndate='" + returnDate + "' WHERE vid=" + vId;
+        String query = "UPDATE unavailable SET returndate='" + returnDate + "' WHERE vid=" + vId;
 
         PreparedStatement preparedStatement = con.prepareStatement(query);
         preparedStatement.executeUpdate();
 
-        String insertQuery = "INSERT INTO "
-                + " unavailable (vId, returndate)"
-                + " VALUES ("
-                + vId + ","
-                + "'" + returnDate + "'"
-                + ")";
-
-        System.out.println(insertQuery);
+        System.out.println(query);
         System.out.println("# The vehicle was successfully updated to unavailable.");
+
+        preparedStatement.close();
+    }
+
+    public void refreshUnavailable() throws SQLException, ClassNotFoundException {
+        Connection con = DB_Connection.getConnection();
+
+        LocalDate current = LocalDate.now();
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+
+        String formattedDate = current.format(formatter);
+
+        String query = "DELETE FROM unavailable WHERE returndate<='" + formattedDate + "'";
+
+        PreparedStatement preparedStatement = con.prepareStatement(query);
+        int rowsAffected = preparedStatement.executeUpdate();
+
+        System.out.println(query);
+        System.out.println("# " + rowsAffected + " vehicles were removed from unavailable.");
 
         preparedStatement.close();
     }

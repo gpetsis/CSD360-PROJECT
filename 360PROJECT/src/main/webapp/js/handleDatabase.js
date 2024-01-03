@@ -229,6 +229,23 @@ function handleRepairVehicle() {
     xhr.send(JSON.stringify(data));   
 }
 
+function handleRefreshUnavailable() {
+    var xhr = new XMLHttpRequest();
+    xhr.onload = function () {
+        if (xhr.readyState === 4 && xhr.status === 200) {
+            const responseData = xhr.responseText;
+            $('#ajaxContent').html("Succesfully refreshed unavailable vehicles.");
+        } else if (xhr.status !== 200) {
+            $('#ajaxContent').html('Request failed. Returned status of ' + xhr.status + "<br>");
+            const responseData = xhr.responseText;
+        }
+    };
+    
+    xhr.open('POST', 'Vehicle');
+    xhr.setRequestHeader("Request-Type", "Refresh-Unavailable");
+    xhr.send();
+}
+
 function replaceVehicles(oldvId, newvId){
     var xhr = new XMLHttpRequest();
     xhr.onload = function () {

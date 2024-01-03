@@ -172,7 +172,7 @@ public class EditVehiclesTable {
 
         System.out.println(formattedDate);
 
-        addToUnavailable(vId, formattedDate);
+        addToUnavailable(vId, formattedDate, 0, null);
     }
 
     public void repairVehicle(int vId) throws SQLException, ClassNotFoundException {
@@ -220,15 +220,17 @@ public class EditVehiclesTable {
         preparedStatement.close();
     }
 
-    public void addToUnavailable(int vId, String returnDate) throws SQLException, ClassNotFoundException {
+    public void addToUnavailable(int vId, String returnDate, float repaircost, String entrydate) throws SQLException, ClassNotFoundException {
         Connection con = DB_Connection.getConnection();
         Statement stmt = con.createStatement();
 
         String insertQuery = "INSERT INTO "
-                + " unavailable (vId, returndate)"
+                + " unavailable (vId, returndate, repaircost, entrydate)"
                 + " VALUES ("
                 + vId + ","
-                + "" + returnDate + ""
+                + "" + returnDate + ","
+                + repaircost
+                + ",'" + entrydate + "'"
                 + ")";
 
         System.out.println(insertQuery);
@@ -403,6 +405,8 @@ public class EditVehiclesTable {
         query = "CREATE TABLE unavailable"
                 + "(vId INTEGER not null,"
                 + "    returndate DATE,"
+                + "    repaircost FLOAT(10),"
+                + "    entrydate DATE,"
                 + "    FOREIGN KEY (vId) REFERENCES vehicles(vId), "
                 + " PRIMARY KEY (vId))";
         stmt.execute(query);

@@ -1,1 +1,0 @@
-SELECT SUM(rents.cost) FROM rents JOIN motorcycles ON rents.vId = motorcycles.licensenumber WHERE rents.date BETWEEN '2024-01-01' AND '2024-01-01'

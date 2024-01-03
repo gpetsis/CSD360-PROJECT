@@ -37,8 +37,8 @@ public class CustomerServlet extends HttpServlet {
     @Override
     protected void doPut(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         String requestType = request.getHeader("Request-Type");
-//        PrintStream fileOut = new PrintStream(new File("C:\\Users\\Nikos Lasithiotakis\\Desktop\\CSD\\5ο Εξάμηνο\\ΗΥ360\\CSD360-PROJECT\\360PROJECT\\src\\main\\webapp\\js\\logfile.txt"));
-//        System.setOut(fileOut);
+        PrintStream fileOut = new PrintStream(new File("C:\\Users\\Nikos Lasithiotakis\\Desktop\\CSD\\5ο Εξάμηνο\\ΗΥ360\\CSD360-PROJECT\\360PROJECT\\src\\main\\webapp\\js\\logfile.txt"));
+        System.setOut(fileOut);
         if (requestType.equals("Replace-Vehicles")) {
             try {
                 replaceVehicles(request, response);
@@ -93,19 +93,20 @@ public class CustomerServlet extends HttpServlet {
     }
 
     void replaceVehicles(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException, SQLException, ClassNotFoundException {
-        PrintStream fileOut = new PrintStream(new File("C:\\CSD\\PENDING\\HY-360\\CSD360-PROJECT\\360PROJECT\\src\\main\\webapp\\js\\logfile.txt"));
-        System.setOut(fileOut);
         Connection con = DB_Connection.getConnection();
         Statement stmt = con.createStatement();
         ResultSet rs = null;
         PreparedStatement preparedStatement;
         String tempOldvId = request.getHeader("oldvId");
         String tempNewvId = request.getHeader("newvId");
+        String entrydate = request.getHeader("entrydate");
+        float repaircost = Float.parseFloat(request.getHeader("repaircost"));
+
         int oldvId = Integer.valueOf(tempOldvId);
         int newvId = Integer.valueOf(tempNewvId);
         System.out.println(oldvId + " " + newvId);
         EditVehiclesTable evt = new EditVehiclesTable();
-        evt.addToUnavailable(oldvId, null);
+        evt.addToUnavailable(oldvId, null, repaircost, entrydate);
         String query = "UPDATE rents SET vId= " + newvId + " WHERE vId=" + oldvId;
         preparedStatement = con.prepareStatement(query);
         preparedStatement.executeUpdate();

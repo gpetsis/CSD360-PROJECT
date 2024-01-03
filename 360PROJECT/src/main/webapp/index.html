@@ -272,6 +272,12 @@
             <div>
                 <label><b>Enter Damaged Vehicle's vId : </b></label>
                 <input type="text" id="reportDamageoldvId" name="oldvId">
+                <br><br>
+                <label><b>Enter Repair Cost : </b></label>
+                <input type="text" id="damageCost" name="repaircost">
+                <br>
+                <label><b>Enter Entry Date : </b></label>
+                <input type="date" id="damageDate" name="entrydate">
             </div>
             
             <h2>Replace Vehicle</h2>
@@ -345,6 +351,12 @@
             <div>
                 <label><b>Enter Vehicle's vId : </b></label>
                 <input type="text" id="reportAccidentvId" name="oldvId">
+                <br><br>
+                <label><b>Enter Repair Cost : </b></label>
+                <input type="text" id="accidentCost" name="repaircost">
+                <br>
+                <label><b>Enter Entry Date : </b></label>
+                <input type="date" id="accidentDate" name="entrydate">
             </div>
            
             <h2>Replace Vehicle</h2>
@@ -411,6 +423,29 @@
                 <input type="button" id="reportAccidentButton" onclick="reportAccident()" value="Report Accident">
             </div>
         </form>
+        
+        <h1>Κατάσταση διαθέσιμων ή ενοικιασμένων οχημάτων ανά κατηγορία</h1>
+        <select name="fistQuestion" id="firstQuestion">
+            <option value="availableVehicles">Available Vehicles</option>
+            <option value="rentedVehicles">Rented Vehicles</option>
+
+            <option value="availableCars">Available Cars</option>
+            <option value="rentedCars">Rented Cars</option>
+
+            <option value="availableScooters">Available Scooters</option>
+            <option value="rentedScooters">Rented Scooters</option>
+
+            <option value="availableBicycles">Available Bicycles</option>
+            <option value="rentedBicycles">Rented Bicycles</option>
+
+            <option value="availableMotorcycles">Available Motorcycles</option>
+            <option value="rentedMotorcycles">Rented Motorcycles</option>
+
+        </select>
+        
+        <br><br>
+        <input type="button" id="questionButton" onclick="firstQuestion()" value="Question">
+        <br><br>
 
     </body>
 </html>

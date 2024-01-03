@@ -228,7 +228,7 @@ public class EditVehiclesTable {
                 + " unavailable (vId, returndate)"
                 + " VALUES ("
                 + vId + ","
-                + "'" + returnDate + "'"
+                + "" + returnDate + ""
                 + ")";
 
         System.out.println(insertQuery);

@@ -93,6 +93,8 @@ public class CustomerServlet extends HttpServlet {
     }
 
     void replaceVehicles(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException, SQLException, ClassNotFoundException {
+        PrintStream fileOut = new PrintStream(new File("C:\\CSD\\PENDING\\HY-360\\CSD360-PROJECT\\360PROJECT\\src\\main\\webapp\\js\\logfile.txt"));
+        System.setOut(fileOut);
         Connection con = DB_Connection.getConnection();
         Statement stmt = con.createStatement();
         ResultSet rs = null;
@@ -164,6 +166,16 @@ public class CustomerServlet extends HttpServlet {
             count = rs.getInt("count");
             System.out.println("Count: " + count);
         }
+
+        query = "SELECT COUNT(*) AS count FROM unavailable WHERE vId=" + request.getHeader("vId");
+        stmt = con.createStatement();
+
+        rs = stmt.executeQuery(query);
+        if (rs.next()) {
+            count += rs.getInt("count");
+            System.out.println("Count: " + count);
+        }
+        stmt.close();
         if (count == 0) {
             status = ert.addRentFromJSON(requestString);
             Rent rent = ert.jsonToRent(requestString);

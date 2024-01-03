@@ -1,0 +1,1 @@
+SELECT AVG(rents.duration) FROM scooters INNER JOIN rents ON rents.vId = scooters.vId

@@ -1,4 +1,5 @@
 <<<<<<< HEAD
+<<<<<<< HEAD
 INSERT INTO  unavailable (vId, returndate) VALUES (1,null)
 # The vehicle was successfully added to unavailable.
 1service
@@ -95,3 +96,7 @@ INSERT INTO  vehicles (vId, brand, model, color, autonomy, rentcost, insuranceco
 INSERT INTO  motorcycles (licensenumber, brand, model, color, autonomy, rentcost, insurancecost) VALUES ('1234','asd','asd','asd','1','3.0','4.0')
 # The vehicle was successfully added to motorcycles.
 >>>>>>> 6881db9df95a1e100e2f21a49c8b0180885e8211
+=======
+Count: 0
+Error: java.util.NoSuchElementException: Vehicle does not exist!
+>>>>>>> parent of 9ab0c80 ([Giannis] Update service vehicle)

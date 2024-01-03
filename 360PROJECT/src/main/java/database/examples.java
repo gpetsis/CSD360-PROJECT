@@ -19,19 +19,19 @@ public class examples {
             + "\"drivinglicense\":\"1273\",\"creditcard\":\"7080901020122334\",\"balance\":\"1500\"}";
 
     static String bike1JSON = "{\"vId\":\"1\",\"brand\":\"bmx\",\"model\":\"model1\","
-            + "\"color\":\"red\",\"autonomy\":\"20\",\"rentcost\":\"20\",\"insurancecost\":\"10\"}";
+            + "\"color\":\"red\",\"autonomy\":\"20\"}";
     static String bike2JSON = "{\"vId\":\"2\",\"brand\":\"bmx\",\"model\":\"model2\","
-            + "\"color\":\"blue\",\"autonomy\":\"30\",\"rentcost\":\"30\",\"insurancecost\":\"15\"}";
+            + "\"color\":\"blue\",\"autonomy\":\"30\"}";
     static String scooter1JSON = "{\"vId\":\"3\",\"brand\":\"patini\",\"model\":\"patini1\","
-            + "\"color\":\"red\",\"autonomy\":\"20\",\"rentcost\":\"30\",\"insurancecost\":\"40\"}";
+            + "\"color\":\"red\",\"autonomy\":\"20\"}";
     static String scooter2JSON = "{\"vId\":\"4\",\"brand\":\"patini2\",\"model\":\"patini2\","
-            + "\"color\":\"green\",\"autonomy\":\"30\",\"rentcost\":\"12\",\"insurancecost\":\"46\"}";
+            + "\"color\":\"green\",\"autonomy\":\"30\"}";
     static String car1JSON = "{\"licensenumber\":\"5\",\"brand\":\"lamborghini\",\"model\":\"aventador\","
-            + "\"color\":\"white\",\"autonomy\":\"800\",\"type\":\"SUV\",\"rentcost\":\"36\",\"insurancecost\":\"12\"}";
+            + "\"color\":\"white\",\"autonomy\":\"800\",\"type\":\"SUV\"}";
     static String car2JSON = "{\"licensenumber\":\"6\",\"brand\":\"buggati\",\"model\":\"veyron\","
-            + "\"color\":\"black\",\"autonomy\":\"700\",\"type\":\"hatchback\",\"rentcost\":\"15\",\"insurancecost\":\"10\"}";
+            + "\"color\":\"black\",\"autonomy\":\"700\",\"type\":\"hatchback\"}";
     static String motorbike1JSON = "{\"licensenumber\":\"7\",\"brand\":\"KTM\",\"model\":\"motor1\","
-            + "\"color\":\"cyan\",\"autonomy\":\"350\",\"rentcost\":\"20\",\"insurancecost\":\"11\"}";
+            + "\"color\":\"cyan\",\"autonomy\":\"350\"}";
     static String motorbike2JSON = "{\"licensenumber\":\"8\",\"brand\":\"Kawasaki\",\"model\":\"motor2\","
-            + "\"color\":\"yellow\",\"autonomy\":\"300\",\"rentcost\":\"25\",\"insurancecost\":\"12\"}";
+            + "\"color\":\"yellow\",\"autonomy\":\"300\"}";
 }

@@ -9,7 +9,6 @@ public class Vehicle {
 
     String brand, model, color;
     int autonomy, vId;
-    double rentcost, insurancecost;
 
     public String getBrand() {
         return brand;
@@ -49,21 +48,5 @@ public class Vehicle {
 
     public void setVehicleId(int newvId) {
         this.vId = newvId;
-    }
-
-    public void setRentCost(double rentCost) {
-        this.rentcost = rentCost;
-    }
-
-    public double getRentCost() {
-        return rentcost;
-    }
-
-    public void setInsuranceCost(double insuranceCost) {
-        this.insurancecost = insuranceCost;
-    }
-
-    public double getInsuranceCost() {
-        return insurancecost;
     }
 }

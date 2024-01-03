@@ -28,16 +28,10 @@ function addNewVehicle(){
         formData.delete('vehicleType');
         formData.delete('vId');
     }
-    else if(type == "scooter" || type == "bicycle"){
+    else {
         formData.delete('type');
         formData.delete('licensenumber');
         formData.delete('vehicleType');
-    }
-    else{
-        formData.delete('vehicleType');
-        formData.delete('vId');
-        formData.delete('type');
-
     }
     formData.forEach((value, key) => (data[key] = value));
     console.log(JSON.stringify(data));
@@ -53,15 +47,10 @@ function handleExtraFields(vehicleType){
         $('#addDivType').show();
         $('#addDivvId').hide();
     }
-    else if(vehicleType == "scooter" || vehicleType == "bicycle"){
+    else{
         $('#addDivLicenseNumber').hide();
         $('#addDivType').hide();
         $('#addDivvId').show();
-    }
-    else{
-        $('#addDivType').hide();
-        $('#addDivvId').hide();
-        $('#addDivLicenseNumber').show();
     }
 }
   
@@ -141,8 +130,6 @@ function rentVehicle(){
             const responseData = xhr.responseText;
             $('#ajaxContent').html("Successfully rented a vehicle.");
             console.log(responseData);
-        }else if(xhr.status == 700){
-            $('#ajaxContent').html("Vehicle is already rented.");
         } else if (xhr.status !== 200) {
             $('#ajaxContent').html('Request failed. Returned status of ' + xhr.status + "<br>");
            const responseData = xhr.responseText;
@@ -156,6 +143,7 @@ function rentVehicle(){
     console.log(JSON.stringify(data));
     xhr.open('POST', 'Customer');
     xhr.setRequestHeader("Request-Type", "Rent");
+<<<<<<< HEAD
     xhr.setRequestHeader("vId", data['vId']);
 <<<<<<< HEAD
     xhr.send(JSON.stringify(data));
@@ -187,6 +175,8 @@ function handleRepairVehicle() {
     xhr.setRequestHeader("Request-Type", "Repair-Vehicle");
 =======
 >>>>>>> 6881db9df95a1e100e2f21a49c8b0180885e8211
+=======
+>>>>>>> parent of 9ab0c80 ([Giannis] Update service vehicle)
     xhr.send(JSON.stringify(data));
 }
 

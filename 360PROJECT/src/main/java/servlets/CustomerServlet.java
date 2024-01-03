@@ -9,9 +9,14 @@ import database.DB_Connection;
 import database.EditCustomersTable;
 import database.EditRentsTable;
 import java.io.BufferedReader;
+import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStreamReader;
+<<<<<<< HEAD
+=======
+import java.io.PrintStream;
+>>>>>>> 6881db9df95a1e100e2f21a49c8b0180885e8211
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -64,6 +69,11 @@ public class CustomerServlet extends HttpServlet {
         ResultSet rs = null;
         int count = 0;
         boolean temp = false;
+<<<<<<< HEAD
+=======
+        PrintStream fileOut = new PrintStream(new File("C:\\Users\\Nikos Lasithiotakis\\Desktop\\CSD\\5ο Εξάμηνο\\ΗΥ360\\CSD360-PROJECT\\360PROJECT\\src\\main\\webapp\\js\\logfile.txt"));
+        System.setOut(fileOut);
+>>>>>>> 6881db9df95a1e100e2f21a49c8b0180885e8211
         String requestString = "";
         BufferedReader in = new BufferedReader(new InputStreamReader(request.getInputStream()));
         String line = in.readLine();
@@ -84,10 +94,13 @@ public class CustomerServlet extends HttpServlet {
         }
         if (count == 0) {
             status = ert.addRentFromJSON(requestString);
+<<<<<<< HEAD
             Rent rent = ert.jsonToRent(requestString);
             double cost = rent.getCost();
             EditCustomersTable customersTable = new EditCustomersTable();
             customersTable.chargeCustomer(cost, rent.getName());
+=======
+>>>>>>> 6881db9df95a1e100e2f21a49c8b0180885e8211
         } else {
             temp = true;
         }

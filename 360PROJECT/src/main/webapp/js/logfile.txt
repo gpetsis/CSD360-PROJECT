@@ -1,4 +1,97 @@
+<<<<<<< HEAD
 INSERT INTO  unavailable (vId, returndate) VALUES (1,null)
 # The vehicle was successfully added to unavailable.
 1service
 {"vId":"1","repairType":"service"}
+=======
+INSERT INTO  vehicles (vId, brand, model, color, autonomy, rentcost, insurancecost) VALUES ('1','bmx','model1','red','20','20.0','10.0')
+# The vehicle was successfully added to vehicles.
+INSERT INTO  bicycles (vId, brand, model, color, autonomy, rentcost, insurancecost) VALUES ('1','bmx','model1','red','20','20.0','10.0')
+# The vehicle was successfully added to bicycles.
+INSERT INTO  vehicles (vId, brand, model, color, autonomy, rentcost, insurancecost) VALUES ('2','bmx','model2','blue','30','30.0','15.0')
+# The vehicle was successfully added to vehicles.
+INSERT INTO  bicycles (vId, brand, model, color, autonomy, rentcost, insurancecost) VALUES ('2','bmx','model2','blue','30','30.0','15.0')
+# The vehicle was successfully added to bicycles.
+{"vId":"3","brand":"patini","model":"patini1","color":"red","autonomy":"20","rentcost":"30","insurancecost":"40"}
+patini
+INSERT INTO  vehicles (vId, brand, model, color, autonomy, rentcost, insurancecost) VALUES ('3','patini','patini1','red','20','30.0','40.0')
+# The vehicle was successfully added to vehicles.
+INSERT INTO  scooters (vId, brand, model, color, autonomy, rentcost, insurancecost) VALUES ('3','patini','patini1','red','20','30.0','40.0')
+# The vehicle was successfully added to scooters.
+{"vId":"4","brand":"patini2","model":"patini2","color":"green","autonomy":"30","rentcost":"12","insurancecost":"46"}
+patini2
+INSERT INTO  vehicles (vId, brand, model, color, autonomy, rentcost, insurancecost) VALUES ('4','patini2','patini2','green','30','12.0','46.0')
+# The vehicle was successfully added to vehicles.
+INSERT INTO  scooters (vId, brand, model, color, autonomy, rentcost, insurancecost) VALUES ('4','patini2','patini2','green','30','12.0','46.0')
+# The vehicle was successfully added to scooters.
+INSERT INTO  vehicles (vId, brand, model, color, autonomy, rentcost, insurancecost) VALUES ('5','lamborghini','aventador','white','800','36.0','12.0')
+# The vehicle was successfully added to vehicles.
+INSERT INTO  cars (licensenumber, brand, model, color, autonomy, type, rentcost, insurancecost) VALUES ('5','lamborghini','aventador','white','800','SUV','36.0','12.0')
+# The vehicle was successfully added to cars.
+INSERT INTO  vehicles (vId, brand, model, color, autonomy, rentcost, insurancecost) VALUES ('6','buggati','veyron','black','700','15.0','10.0')
+# The vehicle was successfully added to vehicles.
+INSERT INTO  cars (licensenumber, brand, model, color, autonomy, type, rentcost, insurancecost) VALUES ('6','buggati','veyron','black','700','hatchback','15.0','10.0')
+# The vehicle was successfully added to cars.
+INSERT INTO  vehicles (vId, brand, model, color, autonomy, rentcost, insurancecost) VALUES ('7','KTM','motor1','cyan','350','20.0','11.0')
+# The vehicle was successfully added to vehicles.
+INSERT INTO  motorcycles (licensenumber, brand, model, color, autonomy, rentcost, insurancecost) VALUES ('7','KTM','motor1','cyan','350','20.0','11.0')
+# The vehicle was successfully added to motorcycles.
+INSERT INTO  vehicles (vId, brand, model, color, autonomy, rentcost, insurancecost) VALUES ('8','Kawasaki','motor2','yellow','300','25.0','12.0')
+# The vehicle was successfully added to vehicles.
+INSERT INTO  motorcycles (licensenumber, brand, model, color, autonomy, rentcost, insurancecost) VALUES ('8','Kawasaki','motor2','yellow','300','25.0','12.0')
+# The vehicle was successfully added to motorcycles.
+{"name":"Giannis Petsis","birthdate":"2003-10-09","address":"Kountouriotou 2","drivinglicense":"4512","creditcard":"1111222233334444","balance":"1000"}
+Correct JSON
+INSERT INTO  customers (name,birthdate,address,drivinglicense,creditcard,balance)  VALUES ('Giannis Petsis','2003-10-09','Kountouriotou 2','4512','1111222233334444','1000.0')
+# The customer was successfully added in the database.
+{"name":"Nikos Lasithiotakis","birthdate":"2003-07-20","address":"Stavrou Mpalali 3","drivinglicense":"9831","creditcard":"5555666677778888","balance":"1200"}
+Correct JSON
+INSERT INTO  customers (name,birthdate,address,drivinglicense,creditcard,balance)  VALUES ('Nikos Lasithiotakis','2003-07-20','Stavrou Mpalali 3','9831','5555666677778888','1200.0')
+# The customer was successfully added in the database.
+{"name":"Kostas Papadopoulou","birthdate":"2001-12-12","address":"Idomeneous 32","drivinglicense":"4512","creditcard":"1234567890121111","balance":"1300"}
+Correct JSON
+INSERT INTO  customers (name,birthdate,address,drivinglicense,creditcard,balance)  VALUES ('Kostas Papadopoulou','2001-12-12','Idomeneous 32','4512','1234567890121111','1300.0')
+# The customer was successfully added in the database.
+{"name":"Xara kwstantinidi","birthdate":"1999-02-01","address":"Knossou 227","drivinglicense":"5218","creditcard":"1020304050606247","balance":"1400"}
+Correct JSON
+INSERT INTO  customers (name,birthdate,address,drivinglicense,creditcard,balance)  VALUES ('Xara kwstantinidi','1999-02-01','Knossou 227','5218','1020304050606247','1400.0')
+# The customer was successfully added in the database.
+{"name":"Evelina Georgiou","birthdate":"1992-04-18","address":"Daidalou 98","drivinglicense":"1273","creditcard":"7080901020122334","balance":"1500"}
+Correct JSON
+INSERT INTO  customers (name,birthdate,address,drivinglicense,creditcard,balance)  VALUES ('Evelina Georgiou','1992-04-18','Daidalou 98','1273','7080901020122334','1500.0')
+# The customer was successfully added in the database.
+{"name":"Nikos","birthdate":"2024-01-02","address":"Spitimou","drivinglicense":"123","creditcard":"13","balance":"13"}
+Correct JSON
+INSERT INTO  customers (name,birthdate,address,drivinglicense,creditcard,balance)  VALUES ('Nikos','2024-01-02','Spitimou','123','13','13.0')
+# The customer was successfully added in the database.
+motorcycle
+{"brand":"KATEM","model":"asd","color":"pinkpinkpink","autonomy":"12","vId":"","rentCost":"21","insuranceCost":"1"}
+motorcycle
+{"licensenumber":"123","brand":"asd","model":"asd","color":"asd","autonomy":"3","rentCost":"45","insuranceCost":"5"}
+INSERT INTO  vehicles (vId, brand, model, color, autonomy, rentcost, insurancecost) VALUES ('123','asd','asd','asd','3','0.0','0.0')
+# The vehicle was successfully added to vehicles.
+INSERT INTO  motorcycles (licensenumber, brand, model, color, autonomy, rentcost, insurancecost) VALUES ('123','asd','asd','asd','3','0.0','0.0')
+# The vehicle was successfully added to motorcycles.
+scooter
+{"brand":"asd","model":"asd","color":"asd","autonomy":"3","vId":"12","rentCost":"45","insuranceCost":"5"}
+{"brand":"asd","model":"asd","color":"asd","autonomy":"3","vId":"12","rentCost":"45","insuranceCost":"5"}
+asd
+INSERT INTO  vehicles (vId, brand, model, color, autonomy, rentcost, insurancecost) VALUES ('12','asd','asd','asd','3','0.0','0.0')
+# The vehicle was successfully added to vehicles.
+INSERT INTO  scooters (vId, brand, model, color, autonomy, rentcost, insurancecost) VALUES ('12','asd','asd','asd','3','0.0','0.0')
+# The vehicle was successfully added to scooters.
+motorcycle
+{"licensenumber":"12","brand":"asd","model":"asd","color":"asd","autonomy":"1","rentcost":"3","insurancecost":"4"}
+INSERT INTO  vehicles (vId, brand, model, color, autonomy, rentcost, insurancecost) VALUES ('12','asd','asd','asd','1','3.0','4.0')
+Error: com.mysql.jdbc.exceptions.jdbc4.MySQLIntegrityConstraintViolationException: Duplicate entry '12' for key 'PRIMARY'
+car
+{"licensenumber":"12","brand":"asd","model":"asd","color":"asd","autonomy":"1","type":"asd","rentcost":"3","insurancecost":"4"}
+INSERT INTO  vehicles (vId, brand, model, color, autonomy, rentcost, insurancecost) VALUES ('12','asd','asd','asd','1','3.0','4.0')
+Error: com.mysql.jdbc.exceptions.jdbc4.MySQLIntegrityConstraintViolationException: Duplicate entry '12' for key 'PRIMARY'
+motorcycle
+{"licensenumber":"1234","brand":"asd","model":"asd","color":"asd","autonomy":"1","rentcost":"3","insurancecost":"4"}
+INSERT INTO  vehicles (vId, brand, model, color, autonomy, rentcost, insurancecost) VALUES ('1234','asd','asd','asd','1','3.0','4.0')
+# The vehicle was successfully added to vehicles.
+INSERT INTO  motorcycles (licensenumber, brand, model, color, autonomy, rentcost, insurancecost) VALUES ('1234','asd','asd','asd','1','3.0','4.0')
+# The vehicle was successfully added to motorcycles.
+>>>>>>> 6881db9df95a1e100e2f21a49c8b0180885e8211

@@ -10,11 +10,9 @@ import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
 import database.EditVehiclesTable;
 import java.io.BufferedReader;
-import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStreamReader;
-import java.io.PrintStream;
 import java.io.PrintWriter;
 import java.sql.SQLException;
 import java.util.ArrayList;
@@ -126,6 +124,7 @@ public class VehicleServlet extends HttpServlet {
         }
     }
 
+<<<<<<< HEAD
     void repairVehicle(HttpServletRequest request, HttpServletResponse response) throws FileNotFoundException, IOException {
         PrintStream fileOut = new PrintStream(new File("C:\\CSD\\PENDING\\HY-360\\CSD360-PROJECT\\360PROJECT\\src\\main\\webapp\\js\\logfile.txt"));
         System.setOut(fileOut);
@@ -161,6 +160,8 @@ public class VehicleServlet extends HttpServlet {
         System.out.println(requestString);
     }
 
+=======
+>>>>>>> 6881db9df95a1e100e2f21a49c8b0180885e8211
     void returnVehicle(HttpServletRequest request, HttpServletResponse response) throws FileNotFoundException, IOException {
         String vId = "";
         BufferedReader in = new BufferedReader(new InputStreamReader(request.getInputStream()));

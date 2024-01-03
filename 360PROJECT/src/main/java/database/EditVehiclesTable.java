@@ -350,12 +350,15 @@ public class EditVehiclesTable {
                 + "    autonomy INTEGER not null,"
                 + "    rentcost FLOAT(10) not null,"
                 + "    insurancecost FLOAT(10) not null,"
+<<<<<<< HEAD
                 + " PRIMARY KEY (vId))";
         stmt.execute(query);
 
         query = "CREATE TABLE unavailable"
                 + "(vId INTEGER not null references vehicles(vId),"
                 + "    returndate DATE,"
+=======
+>>>>>>> 6881db9df95a1e100e2f21a49c8b0180885e8211
                 + " PRIMARY KEY (vId))";
         stmt.execute(query);
         stmt.close();

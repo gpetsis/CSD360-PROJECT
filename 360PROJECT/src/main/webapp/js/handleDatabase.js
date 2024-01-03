@@ -1,8 +1,34 @@
 function initDatabase() {
     var xhr = new XMLHttpRequest();
     xhr.onload = function () {};
+    xhr.open('POST', 'Init');
+    xhr.setRequestHeader("Content-type", "application/json");
+    xhr.send();
+}
+
+function askAnything() {
+    var query = document.getElementById("askAnythingInput").value;
+    
+    var xhr = new XMLHttpRequest();
+    xhr.onload = function () {
+        if (xhr.readyState === 4 && xhr.status === 200) {
+            const responseData = xhr.responseText;
+            $('#ajaxContent').html(responseData);
+//            var vehiclesArray = responseData;
+//            for(var i = 0 ; i < vehiclesArray.length ; i++){
+//                console.log(vehiclesArray[i]);
+//            }
+        } else if (xhr.status !== 200) {
+            $('#ajaxContent').html('Request failed. Returned status of ' + xhr.status + "<br>");
+            const responseData = xhr.responseText;
+        }
+    };
+    
+    console.log(query);
+    
     xhr.open('GET', 'Init');
     xhr.setRequestHeader("Content-type", "application/json");
+    xhr.setRequestHeader("Query", query);
     xhr.send();
 }
 

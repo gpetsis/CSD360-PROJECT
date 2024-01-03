@@ -10,8 +10,10 @@ import java.io.FileNotFoundException;
 import java.io.IOException;
 
 import java.sql.Connection;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.ArrayList;
 
 public class InitDatabase {
 
@@ -52,6 +54,25 @@ public class InitDatabase {
         customersTable.addCustomerFromJSON(examples.Customer3JSON);
         customersTable.addCustomerFromJSON(examples.Customer4JSON);
         customersTable.addCustomerFromJSON(examples.Customer5JSON);
+    }
 
+    public String ask(String query) throws SQLException, ClassNotFoundException {
+        Connection con = DB_Connection.getConnection();
+        Statement stmt = con.createStatement();
+        ArrayList<String> scooters = new ArrayList<String>();
+        ResultSet rs = null;
+        try {
+            rs = stmt.executeQuery(query);
+
+            String response = "";
+            while (rs.next()) {
+                response += DB_Connection.getResultsToJSON(rs);
+            }
+            return response;
+        } catch (Exception e) {
+            System.err.println("Got an exception! ");
+            System.err.println(e.getMessage());
+            return null;
+        }
     }
 }

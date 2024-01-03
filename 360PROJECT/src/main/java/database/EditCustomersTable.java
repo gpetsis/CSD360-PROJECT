@@ -96,20 +96,13 @@ public class EditCustomersTable {
                 + "'" + c.getCreditCard() + "',"
                 + "'" + c.getBalance() + "'"
                 + ")";
-        //stmt.execute(table);
+
         System.out.println(insertQuery);
         stmt.executeUpdate(insertQuery);
         System.out.println("# The customer was successfully added in the database.");
-        /* Get the member id from the database and set it to the member */
+
         stmt.close();
         return null;
-
-//        } catch (SQLException ex) {
-//            appendToFile("Error: " + ex);
-//            System.out.println("Error: " + ex);
-//            Logger.getLogger(EditCustomersTable.class.getName()).log(Level.SEVERE, null, ex);
-//            throw new SQLException();
-//        }
     }
 
     public void chargeCustomer(double cost, String customerName) throws SQLException, ClassNotFoundException {

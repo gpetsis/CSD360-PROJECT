@@ -404,6 +404,90 @@ function replaceVehiclesAfterAccident(oldvId, newvId, entrydate, repaircost){
     xhr.send();
 }
 
+function searchFromToVehicles() {
+    var fromDate = document.getElementById("searchFromDate").value;
+    var toDate = document.getElementById("searchToDate").value;
+
+    var xhr = new XMLHttpRequest();
+    xhr.onload = function () {
+        if (xhr.readyState === 4 && xhr.status === 200) {
+            const responseData = xhr.responseText;
+            $('#ajaxContent').html(responseData);
+        } else if (xhr.status !== 200) {
+            $('#ajaxContent').html('Request failed. Returned status of ' + xhr.status + "<br>");
+            const responseData = xhr.responseText;
+        }
+    };
+    
+    var query = "SELECT rents.vId FROM rents WHERE rents.date BETWEEN '" + fromDate + "' AND '" + toDate + "'"
+    
+    console.log(query);
+    
+    xhr.open('GET', 'Init');
+    xhr.setRequestHeader("Content-type", "application/json");
+    xhr.setRequestHeader("Query", query);
+    xhr.send();
+}
+
+function searchMinMaxAvgVehicles() {
+    var category = document.getElementById("searchMixMaxAvgInput").value;
+    var option = document.getElementById("searchMixMaxAvgOption").value;
+
+    var query;
+    
+    var xhr = new XMLHttpRequest();
+    xhr.onload = function () {
+        if (xhr.readyState === 4 && xhr.status === 200) {
+            const responseData = xhr.responseText;
+            $('#ajaxContent').html(responseData);
+        } else if (xhr.status !== 200) {
+            $('#ajaxContent').html('Request failed. Returned status of ' + xhr.status + "<br>");
+            const responseData = xhr.responseText;
+        }
+    };
+    
+    if(option == "min") {
+        if(category == "cars" || category == "motorcycles") {
+            query = "SELECT MIN(rents.duration) AS minimum FROM rents JOIN " + category + " ON rents.vId = " + category + ".licensenumber";
+        } else {
+            query = "SELECT MIN(rents.duration) AS minimun FROM rents JOIN " + category + " ON rents.vId = " + category + ".vId";
+        }
+    } else if(option == "max") {
+        if(category == "cars" || category == "motorcycles") {
+            query = "SELECT MAX(rents.duration) AS maximum FROM rents JOIN " + category + " ON rents.vId = " + category + ".licensenumber";
+        } else {
+            query = "SELECT MAX(rents.duration) AS maximum FROM rents JOIN " + category + " ON rents.vId = " + category + ".vId";
+        }
+    } else {
+        if(category == "cars" || category == "motorcycles") {
+            query = "SELECT AVG(rents.duration) AS average FROM rents JOIN " + category + " ON rents.vId = " + category + ".licensenumber";
+        } else {
+            query = "SELECT AVG(rents.duration) AS average FROM rents JOIN " + category + " ON rents.vId = " + category + ".vId";
+        }
+    }
+    
+    xhr.open('GET', 'Init');
+    xhr.setRequestHeader("Content-type", "application/json");
+    xhr.setRequestHeader("Query", query);
+    xhr.send();
+}
+
+function searchIncome() {
+    var fromDate = document.getElementById("searchIncomeDateFrom").value;
+    var toDate = document.getElementById("searchIncomeDateTo").value;
+    
+    var category = document.getElementById("searchIncomeInput").value;
+    
+    console.log(fromDate, toDate, category);
+    
+    var query;
+    if(category == "cars" || category == "motorcycles") {
+        query = "SELECT SUM(rents.cost) FROM rents JOIN " + category + " ON rents.vId = " + category + ".licensenumber WHERE rents.date BETWEEN '" + fromDate + "' AND '" + toDate + "'";
+    } else {
+        query = "SELECT SUM(rents.cost) FROM rents JOIN " + category + " ON rents.vId = " + category + ".vId WHERE rents.date BETWEEN '" + fromDate + "' AND '" + toDate + "'";
+    }
+}    
+
 function firstQuestion(){
     var output;
     var query;

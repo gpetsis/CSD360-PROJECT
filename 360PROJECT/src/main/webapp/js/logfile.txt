@@ -1,3 +1,0 @@
-2 5436
-INSERT INTO  unavailable (vId, returndate, repaircost, entrydate) VALUES (2,null,45.0,'2024-01-10')
-# The vehicle was successfully added to unavailable.

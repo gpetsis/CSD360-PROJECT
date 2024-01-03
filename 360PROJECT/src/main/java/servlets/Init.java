@@ -9,7 +9,7 @@ import database.InitDatabase;
 import java.io.File;
 import java.io.IOException;
 import java.io.PrintStream;
-import java.io.PrintWriter;
+import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.servlet.ServletException;
@@ -25,32 +25,6 @@ import javax.servlet.http.HttpServletResponse;
 @WebServlet(name = "Init", urlPatterns = {"/Init"})
 public class Init extends HttpServlet {
 
-    /**
-     * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
-     * methods.
-     *
-     * @param request servlet request
-     * @param response servlet response
-     * @throws ServletException if a servlet-specific error occurs
-     * @throws IOException if an I/O error occurs
-     */
-    protected void processRequest(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
-        response.setContentType("text/html;charset=UTF-8");
-        try (PrintWriter out = response.getWriter()) {
-            /* TODO output your page here. You may use following sample code. */
-            out.println("<!DOCTYPE html>");
-            out.println("<html>");
-            out.println("<head>");
-            out.println("<title>Servlet Init</title>");
-            out.println("</head>");
-            out.println("<body>");
-            out.println("<h1>Servlet Init at " + request.getContextPath() + "</h1>");
-            out.println("</body>");
-            out.println("</html>");
-        }
-    }
-
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
     /**
      * Handles the HTTP <code>GET</code> method.
@@ -64,8 +38,6 @@ public class Init extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         InitDatabase init = new InitDatabase();
-        PrintStream fileOut = new PrintStream(new File("C:\\Users\\Nikos Lasithiotakis\\Desktop\\CSD\\5ο Εξάμηνο\\ΗΥ360\\CSD360-PROJECT\\360PROJECT\\src\\main\\webapp\\js\\logfile.txt"));
-        System.setOut(fileOut);
         try {
             init.initDatabase();
             init.initTables();
@@ -85,9 +57,24 @@ public class Init extends HttpServlet {
      * @throws IOException if an I/O error occurs
      */
     @Override
-    protected void doGet(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
-        processRequest(request, response);
+    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        PrintStream fileOut = new PrintStream(new File("C:\\CSD\\PENDING\\HY-360\\CSD360-PROJECT\\360PROJECT\\src\\main\\webapp\\js\\logfile.txt"));
+        System.setOut(fileOut);
+
+        String query = request.getHeader("Query");
+
+        System.out.println(query);
+
+        InitDatabase database = new InitDatabase();
+        try {
+            String responseQuery = database.ask(query);
+            response.getWriter().write(responseQuery);
+            response.setStatus(200);
+        } catch (SQLException | ClassNotFoundException ex) {
+            Logger.getLogger(Init.class.getName()).log(Level.SEVERE, null, ex);
+            System.out.println("Error: " + ex);
+            response.setStatus(409);
+        }
     }
 
     /**

@@ -6,6 +6,32 @@ function initDatabase() {
     xhr.send();
 }
 
+function askAnything() {
+    var query = document.getElementById("askAnythingInput").value;
+    
+    var xhr = new XMLHttpRequest();
+    xhr.onload = function () {
+        if (xhr.readyState === 4 && xhr.status === 200) {
+            const responseData = xhr.responseText;
+            $('#ajaxContent').html(responseData);
+//            var vehiclesArray = responseData;
+//            for(var i = 0 ; i < vehiclesArray.length ; i++){
+//                console.log(vehiclesArray[i]);
+//            }
+        } else if (xhr.status !== 200) {
+            $('#ajaxContent').html('Request failed. Returned status of ' + xhr.status + "<br>");
+            const responseData = xhr.responseText;
+        }
+    };
+    
+    console.log(query);
+    
+    xhr.open('GET', 'Init');
+    xhr.setRequestHeader("Content-type", "application/json");
+    xhr.setRequestHeader("Query", query);
+    xhr.send();
+}
+
 function addNewVehicle(){
     let myForm = document.getElementById('addNewVehicleForm');
     let formData = new FormData(myForm);
@@ -227,6 +253,23 @@ function handleRepairVehicle() {
     xhr.open('POST', 'Vehicle');
     xhr.setRequestHeader("Request-Type", "Repair-Vehicle");
     xhr.send(JSON.stringify(data));   
+}
+
+function handleRefreshUnavailable() {
+    var xhr = new XMLHttpRequest();
+    xhr.onload = function () {
+        if (xhr.readyState === 4 && xhr.status === 200) {
+            const responseData = xhr.responseText;
+            $('#ajaxContent').html("Succesfully refreshed unavailable vehicles.");
+        } else if (xhr.status !== 200) {
+            $('#ajaxContent').html('Request failed. Returned status of ' + xhr.status + "<br>");
+            const responseData = xhr.responseText;
+        }
+    };
+    
+    xhr.open('POST', 'Vehicle');
+    xhr.setRequestHeader("Request-Type", "Refresh-Unavailable");
+    xhr.send();
 }
 
 function replaceVehicles(oldvId, newvId){

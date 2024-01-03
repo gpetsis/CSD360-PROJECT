@@ -8,6 +8,7 @@ package servlets;
 import com.google.gson.Gson;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
+import com.google.gson.JsonSyntaxException;
 import database.EditVehiclesTable;
 import java.io.BufferedReader;
 import java.io.File;
@@ -124,6 +125,20 @@ public class VehicleServlet extends HttpServlet {
             returnVehicle(request, response);
         } else if (requestType.equals("Repair-Vehicle")) {
             repairVehicle(request, response);
+        } else if (requestType.equals("Refresh-Unavailable")) {
+            refreshUnavailable(request, response);
+        }
+    }
+
+    void refreshUnavailable(HttpServletRequest request, HttpServletResponse response) throws FileNotFoundException, IOException {
+        EditVehiclesTable vehiclesTable = new EditVehiclesTable();
+        try {
+            vehiclesTable.refreshUnavailable();
+            response.setStatus(200);
+        } catch (SQLException | ClassNotFoundException ex) {
+            System.out.println("Error: " + ex);
+            response.setStatus(409);
+            Logger.getLogger(VehicleServlet.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
 
@@ -154,8 +169,9 @@ public class VehicleServlet extends HttpServlet {
             }
 
             System.out.println(vId + repairType);
-        } catch (Exception e) {
-            e.printStackTrace();
+        } catch (JsonSyntaxException | ClassNotFoundException | SQLException ex) {
+            System.out.println("Error : " + ex);
+            response.setStatus(409);
         }
 
         System.out.println(requestString);

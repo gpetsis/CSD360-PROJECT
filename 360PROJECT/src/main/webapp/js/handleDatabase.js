@@ -28,10 +28,16 @@ function addNewVehicle(){
         formData.delete('vehicleType');
         formData.delete('vId');
     }
-    else {
+    else if(type == "scooter" || type == "bicycle"){
         formData.delete('type');
         formData.delete('licensenumber');
         formData.delete('vehicleType');
+    }
+    else{
+        formData.delete('vehicleType');
+        formData.delete('vId');
+        formData.delete('type');
+
     }
     formData.forEach((value, key) => (data[key] = value));
     console.log(JSON.stringify(data));
@@ -47,10 +53,15 @@ function handleExtraFields(vehicleType){
         $('#addDivType').show();
         $('#addDivvId').hide();
     }
-    else{
+    else if(vehicleType == "scooter" || vehicleType == "bicycle"){
         $('#addDivLicenseNumber').hide();
         $('#addDivType').hide();
         $('#addDivvId').show();
+    }
+    else{
+        $('#addDivType').hide();
+        $('#addDivvId').hide();
+        $('#addDivLicenseNumber').show();
     }
 }
   
@@ -130,6 +141,8 @@ function rentVehicle(){
             const responseData = xhr.responseText;
             $('#ajaxContent').html("Successfully rented a vehicle.");
             console.log(responseData);
+        }else if(xhr.status == 700){
+            $('#ajaxContent').html("Vehicle is already rented.");
         } else if (xhr.status !== 200) {
             $('#ajaxContent').html('Request failed. Returned status of ' + xhr.status + "<br>");
            const responseData = xhr.responseText;
@@ -143,5 +156,10 @@ function rentVehicle(){
     console.log(JSON.stringify(data));
     xhr.open('POST', 'Customer');
     xhr.setRequestHeader("Request-Type", "Rent");
+    xhr.setRequestHeader("vId", data['vId']);
     xhr.send(JSON.stringify(data));
+}
+
+function reportDamage(){
+    
 }

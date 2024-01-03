@@ -59,6 +59,8 @@
                 <label>Bicycle</label><br>
                 <input type="radio" id="addNewVehicleScooter" name="vehicleType" value="scooter" onchange="handleExtraFields('scooter')">
                 <label>Scooter</label><br>
+                <input type="radio" id="addNewVehicleMotorcycle" name="vehicleType" value="motorcycle" onchange="handleExtraFields('motorcycle')">
+                <label>Motorcycle</label><br>
             </div>
             
             <div id="addDivLicenseNumber" style="display: none"> 
@@ -98,12 +100,12 @@
             
             <div> 
                 <label><b>Rent Cost</b></label>
-                <input type="text" id="addNewVehicleRentCost" name="rentCost">
+                <input type="text" id="addNewVehicleRentCost" name="rentcost">
             </div>
             
             <div> 
                 <label><b>Insurance Cost</b></label>
-                <input type="text" id="addNewVehicleInsuranceCost" name="insuranceCost">
+                <input type="text" id="addNewVehicleInsuranceCost" name="insurancecost">
             </div>
             
             <div>
@@ -121,10 +123,12 @@
           
         <h1>Search Vehicles</h1>
         <select name="search" id="search">
-            <option value="vehicle">Vehicle</option>
+            <option value="vehicle">Vehicles</option>
             <option value="car">Car</option>
             <option value="scooter">Scooter</option>
             <option value="bicycle">Bicycle</option>
+            <option value="motorcycle">Motorcycle</option>
+
         </select>
         <br><br>
         <input type="button" id="searchButton" onclick="searchVehicles()" value="Search">
@@ -166,6 +170,18 @@
             <div>
                 <br>
                 <input type="button" id="rentVehicleButton" onclick="rentVehicle()" value="Rent">
+            </div>
+        </form>
+        
+        <form>
+            <h1>Report Damage</h1>
+            <div>
+                <label><b>vId</b></label>
+                <input type="text" id="reportDamagevId" name="vId">
+            </div>
+            <div>
+                <br>
+                <input type="button" id="reportDamageButton" onclick="reportDamage()" value="Report">
             </div>
         </form>
 

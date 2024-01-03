@@ -6,9 +6,7 @@
 package database;
 
 import com.google.gson.Gson;
-import java.io.File;
 import java.io.FileNotFoundException;
-import java.io.PrintStream;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -22,6 +20,7 @@ import java.util.NoSuchElementException;
 import mainClasses.Bicycle;
 import mainClasses.Car;
 import mainClasses.Rent;
+import mainClasses.Motorcycle;
 import mainClasses.Scooter;
 import mainClasses.Vehicle;
 
@@ -38,6 +37,12 @@ public class EditVehiclesTable {
 
         Car vehicle = jsonToCar(json);
         return addNewVehicle(vehicle, "cars");
+    }
+
+    public SQLException addMotorcycleFromJSON(String json) throws ClassNotFoundException, FileNotFoundException {
+
+        Motorcycle vehicle = jsonToMotorcycle(json);
+        return addNewVehicle(vehicle, "motorcycles");
     }
 
     public SQLException addScooterFromJSON(String json) throws ClassNotFoundException, FileNotFoundException {
@@ -68,6 +73,13 @@ public class EditVehiclesTable {
         return vehicle;
     }
 
+    public Motorcycle jsonToMotorcycle(String json) {
+        Gson gson = new Gson();
+
+        Motorcycle vehicle = gson.fromJson(json, Motorcycle.class);
+        return vehicle;
+    }
+
     public Scooter jsonToScooter(String json) {
         Gson gson = new Gson();
         Scooter vehicle = gson.fromJson(json, Scooter.class);
@@ -89,8 +101,6 @@ public class EditVehiclesTable {
     }
 
     public void returnVehicle(String vId) throws SQLException, FileNotFoundException, ClassNotFoundException {
-        PrintStream fileOut = new PrintStream(new File("C:\\CSD\\PENDING\\HY-360\\CSD360-PROJECT\\360PROJECT\\src\\main\\webapp\\js\\logfile.txt"));
-        System.setOut(fileOut);
         Connection con = DB_Connection.getConnection();
         Statement stmt;
         Vehicle vehicle;
@@ -207,6 +217,26 @@ public class EditVehiclesTable {
         return null;
     }
 
+    public ArrayList<String> getMotorcycles() throws SQLException, ClassNotFoundException {
+        Connection con = DB_Connection.getConnection();
+        Statement stmt = con.createStatement();
+        ArrayList<String> motorcycles = new ArrayList<String>();
+        ResultSet rs = null;
+        try {
+            rs = stmt.executeQuery("SELECT * FROM motorcycles");
+
+            while (rs.next()) {
+                String json = DB_Connection.getResultsToJSON(rs);
+                motorcycles.add(json);
+            }
+            return motorcycles;
+        } catch (Exception e) {
+            System.err.println("Got an exception! ");
+            System.err.println(e.getMessage());
+        }
+        return null;
+    }
+
     public ArrayList<String> getScooters() throws SQLException, ClassNotFoundException {
         Connection con = DB_Connection.getConnection();
         Statement stmt = con.createStatement();
@@ -294,6 +324,8 @@ public class EditVehiclesTable {
                 + "    model VARCHAR(15) not null,"
                 + "    color VARCHAR(10) not null,"
                 + "    autonomy INTEGER not null,"
+                + "    rentcost FLOAT(10) not null,"
+                + "    insurancecost FLOAT(10) not null,"
                 + " PRIMARY KEY (vId))";
         stmt.execute(query);
 
@@ -304,6 +336,19 @@ public class EditVehiclesTable {
                 + "    color VARCHAR(10) not null,"
                 + "    autonomy INTEGER not null,"
                 + "    type VARCHAR(15) not null,"
+                + "    rentcost FLOAT(10) not null,"
+                + "    insurancecost FLOAT(10) not null,"
+                + " PRIMARY KEY (licensenumber))";
+        stmt.execute(query);
+
+        query = "CREATE TABLE motorcycles "
+                + "(licensenumber INTEGER not null references vehicles(vId),"
+                + "    brand VARCHAR(15) not null,"
+                + "    model VARCHAR(15) not null,"
+                + "    color VARCHAR(10) not null,"
+                + "    autonomy INTEGER not null,"
+                + "    rentcost FLOAT(10) not null,"
+                + "    insurancecost FLOAT(10) not null,"
                 + " PRIMARY KEY (licensenumber))";
         stmt.execute(query);
 
@@ -313,6 +358,8 @@ public class EditVehiclesTable {
                 + "    model VARCHAR(15) not null,"
                 + "    color VARCHAR(10) not null,"
                 + "    autonomy INTEGER not null,"
+                + "    rentcost FLOAT(10) not null,"
+                + "    insurancecost FLOAT(10) not null,"
                 + " PRIMARY KEY (vId))";
         stmt.execute(query);
 
@@ -322,6 +369,8 @@ public class EditVehiclesTable {
                 + "    model VARCHAR(15) not null,"
                 + "    color VARCHAR(10) not null,"
                 + "    autonomy INTEGER not null,"
+                + "    rentcost FLOAT(10) not null,"
+                + "    insurancecost FLOAT(10) not null,"
                 + " PRIMARY KEY (vId))";
         stmt.execute(query);
         stmt.close();
@@ -339,13 +388,15 @@ public class EditVehiclesTable {
             Statement stmt = con.createStatement();
 
             insertQuery = "INSERT INTO "
-                    + " vehicles (vId, brand, model, color, autonomy)"
+                    + " vehicles (vId, brand, model, color, autonomy, rentcost, insurancecost)"
                     + " VALUES ("
                     + "'" + vehicle.getVehicleId() + "',"
                     + "'" + vehicle.getBrand() + "',"
                     + "'" + vehicle.getModel() + "',"
                     + "'" + vehicle.getColor() + "',"
-                    + "'" + vehicle.getAutonomy() + "'"
+                    + "'" + vehicle.getAutonomy() + "',"
+                    + "'" + vehicle.getRentCost() + "',"
+                    + "'" + vehicle.getInsuranceCost() + "'"
                     + ")";
 
             System.out.println(insertQuery);
@@ -355,24 +406,41 @@ public class EditVehiclesTable {
             if (type.equals("cars")) {
                 Car car = (Car) vehicle;
                 insertQuery = "INSERT INTO "
-                        + " " + type + " (licensenumber, brand, model, color, autonomy, type)"
+                        + " " + type + " (licensenumber, brand, model, color, autonomy, type, rentcost, insurancecost)"
                         + " VALUES ("
                         + "'" + car.getVehicleId() + "',"
                         + "'" + car.getBrand() + "',"
                         + "'" + car.getModel() + "',"
                         + "'" + car.getColor() + "',"
                         + "'" + car.getAutonomy() + "',"
-                        + "'" + car.getType() + "'"
+                        + "'" + car.getType() + "',"
+                        + "'" + vehicle.getRentCost() + "',"
+                        + "'" + vehicle.getInsuranceCost() + "'"
                         + ")";
-            } else {
+            } else if (type.equals("bicycles") || type.equals("scooters")) {
                 insertQuery = "INSERT INTO "
-                        + " " + type + " (vId, brand, model, color, autonomy)"
+                        + " " + type + " (vId, brand, model, color, autonomy, rentcost, insurancecost)"
                         + " VALUES ("
                         + "'" + vehicle.getVehicleId() + "',"
                         + "'" + vehicle.getBrand() + "',"
                         + "'" + vehicle.getModel() + "',"
                         + "'" + vehicle.getColor() + "',"
-                        + "'" + vehicle.getAutonomy() + "'"
+                        + "'" + vehicle.getAutonomy() + "',"
+                        + "'" + vehicle.getRentCost() + "',"
+                        + "'" + vehicle.getInsuranceCost() + "'"
+                        + ")";
+            } else {
+                Motorcycle motorcycle = (Motorcycle) vehicle;
+                insertQuery = "INSERT INTO "
+                        + " " + type + " (licensenumber, brand, model, color, autonomy, rentcost, insurancecost)"
+                        + " VALUES ("
+                        + "'" + motorcycle.getVehicleId() + "',"
+                        + "'" + motorcycle.getBrand() + "',"
+                        + "'" + motorcycle.getModel() + "',"
+                        + "'" + motorcycle.getColor() + "',"
+                        + "'" + motorcycle.getAutonomy() + "',"
+                        + "'" + motorcycle.getRentCost() + "',"
+                        + "'" + motorcycle.getInsuranceCost() + "'"
                         + ")";
             }
             System.out.println(insertQuery);

@@ -6,11 +6,15 @@
 package servlets;
 
 import com.google.gson.Gson;
+import com.google.gson.JsonObject;
+import com.google.gson.JsonParser;
 import database.EditVehiclesTable;
 import java.io.BufferedReader;
+import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.io.PrintStream;
 import java.io.PrintWriter;
 import java.sql.SQLException;
 import java.util.ArrayList;
@@ -25,6 +29,7 @@ import javax.servlet.http.HttpServletResponse;
 
 @WebServlet(name = "VehicleServlet", urlPatterns = {"/VehicleServlet"})
 public class VehicleServlet extends HttpServlet {
+
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
      * methods.
@@ -65,8 +70,8 @@ public class VehicleServlet extends HttpServlet {
             throws ServletException, IOException {
         String requestType = request.getHeader("Request-Type");
 //        PrintStream fileOut = new PrintStream(new File("C:\\Users\\Nikos Lasithiotakis\\Desktop\\CSD\\5ο Εξάμηνο\\ΗΥ360\\CSD360-PROJECT\\360PROJECT\\src\\main\\webapp\\js\\logfile.txt"));
-        PrintStream fileOut = new PrintStream(new File("C:\\CSD\\PENDING\\HY-360\\CSD360-PROJECT\\360PROJECT\\src\\main\\webapp\\js\\logfile.txt"));
-        System.setOut(fileOut);
+//        PrintStream fileOut = new PrintStream(new File("C:\\CSD\\PENDING\\HY-360\\CSD360-PROJECT\\360PROJECT\\src\\main\\webapp\\js\\logfile.txt"));
+//        System.setOut(fileOut);
         if (requestType.equals("Search")) {
             try {
                 searchVehicles(request, response);
@@ -92,11 +97,10 @@ public class VehicleServlet extends HttpServlet {
             tempArrayList = evt.getScooters();
         } else if (vehicleType.equals("bicycle")) {
             tempArrayList = evt.getBicycles();
+        } else if (vehicleType.equals("motorcycle")) {
+            tempArrayList = evt.getMotorcycles();
         }
         responseString = tempArrayList.toString();
-        PrintStream fileOut = new PrintStream(new File("C:\\CSD\\PENDING\\HY-360\\CSD360-PROJECT\\360PROJECT\\src\\main\\webapp\\js\\logfile.txt"));
-        System.setOut(fileOut);
-
         response.getWriter().write(responseString);
         System.out.println(responseString);
         return;
@@ -112,22 +116,17 @@ public class VehicleServlet extends HttpServlet {
      * @throws java.io.FileNotFoundException
      */
     @Override
-    protected void doPost(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException, FileNotFoundException {
+    protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException, FileNotFoundException {
         String requestType = request.getHeader("Request-Type");
         if (requestType.equals("Add-Vehicle")) {
             addNewVehicle(request, response);
         } else if (requestType.equals("Return-Vehicle")) {
-//            PrintStream fileOut = new PrintStream(new File("C:\\CSD\\PENDING\\HY-360\\CSD360-PROJECT\\360PROJECT\\src\\main\\webapp\\js\\logfile.txt"));
-//            System.setOut(fileOut);
-
             returnVehicle(request, response);
+        } else if (requestType.equals("Repair-Vehicle")) {
+            repairVehicle(request, response);
         }
     }
 
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
     void repairVehicle(HttpServletRequest request, HttpServletResponse response) throws FileNotFoundException, IOException {
         PrintStream fileOut = new PrintStream(new File("C:\\CSD\\PENDING\\HY-360\\CSD360-PROJECT\\360PROJECT\\src\\main\\webapp\\js\\logfile.txt"));
         System.setOut(fileOut);
@@ -159,20 +158,10 @@ public class VehicleServlet extends HttpServlet {
             e.printStackTrace();
         }
 
-
         System.out.println(requestString);
     }
 
-=======
->>>>>>> 6881db9df95a1e100e2f21a49c8b0180885e8211
-=======
->>>>>>> parent of 9ab0c80 ([Giannis] Update service vehicle)
-=======
->>>>>>> parent of 9ab0c80 ([Giannis] Update service vehicle)
     void returnVehicle(HttpServletRequest request, HttpServletResponse response) throws FileNotFoundException, IOException {
-        PrintStream fileOut = new PrintStream(new File("C:\\CSD\\PENDING\\HY-360\\CSD360-PROJECT\\360PROJECT\\src\\main\\webapp\\js\\logfile.txt"));
-        System.setOut(fileOut);
-
         String vId = "";
         BufferedReader in = new BufferedReader(new InputStreamReader(request.getInputStream()));
         String line = in.readLine();
@@ -201,8 +190,6 @@ public class VehicleServlet extends HttpServlet {
 
     void addNewVehicle(HttpServletRequest request, HttpServletResponse response) throws FileNotFoundException, IOException {
         //        PrintStream fileOut = new PrintStream(new File("C:\\Users\\Nikos Lasithiotakis\\Desktop\\CSD\\5ο Εξάμηνο\\ΗΥ360\\CSD360-PROJECT\\360PROJECT\\src\\main\\webapp\\js\\logfile.txt"));
-        PrintStream fileOut = new PrintStream(new File("C:\\CSD\\PENDING\\HY-360\\CSD360-PROJECT\\360PROJECT\\src\\main\\webapp\\js\\logfile.txt"));
-        System.setOut(fileOut);
         System.out.println(request.getHeader("Vehicle-Type"));
         SQLException status = null;
         EditVehiclesTable evt = new EditVehiclesTable();
@@ -232,9 +219,16 @@ public class VehicleServlet extends HttpServlet {
                 System.out.println(ex);
                 Logger.getLogger(VehicleServlet.class.getName()).log(Level.SEVERE, null, ex);
             }
-        } else {
+        } else if (request.getHeader("Vehicle-Type").equals("scooter")) {
             try {
                 status = evt.addScooterFromJSON(requestString);
+            } catch (ClassNotFoundException ex) {
+                System.out.println(ex);
+                Logger.getLogger(VehicleServlet.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        } else {
+            try {
+                status = evt.addMotorcycleFromJSON(requestString);
             } catch (ClassNotFoundException ex) {
                 System.out.println(ex);
                 Logger.getLogger(VehicleServlet.class.getName()).log(Level.SEVERE, null, ex);

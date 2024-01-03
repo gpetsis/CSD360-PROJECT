@@ -14,6 +14,7 @@ import java.sql.SQLException;
 import java.sql.Statement;
 
 public class InitDatabase {
+
     public void initDatabase() throws SQLException, ClassNotFoundException {
         Connection conn = getInitialConnection();
         Statement stmt = conn.createStatement();
@@ -42,6 +43,8 @@ public class InitDatabase {
         vehiclesTable.addScooterFromJSON(examples.scooter2JSON);
         vehiclesTable.addCarFromJSON(examples.car1JSON);
         vehiclesTable.addCarFromJSON(examples.car2JSON);
+        vehiclesTable.addMotorcycleFromJSON(examples.motorbike1JSON);
+        vehiclesTable.addMotorcycleFromJSON(examples.motorbike2JSON);
 
         EditCustomersTable customersTable = new EditCustomersTable();
         customersTable.addCustomerFromJSON(examples.Customer1JSON);

@@ -235,10 +235,21 @@ function reportDamage(){
     xhr.send(JSON.stringify(data));
 }
 
+function handleServiceDetails(requestType){
+    if(requestType == 'service'){
+        $('#serviceDetails').show();
+    }
+    else{
+        $('#serviceDetails').hide();
+    }
+}
+
 function handleRepairVehicle() {
     let myForm = document.getElementById('repairVehicle');
     let formData = new FormData(myForm);
     
+    var repaircost = formData.get('repaircost');
+    var entrydate = formData.get('entrydate');
     var xhr = new XMLHttpRequest();
     xhr.onload = function () {
         if (xhr.readyState === 4 && xhr.status === 200) {
@@ -251,10 +262,14 @@ function handleRepairVehicle() {
     };
     
     const data = {};
+    formData.delete('repaircost');
+    formData.delete('entrydate');
     formData.forEach((value, key) => (data[key] = value));
     
     xhr.open('POST', 'Vehicle');
     xhr.setRequestHeader("Request-Type", "Repair-Vehicle");
+    xhr.setRequestHeader("entrydate", entrydate);
+    xhr.setRequestHeader("repaircost", repaircost);
     xhr.send(JSON.stringify(data));   
 }
 

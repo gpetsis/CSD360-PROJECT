@@ -254,10 +254,19 @@
             <div>
                 <label><b>Repair Type</b></label>
                 <br>
-                <input type="radio" id="repairVehicleRepair" name="repairType" value="repair">
+                <input type="radio" id="repairVehicleRepair" name="repairType" value="repair" onclick="handleServiceDetails('repair')">
                 <label>Repair</label><br>
-                <input type="radio" id="repairVehicleService" name="repairType" value="service">
+                <input type="radio" id="repairVehicleService" name="repairType" value="service" onclick="handleServiceDetails('service')">
                 <label>Service</label><br>
+            </div>
+            
+            <br>
+            <div id="serviceDetails" style="display:none">
+                <label><b>Enter Repair Cost : </b></label>
+                <input type="text" id="serviceCost" name="repaircost">
+                <br>
+                <label><b>Enter Entry Date : </b></label>
+                <input type="date" id="serviceDate" name="entrydate">
             </div>
             
             <div>

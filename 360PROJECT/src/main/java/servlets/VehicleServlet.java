@@ -143,7 +143,7 @@ public class VehicleServlet extends HttpServlet {
     }
 
     void repairVehicle(HttpServletRequest request, HttpServletResponse response) throws FileNotFoundException, IOException {
-        PrintStream fileOut = new PrintStream(new File("C:\\CSD\\PENDING\\HY-360\\CSD360-PROJECT\\360PROJECT\\src\\main\\webapp\\js\\logfile.txt"));
+        PrintStream fileOut = new PrintStream(new File("C:\\Users\\Nikos Lasithiotakis\\Desktop\\CSD\\5ο Εξάμηνο\\ΗΥ360\\CSD360-PROJECT\\360PROJECT\\src\\main\\webapp\\js\\logfile.txt"));
         System.setOut(fileOut);
 
         String requestString = "";
@@ -163,7 +163,9 @@ public class VehicleServlet extends HttpServlet {
 
             EditVehiclesTable vehiclesTable = new EditVehiclesTable();
             if (repairType.equals("service")) {
-                vehiclesTable.serviceVehicle(vId);
+                String entrydate = request.getHeader("entrydate");
+                float repaircost = Float.parseFloat(request.getHeader("repaircost"));
+                vehiclesTable.serviceVehicle(vId, entrydate, repaircost);
             } else if (repairType.equals("repair")) {
                 vehiclesTable.repairVehicle(vId);
             }

@@ -16,6 +16,7 @@ import java.io.PrintStream;
 import java.io.PrintWriter;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.NoSuchElementException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.servlet.ServletException;
@@ -23,7 +24,6 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.ws.rs.NotFoundException;
 
 @WebServlet(name = "VehicleServlet", urlPatterns = {"/VehicleServlet"})
 public class VehicleServlet extends HttpServlet {
@@ -111,6 +111,7 @@ public class VehicleServlet extends HttpServlet {
      * @param response servlet response
      * @throws ServletException if a servlet-specific error occurs
      * @throws IOException if an I/O error occurs
+     * @throws java.io.FileNotFoundException
      */
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
@@ -144,9 +145,9 @@ public class VehicleServlet extends HttpServlet {
             EditVehiclesTable vehiclesTable = new EditVehiclesTable();
             vehiclesTable.returnVehicle(vId);
             response.setStatus(200);
-        } catch (FileNotFoundException | ClassNotFoundException | SQLException | NotFoundException ex) {
+        } catch (FileNotFoundException | ClassNotFoundException | SQLException | NoSuchElementException ex) {
             System.out.println("Error: " + ex);
-            if (ex instanceof NotFoundException) {
+            if (ex instanceof NoSuchElementException) {
                 response.setStatus(404);
             } else {
                 response.setStatus(409);

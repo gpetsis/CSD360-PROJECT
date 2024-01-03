@@ -18,7 +18,7 @@ import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.time.temporal.ChronoUnit;
 import java.util.ArrayList;
-import javax.ws.rs.NotFoundException;
+import java.util.NoSuchElementException;
 import mainClasses.Bicycle;
 import mainClasses.Car;
 import mainClasses.Rent;
@@ -112,7 +112,7 @@ public class EditVehiclesTable {
 
             System.out.println("Count: " + count);
             if (!vehicleExists) {
-                throw new NotFoundException("Vehicle does not exist!");
+                throw new NoSuchElementException("Vehicle does not exist!");
             }
 
             query = "SELECT * FROM rents WHERE vId=" + vId;

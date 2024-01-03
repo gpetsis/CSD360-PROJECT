@@ -30,4 +30,8 @@ public class examples {
             + "\"color\":\"white\",\"autonomy\":\"800\",\"type\":\"SUV\"}";
     static String car2JSON = "{\"licensenumber\":\"6\",\"brand\":\"buggati\",\"model\":\"veyron\","
             + "\"color\":\"black\",\"autonomy\":\"700\",\"type\":\"hatchback\"}";
+    static String motorbike1JSON = "{\"licensenumber\":\"7\",\"brand\":\"KTM\",\"model\":\"motor1\","
+            + "\"color\":\"cyan\",\"autonomy\":\"350\"}";
+    static String motorbike2JSON = "{\"licensenumber\":\"8\",\"brand\":\"Kawasaki\",\"model\":\"motor2\","
+            + "\"color\":\"yellow\",\"autonomy\":\"300\"}";
 }

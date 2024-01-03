@@ -6,6 +6,8 @@
 package servlets;
 
 import com.google.gson.Gson;
+import com.google.gson.JsonObject;
+import com.google.gson.JsonParser;
 import database.EditVehiclesTable;
 import java.io.BufferedReader;
 import java.io.File;
@@ -27,6 +29,7 @@ import javax.servlet.http.HttpServletResponse;
 
 @WebServlet(name = "VehicleServlet", urlPatterns = {"/VehicleServlet"})
 public class VehicleServlet extends HttpServlet {
+
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
      * methods.
@@ -113,17 +116,49 @@ public class VehicleServlet extends HttpServlet {
      * @throws java.io.FileNotFoundException
      */
     @Override
-    protected void doPost(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException, FileNotFoundException {
+    protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException, FileNotFoundException {
         String requestType = request.getHeader("Request-Type");
         if (requestType.equals("Add-Vehicle")) {
             addNewVehicle(request, response);
         } else if (requestType.equals("Return-Vehicle")) {
-//            PrintStream fileOut = new PrintStream(new File("C:\\CSD\\PENDING\\HY-360\\CSD360-PROJECT\\360PROJECT\\src\\main\\webapp\\js\\logfile.txt"));
-//            System.setOut(fileOut);
-
             returnVehicle(request, response);
+        } else if (requestType.equals("Repair-Vehicle")) {
+            repairVehicle(request, response);
         }
+    }
+
+    void repairVehicle(HttpServletRequest request, HttpServletResponse response) throws FileNotFoundException, IOException {
+        PrintStream fileOut = new PrintStream(new File("C:\\CSD\\PENDING\\HY-360\\CSD360-PROJECT\\360PROJECT\\src\\main\\webapp\\js\\logfile.txt"));
+        System.setOut(fileOut);
+
+        String requestString = "";
+        BufferedReader in = new BufferedReader(new InputStreamReader(request.getInputStream()));
+        String line = in.readLine();
+        while (line != null) {
+            requestString += line;
+            line = in.readLine();
+        }
+
+        try {
+            JsonParser jsonParser = new JsonParser();
+            JsonObject jsonObject = jsonParser.parse(requestString).getAsJsonObject();
+
+            int vId = jsonObject.get("vId").getAsInt();
+            String repairType = jsonObject.get("repairType").getAsString();
+
+            EditVehiclesTable vehiclesTable = new EditVehiclesTable();
+            if (repairType.equals("service")) {
+                vehiclesTable.serviceVehicle(vId);
+            } else if (repairType.equals("repair")) {
+                vehiclesTable.repairVehicle(vId);
+            }
+
+            System.out.println(vId + repairType);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        System.out.println(requestString);
     }
 
     void returnVehicle(HttpServletRequest request, HttpServletResponse response) throws FileNotFoundException, IOException {

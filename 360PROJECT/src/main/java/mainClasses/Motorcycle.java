@@ -6,6 +6,7 @@
 package mainClasses;
 
 public class Motorcycle extends Vehicle {
+
     int licensenumber;
 
     public void setVehicleId(int licensenumber) {

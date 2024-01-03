@@ -173,6 +173,31 @@
             </div>
         </form>
         
+        <form id="repairVehicle">
+            <h1>Repair or Service a Vehicle</h1>
+            <h3>Enter the vId of the vehicle to repair or service it.</h3>
+            <div>
+                <label><b>vId</b></label>
+                <input type="text" id="repairVehiclevId" name="vId">
+            </div>
+
+            <div>
+                <label><b>Repair Type</b></label>
+                <br>
+                <input type="radio" id="repairVehicleRepair" name="repairType" value="repair">
+                <label>Repair</label><br>
+                <input type="radio" id="repairVehicleService" name="repairType" value="service">
+                <label>Service</label><br>
+            </div>
+            
+            <div>
+                <br>
+                <input type="button" id="repairVehicleButton" onclick="handleRepairVehicle()" value="Repair">
+            </div>
+        </form>
+        
+        <form>
+          
         <form id='reportDamage'>
             <h1>Report Damage</h1>
             <div>

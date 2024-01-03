@@ -14,6 +14,7 @@ import java.sql.SQLException;
 import java.sql.Statement;
 
 public class InitDatabase {
+
     public void initDatabase() throws SQLException, ClassNotFoundException {
         Connection conn = getInitialConnection();
         Statement stmt = conn.createStatement();

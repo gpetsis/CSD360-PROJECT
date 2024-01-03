@@ -149,11 +149,8 @@ public class EditVehiclesTable {
                 if (daysDifference < 0) {
                     int penalty = (int) (-24 * daysDifference); // daysDifference is < 0
                     String customerName = rent.getName();
-                    query = "UPDATE customers SET balance=balance - " + penalty + " WHERE name='" + customerName + "'";
-
-                    preparedStatement = con.prepareStatement(query);
-                    preparedStatement.executeUpdate();
-
+                    EditCustomersTable customersTable = new EditCustomersTable();
+                    customersTable.chargeCustomer(penalty, customerName);
                 }
                 query = "DELETE FROM rents WHERE vId=" + vId;
 
@@ -164,18 +161,36 @@ public class EditVehiclesTable {
             }
 
         }
-//        } catch (Exception e) {
-//            System.out.println("Got an exception! ");
-//            System.out.println(e.getMessage());
-//        }
     }
 
-//    public void updateVehicle(String username, String personalpage) throws SQLException, ClassNotFoundException {
-//        Connection con = DB_Connection.getConnection();
-//        Statement stmt = con.createStatement();
-//        String update = "UPDATE petowners SET personalpage='" + personalpage + "' WHERE username = '" + username + "'";
-//        stmt.executeUpdate(update);
-//    }
+    public void serviceVehicle(int vId) throws SQLException, ClassNotFoundException {
+        String returnDate = null;
+
+        addToUnavailable(vId, returnDate);
+    }
+
+    public void addToUnavailable(int vId, String returnDate) throws SQLException, ClassNotFoundException {
+        Connection con = DB_Connection.getConnection();
+        Statement stmt = con.createStatement();
+
+        String insertQuery = "INSERT INTO "
+                + " unavailable (vId, returndate)"
+                + " VALUES ("
+                + vId + ","
+                + returnDate
+                + ")";
+
+        System.out.println(insertQuery);
+        stmt.executeUpdate(insertQuery);
+        System.out.println("# The vehicle was successfully added to unavailable.");
+
+        stmt.close();
+
+    }
+
+    public void repairVehicle(int vId) {
+
+    }
 
     public ArrayList<String> getVehicles() throws SQLException, ClassNotFoundException {
         Connection con = DB_Connection.getConnection();
@@ -277,42 +292,6 @@ public class EditVehiclesTable {
         return null;
     }
 
-//    public PetOwner databaseToPetOwners(String username, String password) throws SQLException, ClassNotFoundException {
-//        Connection con = DB_Connection.getConnection();
-//        Statement stmt = con.createStatement();
-//
-//        ResultSet rs;
-//        try {
-//            rs = stmt.executeQuery("SELECT * FROM petowners WHERE username = '" + username + "' AND password='" + password + "'");
-//            rs.next();
-//            String json = DB_Connection.getResultsToJSON(rs);
-//            Gson gson = new Gson();
-//            PetOwner user = gson.fromJson(json, PetOwner.class);
-//            return user;
-//        } catch (Exception e) {
-//            System.err.println("Got an exception! ");
-//            System.err.println(e.getMessage());
-//        }
-//        return null;
-//    }
-
-//    public String databasePetOwnerToJSON(String username, String password) throws SQLException, ClassNotFoundException {
-//        Connection con = DB_Connection.getConnection();
-//        Statement stmt = con.createStatement();
-//
-//        ResultSet rs;
-//        try {
-//            rs = stmt.executeQuery("SELECT * FROM petowners WHERE username = '" + username + "' AND password='" + password + "'");
-//            rs.next();
-//            String json = DB_Connection.getResultsToJSON(rs);
-//            return json;
-//        } catch (Exception e) {
-//            System.err.println("Got an exception! ");
-//            System.err.println(e.getMessage());
-//        }
-//        return null;
-//    }
-
     public void createVehiclesTable() throws SQLException, ClassNotFoundException {
 
         Connection con = DB_Connection.getConnection();
@@ -379,7 +358,6 @@ public class EditVehiclesTable {
                 + "    returndate DATE,"
                 + " PRIMARY KEY (vId))";
         stmt.execute(query);
-
         stmt.close();
     }
 
@@ -453,7 +431,6 @@ public class EditVehiclesTable {
             System.out.println(insertQuery);
             stmt.executeUpdate(insertQuery);
             System.out.println("# The vehicle was successfully added to " + type + ".");
-
 
             stmt.close();
             return null;

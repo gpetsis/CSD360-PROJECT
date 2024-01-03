@@ -206,6 +206,29 @@ function reportDamage(){
     xhr.send(JSON.stringify(data));
 }
 
+function handleRepairVehicle() {
+    let myForm = document.getElementById('repairVehicle');
+    let formData = new FormData(myForm);
+    
+    var xhr = new XMLHttpRequest();
+    xhr.onload = function () {
+        if (xhr.readyState === 4 && xhr.status === 200) {
+            const responseData = xhr.responseText;
+            $('#ajaxContent').html("Added vehicle to repair.");
+        } else if (xhr.status !== 200) {
+            $('#ajaxContent').html('Request failed. Returned status of ' + xhr.status + "<br>");
+            const responseData = xhr.responseText;
+        }
+    };
+    
+    const data = {};
+    formData.forEach((value, key) => (data[key] = value));
+    
+    xhr.open('POST', 'Vehicle');
+    xhr.setRequestHeader("Request-Type", "Repair-Vehicle");
+    xhr.send(JSON.stringify(data));   
+}
+
 function replaceVehicles(oldvId, newvId){
     var xhr = new XMLHttpRequest();
     xhr.onload = function () {

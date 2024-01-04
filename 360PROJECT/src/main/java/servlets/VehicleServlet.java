@@ -122,7 +122,9 @@ public class VehicleServlet extends HttpServlet {
 
             EditVehiclesTable vehiclesTable = new EditVehiclesTable();
             if (repairType.equals("service")) {
-                vehiclesTable.serviceVehicle(vId);
+                String entrydate = request.getHeader("entrydate");
+                float repaircost = Float.parseFloat(request.getHeader("repaircost"));
+                vehiclesTable.serviceVehicle(vId, entrydate, repaircost);
             } else if (repairType.equals("repair")) {
                 vehiclesTable.repairVehicle(vId);
             }

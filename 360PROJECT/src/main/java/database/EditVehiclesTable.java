@@ -147,7 +147,7 @@ public class EditVehiclesTable {
         }
     }
 
-    public void serviceVehicle(int vId) throws SQLException, ClassNotFoundException {
+    public void serviceVehicle(int vId, String entrydate, float repaircost) throws SQLException, ClassNotFoundException {
         LocalDate current = LocalDate.now();
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
         LocalDate plusDays = current.plusDays(1);
@@ -156,7 +156,7 @@ public class EditVehiclesTable {
 
         System.out.println(formattedDate);
 
-        addToUnavailable(vId, formattedDate, 0, null);
+        addToUnavailable(vId, formattedDate, repaircost, entrydate);
     }
 
     public void repairVehicle(int vId) throws SQLException, ClassNotFoundException {
@@ -212,7 +212,7 @@ public class EditVehiclesTable {
                 + " unavailable (vId, returndate, repaircost, entrydate)"
                 + " VALUES ("
                 + vId + ","
-                + "" + returnDate + ","
+                + "'" + returnDate + "',"
                 + repaircost
                 + ",'" + entrydate + "'"
                 + ")";

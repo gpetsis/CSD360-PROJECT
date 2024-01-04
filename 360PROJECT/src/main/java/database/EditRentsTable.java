@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package database;
 
 import com.google.gson.Gson;
@@ -16,10 +11,6 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import mainClasses.Rent;
 
-/**
- *
- * @author Nikos Lasithiotakis
- */
 public class EditRentsTable {
 
     public SQLException addRentFromJSON(String json) throws ClassNotFoundException, FileNotFoundException {
@@ -105,12 +96,9 @@ public class EditRentsTable {
             return null;
 
         } catch (SQLException ex) {
-//            PrintStream fileOut = new PrintStream(new File("C:\\CSD\\PENDING\\HY-360\\CSD360-PROJECT\\360PROJECT\\src\\main\\webapp\\js\\logfile.txt"));
-//            System.setOut(fileOut);
             System.out.println("Error: " + ex);
             Logger.getLogger(EditCustomersTable.class.getName()).log(Level.SEVERE, null, ex);
             return ex;
         }
     }
-
 }

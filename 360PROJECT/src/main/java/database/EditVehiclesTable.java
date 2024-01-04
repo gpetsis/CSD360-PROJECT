@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package database;
 
 import com.google.gson.Gson;
@@ -38,8 +33,6 @@ public class EditVehiclesTable {
     }
 
     public SQLException addScooterFromJSON(String json) throws ClassNotFoundException, FileNotFoundException {
-//        PrintStream fileOut = new PrintStream(new File("C:\\CSD\\PENDING\\HY-360\\CSD360-PROJECT\\360PROJECT\\src\\main\\webapp\\js\\logfile.txt"));
-//        System.setOut(fileOut);
         System.out.println(json);
         Scooter vehicle = jsonToScooter(json);
         System.out.println(vehicle.getBrand());
@@ -99,7 +92,6 @@ public class EditVehiclesTable {
         ResultSet rs = null;
         boolean vehicleExists;
 
-//        try {
         String query = "SELECT COUNT(*) AS count FROM rents WHERE vId=" + vId;
         PreparedStatement preparedStatement = con.prepareStatement(query);
 
@@ -405,11 +397,6 @@ public class EditVehiclesTable {
         stmt.close();
     }
 
-    /**
-     * Establish a database connection and add in the database.
-     *
-     * @throws ClassNotFoundException
-     */
     public SQLException addNewVehicle(Vehicle vehicle, String type) throws ClassNotFoundException, FileNotFoundException {
         try {
             Connection con = DB_Connection.getConnection();
@@ -479,8 +466,6 @@ public class EditVehiclesTable {
             stmt.close();
             return null;
         } catch (SQLException ex) {
-//            PrintStream fileOut = new PrintStream(new File("C:\\CSD\\PENDING\\HY-360\\CSD360-PROJECT\\360PROJECT\\src\\main\\webapp\\js\\logfile.txt"));
-//            System.setOut(fileOut);
             System.out.println("Error: " + ex);
             return ex;
         }

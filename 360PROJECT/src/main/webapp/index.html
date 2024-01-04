@@ -1,0 +1,475 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Start Page</title>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+        <script src="js/handleDatabase.js" type="text/javascript"></script>
+    </head>
+    <body>
+        <h1>Initialize Database</h1>
+        <input type="button" onclick="initDatabase()" value="Initialize Database">
+        
+        <br><br>
+        <div id="ajaxContent"></div>
+
+        <h1>Ask anything</h1>
+        <div>
+            <label>Question:</label>
+            <input type="text" id="askAnythingInput" style="width: 500px">
+            <input type="button" onclick="askAnything()" value="Ask">
+        </div>
+        
+        <div>
+            <h1>Search vehicles</h1>
+
+            <h3>From To Date: </h3>
+            <div>
+                <label><b>From</b></label>
+                <input type="date" id="searchFromDate" name="fromDate">
+            </div>
+
+            <div>
+                <label><b>To</b></label>
+                <input type="date" id="searchToDate" name="toDate">
+            </div>
+            
+            <br>
+            <input type="button" id="searchFromToDate" onclick="searchFromToVehicles()" value="Search">
+            <br><br>
+            
+            <h3>Min Max Avg: </h3>
+            <select name="search" id="searchMixMaxAvgInput">
+            <option value="vehicles">Vehicles</option>
+            <option value="cars">Cars</option>
+            <option value="scooters">Scooters</option>
+            <option value="bicycles">Bicycles</option>
+            <option value="motorcycles">Motorcycles</option>
+            </select>
+            
+            <select name="search" id="searchMixMaxAvgOption">
+            <option value="min">Min</option>
+            <option value="max">Max</option>
+            <option value="avg">Average</option>
+            </select>
+            
+            <br><br>
+            <input type="button" id="searchMinMaxAvg" onclick="searchMinMaxAvgVehicles()" value="Search">
+            <br><br>
+            
+            <h3>Total income By Date And Category</h3>
+            <div>
+                <label><b>From</b></label>
+                <input type="date" id="searchIncomeDateFrom" name="fromDate">
+            </div>
+
+            <div>
+                <label><b>To</b></label>
+                <input type="date" id="searchIncomeDateTo" name="toDate">
+            </div>
+            
+            <select name="search" id="searchIncomeInput">
+            <option value="vehicles">Vehicles</option>
+            <option value="cars">Cars</option>
+            <option value="scooters">Scooters</option>
+            <option value="bicycles">Bicycles</option>
+            <option value="motorcycles">Motorcycles</option>
+            </select>
+            
+            <br><br>
+            <input type="button" id="searchIncomeButton" onclick="searchIncome()" value="Search">
+            <br><br>
+            
+            <h3>Search expenses: </h3>
+            <div>
+                <label><b>From</b></label>
+                <input type="date" id="searchFromDateExpenses" name="fromDate">
+            </div>
+
+            <div>
+                <label><b>To</b></label>
+                <input type="date" id="searchToDateExpenses" name="toDate">
+            </div>
+            
+            <br><br>
+            <input type="button" id="searchExpensesButton" onclick="searchExpenses()" value="Search">
+            <br><br>
+        </div>
+        
+        
+        
+        <h1>Add New Customer</h1>
+
+        <form id="addNewCustomerForm">
+            <div>
+                <label for="name">Name:</label>
+                <input type="text" id="addNewCustomerName" name="name">
+            </div>
+
+            <div>
+                <label for="birthdate">Birth date:</label>
+                <input type="date" id="addNewCustomerBirthdate" name="birthdate">
+            </div>
+            
+            <div>
+                <label for="address">Address:</label>
+                <input type="text" id="addNewCustomerAddress" name="address">
+            </div>
+            
+            <div>
+                <label for="drivinglicense">Driving License:</label>
+                <input type="text" id="addNewCustomerDrivinglicense" name="drivinglicense">
+            </div>
+                
+            <div>
+                <label for="creditcard">Credit Card:</label>
+                <input type="text" id="addNewCustomerCreditcard" name="creditcard">
+            </div>
+            
+            <div>
+                <label for="balance">Balance:</label>
+                <input type="text" id="addNewCustomerBalance" name="balance">
+            </div>
+            <input type="button" onclick="handleAddNewCustomer()" value="Add new customer">
+        </form>
+  
+        <form id="addNewVehicleForm">
+            <h1>Add New Vehicle</h1>
+            <div>
+                <label><b>Vehicle Type</b></label>
+                <br>
+                <input type="radio" id="addNewVehicleCar" name="vehicleType" value="car" onchange="handleExtraFields('car')">
+                <label>Car</label><br>
+                <input type="radio" id="addNewVehicleBike" name="vehicleType" value="bicycle" onchange="handleExtraFields('bicycle')">
+                <label>Bicycle</label><br>
+                <input type="radio" id="addNewVehicleScooter" name="vehicleType" value="scooter" onchange="handleExtraFields('scooter')">
+                <label>Scooter</label><br>
+                <input type="radio" id="addNewVehicleMotorcycle" name="vehicleType" value="motorcycle" onchange="handleExtraFields('motorcycle')">
+                <label>Motorcycle</label><br>
+            </div>
+            
+            <div id="addDivLicenseNumber" style="display: none"> 
+                <label><b>Licence Number</b></label>
+                <input type="text" id="addNewLicenseNumber" name="licensenumber">
+            </div>
+            
+            <div>
+                <label><b>Brand</b></label>
+                <input type="text" id="addNewVehicleBrand" name="brand">
+            </div>
+            
+            <div>
+                <label><b>Model</b></label>
+                <input type="text" id="addNewVehicleModel" name="model">
+            </div>
+            
+            <div>
+                <label><b>Color</b></label>
+                <input type="text" id="addNewVehicleColor" name="color">
+            </div>
+            
+            <div> 
+                <label><b>Autonomy</b></label>
+                <input type="text" id="addNewVehicleAutonomy" name="autonomy">
+            </div>
+            
+            <div id="addDivvId" style="display: none"> 
+                <label><b>vId</b></label>
+                <input type="text" id="addNewvId" name="vId"> 
+            </div>
+            
+            <div id="addDivType" style="display: none">
+                <label><b>Type</b></label>
+                <input type="text" id="addNewVehicleType" name="type">
+            </div>
+            
+            <div> 
+                <label><b>Rent Cost</b></label>
+                <input type="text" id="addNewVehicleRentCost" name="rentcost">
+            </div>
+            
+            <div> 
+                <label><b>Insurance Cost</b></label>
+                <input type="text" id="addNewVehicleInsuranceCost" name="insurancecost">
+            </div>
+            
+            <div>
+                <br>
+                <input type="button" id="addNewVehicleSumbit" onclick="addNewVehicle()" value="Add New Vehicle">
+            </div>
+            
+            <br>
+        </form>
+        
+        <h1>Return a vehicle</h1>
+        <label for="returnVehicle">Enter vehicle ID:</label>
+        <input type="text" id="returnVehicle">
+        <input type="button" onclick="handleReturnVehicle()" value="Return Vehicle"> 
+          
+        <h1>Search Vehicles</h1>
+        <select name="search" id="search">
+            <option value="vehicle">Vehicles</option>
+            <option value="car">Car</option>
+            <option value="scooter">Scooter</option>
+            <option value="bicycle">Bicycle</option>
+            <option value="motorcycle">Motorcycle</option>
+
+        </select>
+        <br><br>
+        <input type="button" id="searchButton" onclick="searchVehicles()" value="Search">
+        <br><br>
+        
+        <form id="rentVehicle">
+            <h1>Rent a Vehicle</h1>
+            <h3>Calculate the total cost by multiplying the days of rent with the daily rent cost of the car. If paying for insurance, calculate that cost as well.</h3>
+            <div>
+                <label><b>Name</b></label>
+                <input type="text" id="rentVehicleName" name="name">
+            </div>
+            
+            <div>
+                <label><b>Date</b></label>
+                <input type="date" id="rentVehicleDate" name="date">
+            </div>
+            
+            <div>
+                <label><b>Duration</b></label>
+                <input type="text" id="rentVehicleDuration" name="duration">
+            </div>
+            
+            <div>
+                <label><b>Cost</b></label>
+                <input type="text" id="rentVehicleCost" name="cost">
+            </div>
+            
+            <div>
+                <label><b>Insurance</b></label>
+                <input type="checkbox" id="rentVehicleInsurance" name="insurance">
+            </div>
+            
+            <div>
+                <label><b>vId</b></label>
+                <input type="text" id="rentVehiclevId" name="vId">
+            </div>
+            
+            <div>
+                <br>
+                <input type="button" id="rentVehicleButton" onclick="rentVehicle()" value="Rent">
+            </div>
+        </form>
+        
+        <form id="repairVehicle">
+            <h1>Repair or Service a Vehicle</h1>
+            <h3>Enter the vId of the vehicle to repair or service it.</h3>
+            <div>
+                <label><b>vId</b></label>
+                <input type="text" id="repairVehiclevId" name="vId">
+            </div>
+
+            <div>
+                <label><b>Repair Type</b></label>
+                <br>
+                <input type="radio" id="repairVehicleRepair" name="repairType" value="repair" onclick="handleServiceDetails('repair')">
+                <label>Repair</label><br>
+                <input type="radio" id="repairVehicleService" name="repairType" value="service" onclick="handleServiceDetails('service')">
+                <label>Service</label><br>
+            </div>
+            
+            <br>
+            <div id="serviceDetails" style="display:none">
+                <label><b>Enter Repair Cost : </b></label>
+                <input type="text" id="serviceCost" name="repaircost">
+                <br>
+                <label><b>Enter Entry Date : </b></label>
+                <input type="date" id="serviceDate" name="entrydate">
+            </div>
+            
+            <div>
+                <br>
+                <input type="button" id="repairVehicleButton" onclick="handleRepairVehicle()" value="Repair">
+                <input type="button" onclick="handleRefreshUnavailable()" value="Refresh unavailable">
+            </div>
+        </form>
+        
+        <form id='reportDamage'>
+            <h1>Report Damage</h1>
+            <div>
+                <label><b>Enter Damaged Vehicle's vId : </b></label>
+                <input type="text" id="reportDamageoldvId" name="oldvId">
+                <br><br>
+                <label><b>Enter Repair Cost : </b></label>
+                <input type="text" id="damageCost" name="repaircost">
+                <br>
+                <label><b>Enter Entry Date : </b></label>
+                <input type="date" id="damageDate" name="entrydate">
+            </div>
+            
+            <h2>Replace Vehicle</h2>
+            <h3>New costs will affect the next customers</h3>
+            <div>
+                <label><b>Vehicle Type</b></label>
+                <br>
+                <input type="radio" id="reportDamageCar" name="vehicleType" value="car" onchange="handleDamageFields('car')">
+                <label>Car</label><br>
+                <input type="radio" id="reportDamageBike" name="vehicleType" value="bicycle" onchange="handleDamageFields('bicycle')">
+                <label>Bicycle</label><br>
+                <input type="radio" id="reportDamageScooter" name="vehicleType" value="scooter" onchange="handleDamageFields('scooter')">
+                <label>Scooter</label><br>
+                <input type="radio" id="reportDamageMotorcycle" name="vehicleType" value="motorcycle" onchange="handleDamageFields('motorcycle')">
+                <label>Motorcycle</label><br>
+            </div>
+            
+            <div id="reportDamageDivLicenseNumber" style="display: none"> 
+                <label><b>Licence Number</b></label>
+                <input type="text" id="reportDamageLicenseNumber" name="licensenumber">
+            </div>
+            
+            <div>
+                <label><b>Brand</b></label>
+                <input type="text" id="reportDamageBrand" name="brand">
+            </div>
+            
+            <div>
+                <label><b>Model</b></label>
+                <input type="text" id="reportDamageModel" name="model">
+            </div>
+            
+            <div>
+                <label><b>Color</b></label>
+                <input type="text" id="reportDamageColor" name="color">
+            </div>
+            
+            <div> 
+                <label><b>Autonomy</b></label>
+                <input type="text" id="reportDamageAutonomy" name="autonomy">
+            </div>
+            
+            <div id="reportDamageDivvId" style="display: none"> 
+                <label><b>vId</b></label>
+                <input type="text" id="reportDamagevId" name="vId"> 
+            </div>
+            
+            <div id="reportDamageDivType" style="display: none">
+                <label><b>Type</b></label>
+                <input type="text" id="reportDamageType" name="type">
+            </div>
+            
+            <div> 
+                <label><b>Rent Cost</b></label>
+                <input type="text" id="reportDamageRentCost" name="rentcost">
+            </div>
+            
+            <div> 
+                <label><b>Insurance Cost</b></label>
+                <input type="text" id="reportDamageInsuranceCost" name="insurancecost">
+            </div>
+            
+            <div>
+                <br>
+                <input type="button" id="reportDamageButton" onclick="reportDamage()" value="Report Damage">
+            </div>
+        </form>
+        
+        <form id='reportAccident'>
+            <h1>Report Accident</h1>
+            <div>
+                <label><b>Enter Vehicle's vId : </b></label>
+                <input type="text" id="reportAccidentvId" name="oldvId">
+                <br><br>
+                <label><b>Enter Repair Cost : </b></label>
+                <input type="text" id="accidentCost" name="repaircost">
+                <br>
+                <label><b>Enter Entry Date : </b></label>
+                <input type="date" id="accidentDate" name="entrydate">
+            </div>
+           
+            <h2>Replace Vehicle</h2>
+            <div>
+                <label><b>Vehicle Type</b></label>
+                <br>
+                <input type="radio" id="reportAccidentCar" name="vehicleType" value="car" onchange="handleAccidentFields('car')">
+                <label>Car</label><br>
+                <input type="radio" id="reportAccidentBike" name="vehicleType" value="bicycle" onchange="handleAccidentFields('bicycle')">
+                <label>Bicycle</label><br>
+                <input type="radio" id="reportAccidentScooter" name="vehicleType" value="scooter" onchange="handleAccidentFields('scooter')">
+                <label>Scooter</label><br>
+                <input type="radio" id="reportAccidentMotorcycle" name="vehicleType" value="motorcycle" onchange="handleAccidentFields('motorcycle')">
+                <label>Motorcycle</label><br>
+            </div>
+            
+            <div id="reportAccidentDivLicenseNumber" style="display: none"> 
+                <label><b>Licence Number</b></label>
+                <input type="text" id="reportAccidentLicenseNumber" name="licensenumber">
+            </div>
+            
+            <div>
+                <label><b>Brand</b></label>
+                <input type="text" id="reportAccidentBrand" name="brand">
+            </div>
+            
+            <div>
+                <label><b>Model</b></label>
+                <input type="text" id="reportAccidentModel" name="model">
+            </div>
+            
+            <div>
+                <label><b>Color</b></label>
+                <input type="text" id="reportAccidentColor" name="color">
+            </div>
+            
+            <div> 
+                <label><b>Autonomy</b></label>
+                <input type="text" id="reportAccidentAutonomy" name="autonomy">
+            </div>
+            
+            <div id="reportAccidentDivvId" style="display: none"> 
+                <label><b>vId</b></label>
+                <input type="text" id="reportAccidentvId" name="vId"> 
+            </div>
+            
+            <div id="reportAccidentDivType" style="display: none">
+                <label><b>Type</b></label>
+                <input type="text" id="reportAccidentType" name="type">
+            </div>
+            
+            <div> 
+                <label><b>Rent Cost</b></label>
+                <input type="text" id="reportAccidentRentCost" name="rentcost">
+            </div>
+            
+            <div> 
+                <label><b>Insurance Cost</b></label>
+                <input type="text" id="reportAccidentInsuranceCost" name="insurancecost">
+            </div>
+            
+            <div>
+                <br>
+                <input type="button" id="reportAccidentButton" onclick="reportAccident()" value="Report Accident">
+            </div>
+        </form>
+        
+        <h1>Κατάσταση διαθέσιμων ή ενοικιασμένων οχημάτων ανά κατηγορία</h1>
+        <select name="fistQuestion" id="firstQuestion">
+            <option value="availableVehicles">Available Vehicles</option>
+            <option value="rentedVehicles">Rented Vehicles</option>
+
+            <option value="availableCars">Available Cars</option>
+            <option value="rentedCars">Rented Cars</option>
+
+            <option value="availableScooters">Available Scooters</option>
+            <option value="rentedScooters">Rented Scooters</option>
+
+            <option value="availableBicycles">Available Bicycles</option>
+            <option value="rentedBicycles">Rented Bicycles</option>
+
+            <option value="availableMotorcycles">Available Motorcycles</option>
+            <option value="rentedMotorcycles">Rented Motorcycles</option>
+
+        </select>
+        
+        <br><br>
+        <input type="button" id="questionButton" onclick="firstQuestion()" value="Question">
+        <br><br>
+
+    </body>
+</html>

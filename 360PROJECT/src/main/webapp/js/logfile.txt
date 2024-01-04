@@ -1,0 +1,5 @@
+2024-01-06
+UPDATE unavailable SET returndate='2024-01-06' WHERE vid=4
+# The vehicle was successfully updated to unavailable.
+4repair
+{"vId":"4","repairType":"repair"}

@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<web-app version="3.1" xmlns="http://xmlns.jcp.org/xml/ns/javaee" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-app_3_1.xsd">
+    <servlet>
+        <servlet-name>Init</servlet-name>
+        <servlet-class>servlets.Init</servlet-class>
+    </servlet>
+    
+    <servlet-mapping>
+        <servlet-name>Init</servlet-name>
+        <url-pattern>/Init</url-pattern>
+    </servlet-mapping>
+    
+    <servlet>
+        <servlet-name>Customer</servlet-name>
+        <servlet-class>servlets.CustomerServlet</servlet-class>
+    </servlet>
+    
+    <servlet-mapping>
+        <servlet-name>Customer</servlet-name>
+        <url-pattern>/Customer</url-pattern>
+    </servlet-mapping>
+  
+    <servlet>
+        <servlet-name>Vehicle</servlet-name>
+        <servlet-class>servlets.VehicleServlet</servlet-class>
+    </servlet>
+        
+    <servlet-mapping>
+        <servlet-name>Vehicle</servlet-name>
+        <url-pattern>/Vehicle</url-pattern>
+    </servlet-mapping>
+</web-app>

@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package servlets;
 
 import com.google.gson.Gson;
@@ -11,11 +6,9 @@ import com.google.gson.JsonParser;
 import com.google.gson.JsonSyntaxException;
 import database.EditVehiclesTable;
 import java.io.BufferedReader;
-import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStreamReader;
-import java.io.PrintStream;
 import java.io.PrintWriter;
 import java.sql.SQLException;
 import java.util.ArrayList;
@@ -31,20 +24,10 @@ import javax.servlet.http.HttpServletResponse;
 @WebServlet(name = "VehicleServlet", urlPatterns = {"/VehicleServlet"})
 public class VehicleServlet extends HttpServlet {
 
-    /**
-     * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
-     * methods.
-     *
-     * @param request servlet request
-     * @param response servlet response
-     * @throws ServletException if a servlet-specific error occurs
-     * @throws IOException if an I/O error occurs
-     */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
         try (PrintWriter out = response.getWriter()) {
-            /* TODO output your page here. You may use following sample code. */
             out.println("<!DOCTYPE html>");
             out.println("<html>");
             out.println("<head>");
@@ -57,22 +40,10 @@ public class VehicleServlet extends HttpServlet {
         }
     }
 
-    // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
-    /**
-     * Handles the HTTP <code>GET</code> method.
-     *
-     * @param request servlet request
-     * @param response servlet response
-     * @throws ServletException if a servlet-specific error occurs
-     * @throws IOException if an I/O error occurs
-     */
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         String requestType = request.getHeader("Request-Type");
-//        PrintStream fileOut = new PrintStream(new File("C:\\Users\\Nikos Lasithiotakis\\Desktop\\CSD\\5ο Εξάμηνο\\ΗΥ360\\CSD360-PROJECT\\360PROJECT\\src\\main\\webapp\\js\\logfile.txt"));
-//        PrintStream fileOut = new PrintStream(new File("C:\\CSD\\PENDING\\HY-360\\CSD360-PROJECT\\360PROJECT\\src\\main\\webapp\\js\\logfile.txt"));
-//        System.setOut(fileOut);
         if (requestType.equals("Search")) {
             try {
                 searchVehicles(request, response);
@@ -107,15 +78,6 @@ public class VehicleServlet extends HttpServlet {
         return;
     }
 
-    /**
-     * Handles the HTTP <code>POST</code> method.
-     *
-     * @param request servlet request
-     * @param response servlet response
-     * @throws ServletException if a servlet-specific error occurs
-     * @throws IOException if an I/O error occurs
-     * @throws java.io.FileNotFoundException
-     */
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException, FileNotFoundException {
         String requestType = request.getHeader("Request-Type");
@@ -143,9 +105,6 @@ public class VehicleServlet extends HttpServlet {
     }
 
     void repairVehicle(HttpServletRequest request, HttpServletResponse response) throws FileNotFoundException, IOException {
-        PrintStream fileOut = new PrintStream(new File("C:\\Users\\Nikos Lasithiotakis\\Desktop\\CSD\\5ο Εξάμηνο\\ΗΥ360\\CSD360-PROJECT\\360PROJECT\\src\\main\\webapp\\js\\logfile.txt"));
-        System.setOut(fileOut);
-
         String requestString = "";
         BufferedReader in = new BufferedReader(new InputStreamReader(request.getInputStream()));
         String line = in.readLine();
@@ -207,8 +166,6 @@ public class VehicleServlet extends HttpServlet {
     }
 
     void addNewVehicle(HttpServletRequest request, HttpServletResponse response) throws FileNotFoundException, IOException {
-//        PrintStream fileOut = new PrintStream(new File("C:\\Users\\Nikos Lasithiotakis\\Desktop\\CSD\\5ο Εξάμηνο\\ΗΥ360\\CSD360-PROJECT\\360PROJECT\\src\\main\\webapp\\js\\logfile.txt"));
-//        System.setOut(fileOut);
         System.out.println(request.getHeader("Vehicle-Type"));
         SQLException status = null;
         EditVehiclesTable evt = new EditVehiclesTable();
@@ -219,10 +176,7 @@ public class VehicleServlet extends HttpServlet {
             requestString += line;
             line = in.readLine();
         }
-//        StringBuilder stringBuilder = new StringBuilder(requestString);
-//        stringBuilder.deleteCharAt(stringBuilder.length() - 1);
-//        stringBuilder.append(",\"vId\":\"0\"}");
-//        requestString = stringBuilder.toString();
+
         System.out.println(requestString);
         if (request.getHeader("Vehicle-Type").equals("car")) {
             try {
@@ -260,14 +214,8 @@ public class VehicleServlet extends HttpServlet {
         }
     }
 
-    /**
-     * Returns a short description of the servlet.
-     *
-     * @return a String containing servlet description
-     */
     @Override
     public String getServletInfo() {
         return "Short description";
-    }// </editor-fold>
-
+    }
 }

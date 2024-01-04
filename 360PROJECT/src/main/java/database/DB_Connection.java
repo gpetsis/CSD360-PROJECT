@@ -15,13 +15,6 @@ public class DB_Connection {
     private static final String username = "root";
     private static final String password = "";
 
-    /**
-     * Attempts to establish a database connection
-     *
-     * @return a connection to the database
-     * @throws SQLException
-     * @throws java.lang.ClassNotFoundException
-     */
     public static Connection getConnection() throws SQLException, ClassNotFoundException {
         Class.forName("com.mysql.jdbc.Driver");
         return DriverManager.getConnection(url + ":" + port + "/" + databaseName, username, password);

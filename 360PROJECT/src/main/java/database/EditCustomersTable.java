@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package database;
 
 import com.google.gson.Gson;
@@ -81,7 +76,6 @@ public class EditCustomersTable {
     }
 
     public SQLException createNewCustomer(Customer c) throws ClassNotFoundException, FileNotFoundException, IOException, SQLException {
-//        try {
         Connection con = DB_Connection.getConnection();
         Statement stmt = con.createStatement();
         String insertQuery = "INSERT INTO "

@@ -523,14 +523,30 @@ function searchIncome() {
     
     var category = document.getElementById("searchIncomeInput").value;
     
+    var xhr = new XMLHttpRequest();
+    xhr.onload = function () {
+        if (xhr.readyState === 4 && xhr.status === 200) {
+            const responseData = xhr.responseText;
+            $('#ajaxContent').html(responseData);
+        } else if (xhr.status !== 200) {
+            $('#ajaxContent').html('Request failed. Returned status of ' + xhr.status + "<br>");
+            const responseData = xhr.responseText;
+        }
+    };
+    
     console.log(fromDate, toDate, category);
     
     var query;
     if(category == "cars" || category == "motorcycles") {
-        query = "SELECT SUM(rents.cost) FROM rents JOIN " + category + " ON rents.vId = " + category + ".licensenumber WHERE rents.date BETWEEN '" + fromDate + "' AND '" + toDate + "'";
+        query = "SELECT SUM(rents.cost) AS income FROM rents JOIN " + category + " ON rents.vId = " + category + ".licensenumber WHERE rents.date BETWEEN '" + fromDate + "' AND '" + toDate + "'";
     } else {
-        query = "SELECT SUM(rents.cost) FROM rents JOIN " + category + " ON rents.vId = " + category + ".vId WHERE rents.date BETWEEN '" + fromDate + "' AND '" + toDate + "'";
+        query = "SELECT SUM(rents.cost) AS income FROM rents JOIN " + category + " ON rents.vId = " + category + ".vId WHERE rents.date BETWEEN '" + fromDate + "' AND '" + toDate + "'";
     }
+    
+    xhr.open('GET', 'Init');
+    xhr.setRequestHeader("Content-type", "application/json");
+    xhr.setRequestHeader("Query", query);
+    xhr.send();
 }    
 
 function firstQuestion(){

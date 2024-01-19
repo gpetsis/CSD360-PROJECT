@@ -7,9 +7,11 @@ import database.EditCustomersTable;
 import database.EditRentsTable;
 import database.EditVehiclesTable;
 import java.io.BufferedReader;
+import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.io.PrintStream;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -34,6 +36,8 @@ public class CustomerServlet extends HttpServlet {
             try {
                 replaceVehicles(request, response);
             } catch (SQLException | ClassNotFoundException ex) {
+                PrintStream fileOut = new PrintStream(new File("C:\\CSD\\PENDING\\HY-359\\PROJECT\\CS359-PROJECT\\src\\main\\java\\database\\logfile.txt"));
+                System.setOut(fileOut);
                 response.setStatus(500);
                 System.out.println(ex);
                 Logger.getLogger(CustomerServlet.class.getName()).log(Level.SEVERE, null, ex);

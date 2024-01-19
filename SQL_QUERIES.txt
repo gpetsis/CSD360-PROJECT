@@ -1,0 +1,93 @@
+CREATE DATABASE PROJECT360
+
+CREATE TABLE customers (name VARCHAR(20) not null, birthdate DATE not null, address VARCHAR(50) not null, drivinglicense INTEGER not null, creditcard BIGINT not null, balance FLOAT not null, PRIMARY KEY (name))
+
+CREATE TABLE vehicles (vId INTEGER not null unique brand VARCHAR(15) not null, model VARCHAR(15) not null, color VARCHAR(10) not null, autonomy INTEGER not null, rentcost FLOAT(10) not null, insurancecost FLOAT(10) not null, PRIMARY KEY (vId))
+
+CREATE TABLE cars (licensenumber INTEGER not null references vehicles(vId), brand VARCHAR(15) not null, model VARCHAR(15) not null, color VARCHAR(10) not null, autonomy INTEGER not null, type VARCHAR(15) not null, rentcost FLOAT(10) not null, nsurancecost FLOAT(10) not null, RIMARY KEY (licensenumber))
+
+CREATE TABLE motorcycles (licensenumber INTEGER not null references vehicles(vId), brand VARCHAR(15) not null, model VARCHAR(15) not null, color VARCHAR(10) not null," autonomy INTEGER not null, rentcost FLOAT(10) not null, insurancecost FLOAT(10) not null, PRIMARY KEY (licensenumber))
+
+CREATE TABLE scooters (vId INTEGER not null references vehicles(vId), brand VARCHAR(15) not null, model VARCHAR(15) not null, color VARCHAR(10) not null, autonomy INTEGER not null, rentcost FLOAT(10) not null, insurancecost FLOAT(10) not null, PRIMARY KEY (vId))
+
+CREATE TABLE bicycles (vId INTEGER not null references vehicles(vId), brand VARCHAR(15) not null, model VARCHAR(15) not null, color VARCHAR(10) not null, autonomy INTEGER not null, rentcost FLOAT(10) not null, insurancecost FLOAT(10) not null, PRIMARY KEY (vId))
+
+CREATE TABLE unavailable (vId INTEGER not null, returndate DATE, repaircost FLOAT(10), entrydate DATE, FOREIGN KEY (vId) REFERENCES vehicles(vId), PRIMARY KEY (vId))
+
+CREATE TABLE rents (rent_id INTEGER NOT NULL AUTO_INCREMENT, vId INT, name VARCHAR(255), date DATE NOT NULL, duration VARCHAR(50) NOT NULL, cost FLOAT(10) NOT NULL, insurance BOOLEAN NOT NULL, PRIMARY KEY (rent_id), FOREIGN KEY (vId) REFERENCES vehicles(vId), FOREIGN KEY (name) REFERENCES customers(name))
+
+SELECT * FROM rents
+
+INSERT INTO rents (vId,name,date,duration,cost,insurance) VALUES (x1, x2, x3, x4, x5, x6)
+
+SELECT COUNT(*) AS count FROM rents WHERE vId=x
+
+SELECT * FROM rents WHERE vId=x
+
+DELETE FROM rents WHERE vId=x
+
+UPDATE unavailable SET returndate='x1' WHERE vId=x2
+
+DELETE FROM unavailable WHERE returndate<='x'
+
+SELECT * FROM vehicles
+
+SELECT * FROM cars
+
+SELECT * FROM motorcycles
+
+SELECT * FROM scooters
+
+SELECT * FROM bicycles
+
+SELECT SUM(unavailable.repaircost) AS cost FROM unavailable WHERE unavailable.entrydate BETWEEN 'fromDate' AND 'toDate'
+
+SELECT rents.vId FROM rents WHERE rents.date BETWEEN 'fromDate' AND 'toDate'
+
+INSERT INTO customers (name,birthdate,address,drivinglicense,creditcard,balance) VALUES (name, birthdate, address, drivinglicense, creditcard, balance)
+
+UPDATE customers SET balance=balance - cost WHERE name=customerName
+
+INSERT INTO unavailable (vId, returndate, repaircost, entrydate) VALUES (vId, returnDate, repaircost, entrydate)
+
+INSERT INTO vehicles (vId, brand, model, color, autonomy, rentcost, insurancecost) VALUES (vehicleId, brand, model, color, autonomy, rentcost, insurancecost)
+
+INSERT INTO cars (licensenumber, brand, model, color, autonomy, type, rentcost, insurancecost) VALUES (vehicleId, brand, model, color, autonomy, type, rentcost, insurancecost)
+
+INSERT INTO bicycles (vId, brand, model, color, autonomy, rentcost, insurancecost) VALUES (vehicleId, brand, model, color, autonomy, rentcost, insurancecost)
+
+INSERT INTO scooters (vId, brand, model, color, autonomy, rentcost, insurancecost) VALUES (vehicleId, brand, model, color, autonomy, rentcost, insurancecost)
+
+INSERT INTO motorcycles (licensenumber, brand, model, color, autonomy, rentcost, insurancecost) VALUES (vehicleId, brand, model, color, autonomy, rentcost, insurancecost)
+
+SELECT MIN(rents.duration) AS minimum FROM rents JOIN cars ON rents.vId = cars.licensenumber
+...
+
+SELECT MAX(rents.duration) AS minimum FROM rents JOIN cars ON rents.vId = cars.licensenumber
+...
+
+SELECT AVG(rents.duration) AS minimum FROM rents JOIN cars ON rents.vId = cars.licensenumber
+...
+
+SELECT SUM(rents.cost) AS income FROM rents JOIN cars ON rents.vId = cars.licensenumber WHERE rents.date BETWEEN 'fromDate' AND 'toDate'
+...
+
+SELECT vehicles.vId FROM vehicles LEFT OUTER JOIN rents ON vehicles.vId = rents.vId LEFT OUTER JOIN unavailable ON vehicles.vId = unavailable.vId WHERE rents.vId IS NULL AND unavailable.vId IS NULL
+
+SELECT vehicles.vId FROM vehicles INNER JOIN rents ON vehicles.vId = rents.vId
+
+SELECT cars.licensenumber FROM cars LEFT OUTER JOIN rents ON cars.licensenumber = rents.vId LEFT OUTER JOIN unavailable ON cars.licensenumber = unavailable.vId WHERE rents.vId IS NULL AND unavailable.vId IS NULL
+
+SELECT cars.licensenumber FROM cars INNER JOIN rents ON cars.licensenumber = rents.vId
+
+SELECT scooters.vId FROM scooters LEFT OUTER JOIN rents ON scooters.vId = rents.vId LEFT OUTER JOIN unavailable ON scooters.vId = unavailable.vId WHERE rents.vId IS NULL AND unavailable.vId IS NULL
+
+SELECT scooters.vId FROM scooters INNER JOIN rents ON scooters.vId = rents.vId
+
+SELECT bicycles.vId FROM bicycles LEFT OUTER JOIN rents ON bicycles.vId = rents.vId LEFT OUTER JOIN unavailable ON bicycles.vId = unavailable.vId WHERE rents.vId IS NULL AND unavailable.vId IS NULL
+
+SELECT bicycles.vId FROM bicycles INNER JOIN rents ON bicycles.vId = rents.vId
+
+SELECT motorcycles.licensenumber FROM motorcycles LEFT OUTER JOIN rents ON motorcycles.licensenumber = rents.vId LEFT OUTER JOIN unavailable ON motorcycles.licensenumber = unavailable.vId WHERE rents.vId IS NULL AND unavailable.vId IS NULL
+
+SELECT motorcycles.licensenumber FROM motorcycles INNER JOIN rents ON motorcycles.licensenumber = rents.vId

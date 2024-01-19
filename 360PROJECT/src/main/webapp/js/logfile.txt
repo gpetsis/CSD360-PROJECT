@@ -1,5 +1,77 @@
-2024-01-06
-UPDATE unavailable SET returndate='2024-01-06' WHERE vid=4
-# The vehicle was successfully updated to unavailable.
-4repair
-{"vId":"4","repairType":"repair"}
+3 12344
+INSERT INTO  unavailable (vId, returndate, repaircost, entrydate) VALUES (3,'null',150.0,'2024-01-18')
+com.mysql.jdbc.MysqlDataTruncation: Data truncation: Incorrect date value: 'null' for column `project360`.`unavailable`.`returndate` at row 1
+SELECT * FROM rents
+car
+{"licensenumber":"87","brand":"asd","model":"ads","color":"asd","autonomy":"12","type":"asd","rentcost":"43","insurancecost":"1"}
+INSERT INTO  vehicles (vId, brand, model, color, autonomy, rentcost, insurancecost) VALUES ('87','asd','ads','asd','12','43.0','1.0')
+# The vehicle was successfully added to vehicles.
+INSERT INTO  cars (licensenumber, brand, model, color, autonomy, type, rentcost, insurancecost) VALUES ('87','asd','ads','asd','12','asd','43.0','1.0')
+# The vehicle was successfully added to cars.
+3 87
+INSERT INTO  unavailable (vId, returndate, repaircost, entrydate) VALUES (3,null,150.0,'2024-01-19')
+com.mysql.jdbc.exceptions.jdbc4.MySQLIntegrityConstraintViolationException: Duplicate entry '3' for key 'PRIMARY'
+car
+{"licensenumber":"87","brand":"asd","model":"ads","color":"asd","autonomy":"12","type":"asd","rentcost":"43","insurancecost":"1"}
+INSERT INTO  vehicles (vId, brand, model, color, autonomy, rentcost, insurancecost) VALUES ('87','asd','ads','asd','12','43.0','1.0')
+Error: com.mysql.jdbc.exceptions.jdbc4.MySQLIntegrityConstraintViolationException: Duplicate entry '87' for key 'PRIMARY'
+car
+{"licensenumber":"8888888","brand":"asd","model":"ads","color":"asd","autonomy":"12","type":"asd","rentcost":"43","insurancecost":"1"}
+INSERT INTO  vehicles (vId, brand, model, color, autonomy, rentcost, insurancecost) VALUES ('8888888','asd','ads','asd','12','43.0','1.0')
+# The vehicle was successfully added to vehicles.
+INSERT INTO  cars (licensenumber, brand, model, color, autonomy, type, rentcost, insurancecost) VALUES ('8888888','asd','ads','asd','12','asd','43.0','1.0')
+# The vehicle was successfully added to cars.
+3 8888888
+INSERT INTO  unavailable (vId, returndate, repaircost, entrydate) VALUES (3,null,150.0,'2024-01-19')
+# The vehicle was successfully added to unavailable.
+bicycle
+{"brand":"asd","model":"ads","color":"asd","autonomy":"12","vId":"9999999","rentcost":"43","insurancecost":"1"}
+INSERT INTO  vehicles (vId, brand, model, color, autonomy, rentcost, insurancecost) VALUES ('9999999','asd','ads','asd','12','43.0','1.0')
+# The vehicle was successfully added to vehicles.
+INSERT INTO  bicycles (vId, brand, model, color, autonomy, rentcost, insurancecost) VALUES ('9999999','asd','ads','asd','12','43.0','1.0')
+# The vehicle was successfully added to bicycles.
+3 9999999
+INSERT INTO  unavailable (vId, returndate, repaircost, entrydate) VALUES (3,null,150.0,'2024-01-19')
+com.mysql.jdbc.exceptions.jdbc4.MySQLIntegrityConstraintViolationException: Duplicate entry '3' for key 'PRIMARY'
+bicycle
+{"brand":"asd","model":"ads","color":"asd","autonomy":"12","vId":"9999999","rentcost":"43","insurancecost":"1"}
+INSERT INTO  vehicles (vId, brand, model, color, autonomy, rentcost, insurancecost) VALUES ('9999999','asd','ads','asd','12','43.0','1.0')
+Error: com.mysql.jdbc.exceptions.jdbc4.MySQLIntegrityConstraintViolationException: Duplicate entry '9999999' for key 'PRIMARY'
+bicycle
+{"brand":"asd","model":"ads","color":"asd","autonomy":"12","vId":"999999","rentcost":"43","insurancecost":"1"}
+INSERT INTO  vehicles (vId, brand, model, color, autonomy, rentcost, insurancecost) VALUES ('999999','asd','ads','asd','12','43.0','1.0')
+# The vehicle was successfully added to vehicles.
+INSERT INTO  bicycles (vId, brand, model, color, autonomy, rentcost, insurancecost) VALUES ('999999','asd','ads','asd','12','43.0','1.0')
+# The vehicle was successfully added to bicycles.
+3 999999
+INSERT INTO  unavailable (vId, returndate, repaircost, entrydate) VALUES (3,null,150.0,'2024-01-19')
+# The vehicle was successfully added to unavailable.
+bicycle
+{"brand":"asd","model":"ads","color":"asd","autonomy":"12","vId":"1324","rentcost":"43","insurancecost":"1"}
+INSERT INTO  vehicles (vId, brand, model, color, autonomy, rentcost, insurancecost) VALUES ('1324','asd','ads','asd','12','43.0','1.0')
+# The vehicle was successfully added to vehicles.
+INSERT INTO  bicycles (vId, brand, model, color, autonomy, rentcost, insurancecost) VALUES ('1324','asd','ads','asd','12','43.0','1.0')
+# The vehicle was successfully added to bicycles.
+123445 1324
+INSERT INTO  unavailable (vId, returndate, repaircost, entrydate) VALUES (123445,null,150.0,'2024-01-19')
+# The vehicle was successfully added to unavailable.
+car
+{"licensenumber":"3612","brand":"asd","model":"asd","color":"asd","autonomy":"12","type":"asd","rentcost":"31","insurancecost":"1"}
+INSERT INTO  vehicles (vId, brand, model, color, autonomy, rentcost, insurancecost) VALUES ('3612','asd','asd','asd','12','31.0','1.0')
+# The vehicle was successfully added to vehicles.
+INSERT INTO  cars (licensenumber, brand, model, color, autonomy, type, rentcost, insurancecost) VALUES ('3612','asd','asd','asd','12','asd','31.0','1.0')
+# The vehicle was successfully added to cars.
+SELECT name, insurance, cost FROM rents WHERE vId=1324
+Name: Nikos Lasithiotakis
+Insurance: false
+UPDATE customers SET balance=balance-36 WHERE name='Nikos Lasithiotakis'
+1324 3612
+INSERT INTO  unavailable (vId, returndate, repaircost, entrydate) VALUES (1324,null,150.0,'2024-01-10')
+# The vehicle was successfully added to unavailable.
+bicycle
+{"brand":"asd","model":"asd","color":"asd","autonomy":"12","vId":"651","rentcost":"31","insurancecost":"1"}
+INSERT INTO  vehicles (vId, brand, model, color, autonomy, rentcost, insurancecost) VALUES ('651','asd','asd','asd','12','31.0','1.0')
+# The vehicle was successfully added to vehicles.
+INSERT INTO  bicycles (vId, brand, model, color, autonomy, rentcost, insurancecost) VALUES ('651','asd','asd','asd','12','31.0','1.0')
+# The vehicle was successfully added to bicycles.
+SELECT name, insurance, cost FROM rents WHERE vId=1324

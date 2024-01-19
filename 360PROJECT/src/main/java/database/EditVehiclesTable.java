@@ -209,7 +209,7 @@ public class EditVehiclesTable {
         Statement stmt = con.createStatement();
         String insertQuery;
 
-        if (returnDate == null) {
+      if (returnDate == null) {
             insertQuery = "INSERT INTO "
                     + " unavailable (vId, returndate, repaircost, entrydate)"
                     + " VALUES ("
@@ -228,7 +228,7 @@ public class EditVehiclesTable {
                     + ",'" + entrydate + "'"
                     + ")";
         }
-
+      
         System.out.println(insertQuery);
         stmt.executeUpdate(insertQuery);
         System.out.println("# The vehicle was successfully added to unavailable.");

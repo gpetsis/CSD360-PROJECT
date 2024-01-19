@@ -231,21 +231,25 @@ function reportDamage(){
     type = formData.get('vehicleType');
     console.log(type);
     if(type == "car"){
+        oldvId = formData.get('oldvId');
+        newvId = formData.get('licensenumber');
         formData.delete('vehicleType');
         formData.delete('vId');
     }
     else if(type == "scooter" || type == "bicycle"){
+        oldvId = formData.get('oldvId');
+        newvId = formData.get('vId');
         formData.delete('type');
         formData.delete('licensenumber');
         formData.delete('vehicleType');
     }
     else{
+        oldvId = formData.get('oldvId');
+        newvId = formData.get('licensenumber');
         formData.delete('vehicleType');
         formData.delete('vId');
         formData.delete('type');
     }
-    oldvId = formData.get('oldvId');
-    newvId = formData.get('vId');
     formData.delete('oldvId');
     formData.delete('repaircost');
     formData.delete('entrydate');
@@ -375,21 +379,25 @@ function reportAccident(){
     type = formData.get('vehicleType');
     console.log(type);
     if(type == "car"){
+        oldvId = formData.get('oldvId');
+        newvId = formData.get('licensenumber');
         formData.delete('vehicleType');
         formData.delete('vId');
     }
     else if(type == "scooter" || type == "bicycle"){
+        oldvId = formData.get('oldvId');
+        newvId = formData.get('vId');
         formData.delete('type');
         formData.delete('licensenumber');
         formData.delete('vehicleType');
     }
     else{
+        oldvId = formData.get('oldvId');
+        newvId = formData.get('licensenumber');
         formData.delete('vehicleType');
         formData.delete('vId');
         formData.delete('type');
     }
-    oldvId = formData.get('oldvId');
-    newvId = formData.get('vId');
     formData.delete('oldvId');
     formData.delete('entrydate');
     formData.delete('repaircost');
